@@ -1,0 +1,48 @@
+This document describes the eHost .knowtator file format.
+
+Knowtator files are XML files that contain annotation information. For each text file annotated with eHost a .knowtator file is produced that contains all the annotations for that text file. Any given annotation will have the following attributes:
+
+1. Exactly one class.
+2. Zero or more attributes.
+3. Zero or more relationships.
+4. A creation date.
+5. Document span start and end values.
+6. Spanned text.
+7. An annotator name.
+8. An annotator id.
+9. A classMention ID.
+10. Zero or more stringSlotMention ID's, one for each attribute.
+
+Since this project does not use relationships (so far anyway) they will not be addressed in this document.
+
+The annotation information is stored in the knowtator file in three main parent elements: "annotation", "classMention", and "stringSlotMention". 
+
+The annotation element contains the spanned text, the span start and end values, the annotator name, annotator ID, creation date, and a reference to the classMention ID. 
+
+The classMention element contains the classMention ID, the spanned text again, the class assigned to that text, and references to all of the stringSlotMention IDs.
+
+The stringSlotMention element contains the stringSlotMention ID, the attribute field name, and the attribute field value. There is one stringSlotMention element for every attribute of the annotation.
+A sample annotation is shown below:
+
+    <annotation>
+        <mention id="EHOST_Instance_600" />
+        <annotator id="eHOST_2010">Shane</annotator>
+        <span start="4908" end="4917" />
+        <spannedText>DOC CLASS</spannedText>
+        <creationDate>Wed May 31 11:37:23 EDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_630">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_631">
+        <mentionSlot id="present_or_absent" />
+        <stringSlotMentionValue value="absent" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_600">
+        <hasSlotMention id="EHOST_Instance_630" />
+        <hasSlotMention id="EHOST_Instance_631" />
+        <mentionClass id="doc_classification">DOC CLASS</mentionClass>
+    </classMention>
+
+
