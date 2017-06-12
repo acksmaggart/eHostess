@@ -1,0 +1,24 @@
+Chief Complaint:
+   24 Hour Events:
+   - Got 1u PRBC w/ lasix
+   - Levophed weaned
+   - CT chest/abd/pelvis showed multifocal PNA, no e/o abscess
+   Allergies:
+   No Known Drug Allergies
+   Last dose of Antibiotics:
+   Daptomycin - [**2761-10-2**] 12:30 PM
+   Ceftazidime - [**2761-10-2**] 10:00 PM
+   Infusions:
+   Other ICU medications:
+   Furosemide (Lasix) - [**2761-10-2**] 05:01 PM
+   Heparin Sodium (Prophylaxis) - [**2761-10-3**] 06:00 AM
+   Other medications:
+   Changes to medical and family history:
+   Review of systems is unchanged from admission except as noted below
+   Review of systems:
+   Flowsheet Data as of  [**2761-10-3**] 08:00 AM
+   Vital signs
+   Hemodynamic monitoring
+   Fluid balance
+                                                                  24 hours
+                                                               Since 12 AM

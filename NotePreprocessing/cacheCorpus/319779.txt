@@ -1,0 +1,142 @@
+Chief Complaint:
+   24 Hour Events:
+   - Got 1u PRBC w/ lasix
+   - Levophed weaned
+   - CT chest/abd/pelvis showed multifocal PNA, no e/o abscess
+   Allergies:
+   No Known Drug Allergies
+   Last dose of Antibiotics:
+   Daptomycin - [**2761-10-2**] 12:30 PM
+   Ceftazidime - [**2761-10-2**] 10:00 PM
+   Infusions:
+   Other ICU medications:
+   Furosemide (Lasix) - [**2761-10-2**] 05:01 PM
+   Heparin Sodium (Prophylaxis) - [**2761-10-3**] 06:00 AM
+   Other medications:
+   Changes to medical and family history:
+   Review of systems is unchanged from admission except as noted below
+   Review of systems:
+   Flowsheet Data as of  [**2761-10-3**] 08:00 AM
+   Vital signs
+   Hemodynamic monitoring
+   Fluid balance
+                                                                  24 hours
+                                                               Since 12 AM
+   Tmax: 36.6
+C (97.8
+   Tcurrent: 35.6
+C (96
+   HR: 76 (62 - 78) bpm
+   BP: 110/46(62) {93/40(56) - 122/89(92)} mmHg
+   RR: 24 (20 - 35) insp/min
+   SpO2: 99%
+   Heart rhythm: SR (Sinus Rhythm)
+   Height: 70 Inch
+    CVP: 19 (12 - 19)mmHg
+   CO/CI (Fick): (5 L/min) / (2.4 L/min/m2)
+   Mixed Venous O2% Sat: 53 - 53
+   Total In:
+                                                                  2,035 mL
+                                                                     78 mL
+   PO:
+                                                                    630 mL
+   TF:
+   IVF:
+                                                                  1,030 mL
+                                                                     78 mL
+   Blood products:
+                                                                    375 mL
+   Total out:
+                                                                  1,075 mL
+                                                                    196 mL
+   Urine:
+                                                                  1,075 mL
+                                                                    196 mL
+   NG:
+   Stool:
+   Drains:
+   Balance:
+                                                                    960 mL
+                                                                   -118 mL
+   Respiratory support
+   O2 Delivery Device: Nasal cannula
+   SpO2: 99%
+   ABG: 7.36/42/36/21/-1
+   Physical Examination
+   Peripheral Vascular: (Right radial pulse: Not assessed), (Left radial
+   pulse: Not assessed), (Right DP pulse: Not assessed), (Left DP pulse:
+   Not assessed)
+   Skin:  Not assessed
+   Neurologic: Responds to: Not assessed, Movement: Not assessed, Tone:
+   Not assessed
+   Labs / Radiology
+   193 K/uL
+   8.4 g/dL
+   100 mg/dL
+   1.7 mg/dL
+   21 mEq/L
+   4.5 mEq/L
+   28 mg/dL
+   111 mEq/L
+   140 mEq/L
+   29
+   19.1 K/uL
+        [image002.jpg]
+                             [**2761-10-2**]  05:52 AM
+                             [**2761-10-2**]  05:35 PM
+                             [**2761-10-2**]  10:33 PM
+                             [**2761-10-3**]  03:59 AM
+                             [**2761-10-3**]  04:20 AM
+   WBC
+   42.2
+   23.7
+   19.1
+   Hct
+   25.3
+   27.5
+   26.5
+   29
+   Plt
+   [**Telephone/Fax (3) 4402**]
+   Cr
+   1.8
+   1.7
+   1.8
+   1.7
+   TropT
+   0.09
+   TCO2
+   25
+   Glucose
+   121
+   134
+   128
+   100
+   Other labs: PT / PTT / INR:31.9/46.0/3.3, CK / CKMB /
+   Troponin-T:40//0.09, Differential-Neuts:87.4 %, Lymph:7.0 %, Mono:3.6
+   %, Eos:1.8 %, Lactic Acid:1.1 mmol/L, Albumin:2.7 g/dL, Ca++:7.5 mg/dL,
+   Mg++:1.9 mg/dL, PO4:3.5 mg/dL
+   Imaging: Prelim Chest/abd/pelvis:
+   1. Areas of patchy consolidation in bilateral lungs consistent with
+   multifocal pneumonia with associated bilateral pleural effusions.
+   2. No evidence of abscess or colitis, however, study is limited
+   secondary to
+   lack of intravenous contrast, and secondary to artifact from right hip.
+   3. Central venous catheter with tip in SVC.
+   Microbiology: Bld cx [**10-1**] - pending
+   Ucx [**10-1**] - pending
+   Assessment and Plan
+   ICU Care
+   Nutrition:
+   Glycemic Control:
+   Lines:
+   Multi Lumen - [**2761-10-2**] 01:22 AM
+   20 Gauge - [**2761-10-2**] 01:22 AM
+   Prophylaxis:
+   DVT:
+   Stress ulcer:
+   VAP:
+   Comments:
+   Communication:  Comments:
+   Code status: Full code
+   Disposition:

@@ -1,0 +1,260 @@
+Chief Complaint:  Hematemesis
+   Admit to MICU for: UGIB
+   HPI:
+   Mr. [**Known patient lastname 4716**] is a 70 yo man with a history of COPD with approximately
+   thrice yearly hospitalizations for exacerbations, HTN, CHF, CVA,
+   lung CA s/p resection, and AAA s/p repair [**1-9**] presenting with
+   hematemesis. Of note he was discharged from [**Hospital1 52**] [**9-23**] for URI/COPD
+   exacerbation.  This am noted he felt weak/lightheaded upon arising from
+   bed, fell to floor. Had 1x episode of vomiting maroon blood.  Continued
+   to have sx of lightheadedness.  At time of presentation to ED, was HD
+   stable with VS 98.6 88 156/85 18 100% 2L.  Reported some CP day prior
+   to admission, currently resolved.  Did have some elevated LFTs on
+   initial testing with RUQ tenderness. A RUQ u/s was done which showed
+   some evidence of GB swelling without CBD dilitation.  Got 2L IVF in ED
+   as well as nebs and IV PPI. Pt guaiac negative on exam.  CXR was
+   negative for evidence of new infiltrate. ECG unchanged.
+   .
+   On ROS pt notes that he did fall and hit head this morning, does not
+   think he lost consciousness.  Had also fallen a few weeks ago and hit
+   his coccyx, has some pain there when he sits.  Denies recent chest
+   discomfort or shortness of breath. Does endorse worsening cough over
+   past week productive of sputum. States that he had ~500cc of maroon
+   hematemesis after falling, says this happened before in [**Month (only) 2548**] when he
+   had an UGIB at an OSH but it was a higher volume then. No nausea. No
+   abd pain, no constipation or diarrhea. Last BM earlier today.
+   Allergies:
+   Univasc (Oral) (Moexipril Hcl)
+   Cough;
+   Lipitor (Oral) (Atorvastatin Calcium)
+   leg cramps;
+   Vitamin E
+   epistaxis;
+   Ambien (Oral) (Zolpidem Tartrate)
+   disorientatio
+   Last dose of Antibiotics:
+   Infusions:
+   Other ICU medications:
+   Pantoprazole (Protonix) - [**2771-9-29**] 04:00 PM
+   Other medications:
+   1. Fluticasone-Salmeterol 250-50 mcg [**Hospital1 **]
+   2. Pantoprazole 40 mg Tablet daily
+   3. Fluoxetine 20 mg Capsule daily
+   4. Simvastatin 40 mg Tablet daily
+   5. Multivitamin 1 daily
+   6. Folic Acid 1 mg  DAILY
+   7. Docusate Sodium 100 mg PO BID
+   8. Acetaminophen 325 mg Tablet1-2 Q6H PRN
+   9. Gabapentin 200mg daily
+   10. Aspirin 325 mg Tablet daily
+   11. Guaifenesin prn
+   12. Isosorbide Mononitrate 30 mg Tablet Sustained Release daily
+   13. Metoprolol Tartrate 50 mg Tablet PO Q8H
+   14. Lisinopril 10 mg Table PO DAILY
+   16. Prednisone 20 mg Tablet Sig: 1-3 Tablets PO DAILY (Daily)
+   for 8 days: Please take 60 mg ([**9-24**], [**9-25**], [**9-26**], [**9-27**]), followed
+   by 40 mg ([**9-28**], [**9-29**]), followed by 20 mg ([**9-30**], [**10-1**]).
+   15. Prednisone 5 mg Tablet Sig: 1-2 Tablets PO once a day for 4
+   days: Please take 10 mg ([**10-2**], [**10-3**]) followed by 5 mg ([**10-4**],
+   [**10-5**]).
+   17. Albuterol
+   18. Hydrochlorothiazide 25 mg Tablet daily
+   Past medical history:
+   Family history:
+   Social History:
+   1. Hypertension
+   2. Hyperlipidemia
+   3. Peripheral vascular disease with right SFA atherectomy and
+   left external iliac artery stenting in [**2769**].
+   4. Cardiomyopathy - likely non-ischemic from Chemo
+   5. Carotid stenosis - likely d/t parotid XRT, s/p stenting to
+   the left common carotid and internal carotid in [**2768**]
+   6. AAA (thoracoabdominal) s/p endovascular repair
+   7. Small-cell carcinoma of the parotid gland s/p chemo and XRT
+   8. History of lung carcinoma s/p wedge resection left upper lobe
+   on and right lower lobe superior segmentectomy on [**11-6**]
+   9. History of supraventricular tachycardia
+   10. Depression
+   11. COPD with an FEV-1 of 42%
+   12. Chronic kidney disease, stage II to III (Cr 1.4-1.9)
+   13. UGIB in early [**Month (only) 2548**] (done at [**Hospital6 **], reportedly a
+   duodenal bleed), Dr. [**First Name (STitle) 2964**] recommended continuing ASA.
+   Father and sister have [**Name (NI) 1284**]. mother and brother have [**Name2 (NI) 774**] CA.
+   Occupation:
+   Drugs:
+   Tobacco:
+   Alcohol:
+   Other: Patient smoked for 50 years, quit 3 years ago. quit drinking 24
+   years ago. he is now retired but had his own business prior to
+   retiring. Lives at [**Doctor Last Name 276**] House which is [**Hospital3 **] where he is
+   independent except for med administration and meals.
+   Review of systems:
+   Flowsheet Data as of [**2771-9-29**] 06:38 PM
+   Vital Signs
+   Hemodynamic monitoring
+   Fluid Balance
+                                                                  24 hours
+                                                               Since 12 AM
+   Tmax: 35.6
+C (96
+   Tcurrent: 35.6
+C (96
+   HR: 70 (69 - 73) bpm
+   BP: 141/97(106) {141/97(106) - 153/105(117)} mmHg
+   RR: 29 (21 - 29) insp/min
+   SpO2: 99%
+   Heart rhythm: SR (Sinus Rhythm)
+   Height: 68 Inch
+                  Total In:
+                  PO:
+                  TF:
+   IVF:
+   Blood products:
+   Total out:
+                                                                      0 mL
+                                                                    390 mL
+   Urine:
+   390 mL
+   NG:
+   Stool:
+   Drains:
+   Balance:
+                                                                      0 mL
+                                                                   -390 mL
+   Respiratory
+   SpO2: 99% 2L
+   Physical Examination
+   Vitals: T: 96 BP:147/102  P:71  R:12  SaO2: 100%
+   General: Drowsy, easily arousable, frail appearing elderly gentleman in
+   NAD
+   HEENT: small tender pink swelling on occiput, ttp on right mastoid
+   process. Thrush.  MMM.  conjunctiva not pale or injected. no scleral
+   icterus.
+   Neck: s/p radiation. No bruits.
+   Pulmonary: Diminished air exchange b/l, slight rhonchi, clear with
+   coughing.  wheezes on forced expiration. diminished  bs right base with
+   pneumonectomy scar.
+   Cardiac: RR, nl S1 S2, no murmurs, rubs or gallops appreciated
+   Abdomen: s/p AAA repair scar. No HSM. negative [**Doctor Last Name **]. No abdominal
+   bruit. + BS, soft ND/NT
+   Extremities: No edema. cool. 1+ TP pulses.  Small ecchymosis with
+   excoriation to right of coccyx. No midline tenderness.
+   Skin: no rashes or lesions noted.
+   Neurologic: Drowsy. Oriented x 3. Falling asleep during conversation
+   but easily arousable.  Follows all commands.  Poor short term memory.
+   CN II- XII intact.  Moving all extremities symetrically.
+   Labs / Radiology
+   129 K/uL
+   13.6 g/dL
+   154
+   1.9
+   65          [**Numeric Identifier 4717**]
+   22
+   99
+   5.2
+   136
+   41.1 %
+   14.3 K/uL
+       [image002.jpg]
+   CK 55 Trop 0.02
+   AST96 ALT 236
+                                  [**2769-2-3**]
+                          2:33 A8/27/[**2771**]  04:12 PM
+                                  [**2769-2-7**]
+                                   10:20 P
+                                  [**2769-2-8**]
+                                   1:20 P
+                                  [**2769-2-9**]
+                                   11:50 P
+                                  [**2769-2-10**]
+                                   1:20 A
+                                  [**2769-2-11**]
+                                   7:20 P
+                                  1//11/006
+                                   1:23 P
+                                  [**2769-3-6**]
+                                   1:20 P
+                                  [**2769-3-6**]
+                                   11:20 P
+                                  [**2769-3-6**]
+                                   4:20 P
+   WBC
+                                    14.3
+   Hct
+                                    41.1
+   Plt
+                                     129
+   Imaging: RUQ u/s: Preliminary Report
+   THICKENING AND EDEMA OF THE WALL OF THE GALLBLADDER WITHOUT INTRA OR
+   EXTRA HEPATIC BILIARY DILATATION. HIDA SCAN RECOMENDED TO EXCLUDE
+   ACALCULOUS CHOLECYSTITIS
+   .
+   CXR:Unchanged, no acute process.
+   ECG: NSR at 66, LBBB, LVH, LAD, RA abnormality.  No change from prior.
+   Assessment and Plan
+   70M with h/o COPD with recent hospitalization for COPD exacerbation on
+   steroid taper, AAA s/p repair presenting with fall and hematemesis on
+   aspirin found with transaminitis, RUQ tenderness, gallbladder swelling
+   and leukocytosis
+   .
+   <I>PLAN:</I>
+   .
+   <I>## Hematemesis:</I>Per report pt had single episode of maroon
+   hematemesis, unclear volume. Is guaiac negative so if GI source, has
+   not been significant or of prolonged duration. Ddx is broad  GI vs oral
+   vs pulmonary source. Pt has history of lung ca s/p resection, has
+   history of acute cough/possible bronchitis.  He had GIB in [**Month (only) 2548**] at OSH,
+   unclear etiology, per PCP was [**Name Initial (PRE) **] duodenal bleed.  Another more ominous
+   possibility is an aorto-enteric fistula from his graft, however the
+   patient has had no other symptoms such as chest pain and is currently
+   hemodynamically stable.
+   -GI aware, no plans for emergent/urgent scope.  NPO after MN for
+   possibly EGD
+   -2PIV
+   -IV PPI, may switch back to home dose when taking PO
+   -Active T+S
+   -Check HCT in am, if stable may move to Q24.
+   -switch asa to 81mg
+   -decrease BB, hold other anti-hypertensives overnight, if HD stable,
+   may restart in am.
+   .
+   <I>## RUQ pain:</I>Unclear picture with transaminitis without ductal
+   dilatation and some gall bladder swelling. Pt is on steroids, reports
+   vague history of poor appetite with 25lb wt loss over 3 months, at risk
+   for acalculous cholecystitis.
+   -HIDA scan
+   -f/u blood cx
+   .
+   <I>## COPD:</I>Continue steroid taper, advair, duonebs
+   .
+   <I>## HTN:</I>Decreased dose of BB, holding other antihypertensives
+   until am, may restart HCTZ or ACEI in am if stable, no further bleeding
+   overnight.
+   .
+   <I>## HL:</I>Continue statin
+   .
+   <I>## Cardiomyopathy:</I>Restart ACEI in am
+   .
+   <I>## Leukocytosis:</I>Ddx includes steroid induced leukocytosis,
+   recent URI, cholecystits.  UA bland, unlikely source.
+   -Continue to trend
+   -f/u blood cultures
+   .
+   <I>## Falls:</I>Head CT read pending. On prelim look no overt bleed. No
+   focal neuron deficits.
+   -f/u final read CT
+   -Fall precautions
+   -PT c/s
+   ICU Care
+   Nutrition: NPO for now
+   Glycemic Control:
+   Lines:
+   18 Gauge - [**2771-9-29**] 02:49 PM x 2
+   Prophylaxis:
+   DVT: hep SC, pneumoboots
+   Stress ulcer: PPI
+   VAP:  Not needed
+   Comments:
+   Communication:  Comments:
+   Code status: Full code, confirmed
+   Disposition: Call out in am if HD stable.

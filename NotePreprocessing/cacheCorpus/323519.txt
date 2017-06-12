@@ -1,0 +1,114 @@
+Chief Complaint:  Suicidal ingestion
+   HPI:
+   Patient seen, examined and case discussed with Dr. [**First Name (STitle) 1936**].  Please see
+   resident note for complete details. Briefly, Mr. [**Known patient lastname 4524**] is a 39 yo
+   male with hx of polysubstanc abuse and severe psychopathy with
+   extensive SIB recently discharged from [**Hospital1 1207**] for SIB.  Found in park next
+   to a noose, cut his neck superficially with a beer can and reported
+   that he ate 5 pieces of glass.  Reviewed medical records from [**Hospital1 754**]
+   and [**Hospital1 172**] he has been admitted and scoped for suicidal ingestions on
+   [**8-25**] and [**8-6**].  Patient does endorse recent admissions to [**Hospital1 138**] for
+   ingestions.  Patient intubated for procedure unable to take history.
+   Allergies:
+   Haldol (Oral) (Haloperidol)
+   Dystonic;
+   Last dose of Antibiotics:
+   Infusions:
+   Propofol - 80 mcg/Kg/min
+   Other ICU medications:
+   Fentanyl - [**2639-9-20**] 10:30 AM
+   Midazolam (Versed) - [**2639-9-20**] 10:35 AM
+   Other medications:
+   Past medical history:
+   Family history:
+   Social History:
+   Please see resident H+P
+   Please see resident H+P
+   Occupation:
+   Drugs:
+   Tobacco:
+   Alcohol:
+   Other:
+   Review of systems: Unable to obtain
+   Flowsheet Data as of [**2639-9-20**] 12:54 PM
+   Vital Signs
+   Hemodynamic monitoring
+   Fluid Balance
+                                                                  24 hours
+                                                               Since 12 AM
+   Tmax: 35.7
+C (96.2
+   Tcurrent: 35.7
+C (96.2
+   HR: 60 (52 - 100) bpm
+   BP: 92/55(63) {92/55(63) - 106/66(75)} mmHg
+   RR: 10 (10 - 26) insp/min
+   SpO2: 97%
+   Heart rhythm: SR (Sinus Rhythm)
+   Height: 71 Inch
+             Total In:
+             678 mL
+   PO:
+             TF:
+   IVF:
+   678 mL
+   Blood products:
+   Total out:
+                                                                      0 mL
+                                                                    300 mL
+   Urine:
+   300 mL
+   NG:
+   Stool:
+   Drains:
+   Balance:
+                                                                      0 mL
+                                                                    378 mL
+   Respiratory
+   Ventilator mode: CMV/ASSIST
+   Vt (Set): 600 (600 - 600) mL
+   RR (Set): 10
+   PEEP: 5 cmH2O
+   FiO2: 40%
+   PIP: 18 cmH2O
+   Plateau: 12 cmH2O
+   SpO2: 97%
+   ABG: ////
+   Ve: 6.9 L/min
+   Physical Examination
+   General Appearance: Well nourished, No acute distress intubated.
+   HEENT: PERRL, Conjunctiva nml, intubated, JVP flat  CV: RRR s1s2 no
+   m/r/g  Lungs: CTA, Abd: Soft, ND.  Ext: No c/c/e.  Skin: Old scars
+   neck, few superficial lesions left lateral neck.
+   Neurologic:   Not assessed intubated
+   Labs / Radiology
+        Please see admission H+P  Tox + For etoh 38 and Urine tox pending
+   Assessment and Plan
+   Patient is a 39 yo male with significant poly substance abuse and
+   severe psychopathy with multiple admissions for foreign body removal
+   over the past few months.  Who currently states he is suicidal and is
+   s/p elective intubation for EGD which demonstrated a piece of glass
+   within the stomach.
+   1)Psyc- Will discuss management with psychiatry given suicidal reports
+   and multiple recent ingestions.
+   -Urine tox screen pending
+   -1:1 sitter
+   -Restraints
+   -Follow for signs of withdrawal
+   2)Glass ingestion-Follow serial abdominal exams for clinical signs of
+   perforation.
+   3)Dispo: Floor with 1:1.
+   ICU Care
+   Nutrition:
+   Glycemic Control:
+   Lines / Intubation: Peripherals
+   Comments:
+   Prophylaxis:
+   DVT: SC heprin
+   Stress ulcer:  PPI
+   VAP:
+   Comments:
+   Communication:  Comments:
+   Code status: Full code
+   Disposition:
+   Total time spent:
