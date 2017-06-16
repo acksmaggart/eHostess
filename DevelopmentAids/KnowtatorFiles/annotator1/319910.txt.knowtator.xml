@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotations textSource="319910.txt">
+    <annotation>
+        <mention id="EHOST_Instance_1" />
+        <annotator id="eHOST_2010">TestAnnotator</annotator>
+        <span start="255" end="266" />
+        <spannedText>MULTI LUMEN</spannedText>
+        <creationDate>Mon Jun 12 12:15:19 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_4">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_5">
+        <mentionSlot id="manual_v_auto" />
+        <stringSlotMentionValue value="manual" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_1">
+        <hasSlotMention id="EHOST_Instance_4" />
+        <hasSlotMention id="EHOST_Instance_5" />
+        <mentionClass id="bleeding_absent">MULTI LUMEN</mentionClass>
+    </classMention>
+    <annotation>
+        <mention id="EHOST_Instance_2" />
+        <annotator id="eHOST_2010">TestAnnotator</annotator>
+        <span start="135" end="148" />
+        <spannedText>STOOL CULTURE</spannedText>
+        <creationDate>Mon Jun 12 12:16:27 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_6">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_7">
+        <mentionSlot id="manual_v_auto" />
+        <stringSlotMentionValue value="manual" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_2">
+        <hasSlotMention id="EHOST_Instance_6" />
+        <hasSlotMention id="EHOST_Instance_7" />
+        <mentionClass id="bleeding_present">STOOL CULTURE</mentionClass>
+    </classMention>
+    <annotation>
+        <mention id="EHOST_Instance_3" />
+        <annotator id="eHOST_2010">TestAnnotator</annotator>
+        <span start="92" end="103" />
+        <spannedText>PAN CULTURE</spannedText>
+        <creationDate>Mon Jun 12 12:16:36 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_8">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_9">
+        <mentionSlot id="manual_v_auto" />
+        <stringSlotMentionValue value="manual" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_3">
+        <hasSlotMention id="EHOST_Instance_8" />
+        <hasSlotMention id="EHOST_Instance_9" />
+        <mentionClass id="bleeding_hypothetical">PAN CULTURE</mentionClass>
+    </classMention>
+    <eHOST_Adjudication_Status version="1.0">
+        <Adjudication_Selected_Annotators version="1.0" />
+        <Adjudication_Selected_Classes version="1.0" />
+        <Adjudication_Others>
+            <CHECK_OVERLAPPED_SPANS>false</CHECK_OVERLAPPED_SPANS>
+            <CHECK_ATTRIBUTES>false</CHECK_ATTRIBUTES>
+            <CHECK_RELATIONSHIP>false</CHECK_RELATIONSHIP>
+            <CHECK_CLASS>false</CHECK_CLASS>
+            <CHECK_COMMENT>false</CHECK_COMMENT>
+        </Adjudication_Others>
+    </eHOST_Adjudication_Status>
+</annotations>
+

@@ -1,0 +1,379 @@
+Admission Date:  [**3259-7-13**]              Discharge Date:   [**3259-7-24**]
+
+Date of Birth:  [**3179-1-2**]             Sex:   F
+
+Service: MEDICINE
+
+Allergies:
+Atorvastatin
+
+Attending:[**First Name3 (LF) 133**]
+Chief Complaint:
+cough, SOB
+
+Major Surgical or Invasive Procedure:
+RIJ placed
+Hemodialysis
+
+
+History of Present Illness:
+Pt is an 80F with a history of severe AS, CAD, s/p nephrectomy
+for RCC with ESRD recently started on HD and recent admission to
+[**Hospital1 18**] for cough [**Date range (1) 134**] p/w cough. Today she woke up from
+sleep with acute shortness of breath and cough. NO Chest pain.
+Husband called 911. In the ER, afebrile HR 120s, SBP 110s. CXR
+with ? PNA. She was given ceftriaxone 1 gram and levofloxacin
+750mg IV X1. Given continued resp distress intubated (rocuronium
+and etomidate).
+On presentation to the CCU pt intubated unable to provide
+history. Per husbandpt has had a severe cough since discharge
+from hosp productive for clear sputum. Overall has had a cough
+for ~3 mos (had been treated for PNA X2 most recently [**3259-6-29**]).
+She saw her cardiologist and who stopped her ramipril and
+switched her to losartan 1 day PTA. She has not had any fevers,
+nausea, vomiting or diaphoresis. Of note she had aoritc
+valvuloplasty on [**3259-6-24**] (initially valve area 0.56cm2, gradient
+27 -> after the procedure the calculated aortic valve area was
+0.74 cm2 and gradient 12 mmHg.) Pt has been on dialysis in the
+past but with improvement in creatinine she was not dialysed on
+Thursday (last dialysis [**3259-7-8**]).
+
+
+Past Medical History:
+Percutaneous coronary intervention, in [**3257**] anatomy as follows:
+-- LMCA clean
+-- LAD: mild disease
+-- LCX: mild disease with origin OM1 and OM2 60-70% stenosis
+-- RCA: ulcerated 50% proximal plaque w/ mild disease
+-- severe AS: [**Location (un) 108**] 0.8 cm2, peak gradient 50
+-- EF 60%
+.
+Other Past History:
+-- severe AS: cardiac investigation in [**State 107**] by [**First Name8 (NamePattern2) 109**] [**Last Name (NamePattern1) 110**]
+revealed calculated [**Location (un) 108**] of 1.0 cm2, valve gradient of 32 mm Hg.
+LVEF is 45-50% with apical akinesis.  She has 1+ MR. Cath at [**Hospital1 **]
+revealed [**Location (un) 108**] 0.8 cm2, moderate CAD at 30-40% except for 60-70%
+stenosis of OM1 and OM2.  Peak aortic valve gradient is 50,
+cardiac output is 3.2 liters/min.  No signficant carotid
+disease.
+-- h/o MRSA from LLE trauma in [**3258-8-28**]
+-- chronic systolic CHF, EF 30-40%
+-- right nephrectomy [**3251**] due to renal cell carcinoma
+-- ESRD on hemodialysis for one month
+-- h/o cholelithiasis
+-- osteoarthritis
+-- herpes zoster of the right which was intracostal
+-- h/o H. pylori
+-- anemia
+-- h/o right inguinal herniorrhaphy in [**3242**]
+-- myositis s/p muscle biopsy at [**Hospital1 111**], possibly related to statin
+use
+.
+
+
+Social History:
+Social history is significant for the absence of current tobacco
+use. She has a 50 pack-year smoking history but stopped in [**3241**].
+There is no history of alcohol abuse.
+
+
+Family History:
+There is no family history of premature coronary artery disease
+or sudden death.
+
+Physical Exam:
+VS
+Gen: Elderly woman in NAD, pleasant
+HEENT: NCAT. Sclera anicteric. PERRL, EOMI. Conjunctiva were
+pink, no pallor or cyanosis of the oral mucosa. No xanthalesma.
+
+Neck: Supple with JVP of 7 cm.
+CV: PMI located in 5th intercostal space, midclavicular line.
+RR, normal [**4-3**] harsh early peaking systolic murmur.
+Chest: No chest wall deformities, slight kyphosis. Resp were
+unlabored, no accessory muscle use. CTAB, slight crackles at
+bases.
+Abd: Soft, NTND. No HSM or tenderness. Abd aorta not enlarged by
+palpation. No abdominial bruits.
+Ext: No c/c/e. No femoral bruits.
+Skin: No stasis dermatitis, ulcers, scars, or xanthomas.
+.
+Pulses:
+Right: DP 2+
+Left: DP 2+
+.
+
+
+Pertinent Results:
+Percutaneous coronary intervention, in [**5-/3259**]:
+COMMENTS:
+1. Limited coronary angiography demonstrated heavily calcified
+left
+main, left anterior descending and left circumflex arteries. The
+left circumflex had a heavily calcified proximal lesion.
+2. LV ventriculography was deferred.
+3. Successful Rotational atherectomy, PTCA and stenting of the
+proximal left circumflex artery with a Cypher (3x13mm) drug
+eluting stent postdilated to 3.5mm. Final angiography
+demonstrated no
+angiographically apparent dissection, no residual stenosis and
+TIMI III flow throughout the vessel (See PTCA Comments).
+FINAL DIAGNOSIS:
+1. One vessel coronary artery disease.
+2. Successful rotational atherectomy, PTCA and stenting of the
+proximal LCX with a drug eluting stent (Cypher).
+.
+.
+2D-ECHOCARDIOGRAM performed on [**3259-7-4**] demonstrated:The left
+atrium and right atrium are normal in cavity size. There is
+moderate symmetric left ventricular hypertrophy with normal
+cavity size and moderate global hypokinesis (LVEF = 30-35 %).
+Right ventricular chamber size and free wall motion are normal.
+The aortic valve leaflets are moderately thickened. There is
+severe aortic valve stenosis (area 0.7cm2). Mild (1+) aortic
+regurgitation is seen. The mitral valve leaflets are mildly
+thickened. There is no mitral valve prolapse. Mild to moderate
+([**1-29**]+) mitral regurgitation is seen. [Due to acoustic shadowing,
+the severity of mitral regurgitation may be significantly
+UNDERestimated.] There is mild pulmonary artery systolic
+hypertension. There is a very small circumferential pericardial
+effusion.
+IMPRESSION: Severe aortic valve stenosis. Moderate symmetric
+left ventricular hypertrophy with moderate global hypokinesis.
+Mild-moderate mitral regurgitation. Pulmonary artery systolic
+hypertension.
+.
+
+[**3259-7-13**] 03:15AM BLOOD WBC-17.0*# RBC-3.46* Hgb-9.3* Hct-29.7*
+MCV-86 MCH-26.9* MCHC-31.3 RDW-16.0* Plt Ct-567*#
+[**3259-7-13**] 03:15AM BLOOD PT-14.1* PTT-22.3 INR(PT)-1.2*
+[**3259-7-13**] 03:15AM BLOOD Glucose-337* UreaN-46* Creat-1.9* Na-138
+K-4.9 Cl-104 HCO3-16* AnGap-23*
+[**3259-7-13**] 03:15AM BLOOD CK(CPK)-21* Amylase-34
+[**3259-7-13**] 03:15AM BLOOD CK-MB-NotDone cTropnT-0.01 proBNP-[**Numeric Identifier 135**]*
+[**3259-7-13**] 06:58AM BLOOD Type-ART Rates-14/22 FiO2-100 pO2-127*
+pCO2-42 pH-7.28* calTCO2-21 Base XS--6 AADO2-558 REQ O2-91
+-ASSIST/CON Intubat-INTUBATED
+[**3259-7-18**] 04:06AM BLOOD WBC-6.5 RBC-3.06* Hgb-8.3* Hct-25.4*
+MCV-83 MCH-27.0 MCHC-32.5 RDW-15.4 Plt Ct-193
+[**3259-7-18**] 04:06AM BLOOD PT-16.0* PTT-39.5* INR(PT)-1.4*
+[**3259-7-18**] 04:06AM BLOOD Glucose-96 UreaN-11 Creat-2.1* Na-139
+K-4.2 Cl-105 HCO3-24 AnGap-14
+[**3259-7-19**] 06:51AM BLOOD ALT-7 AST-13 LD(LDH)-176 AlkPhos-61
+TotBili-0.3
+[**3259-7-17**] 08:20AM BLOOD calTIBC-341 VitB12-963* Folate-6.6
+Ferritn-41 TRF-262
+[**3259-7-17**] 01:40AM BLOOD Type-ART pO2-104 pCO2-35 pH-7.46*
+calTCO2-26 Base XS-1
+.
+EKG on admission-Sinus tachycardia with left bundle-branch block
+with secondary ST-T wave
+abnormalities. No diagnostic change from tracing #1.
+.
+[**Month/Day/Year **] on admission - The left atrium is mildly dilated. Left
+ventricular wall thicknesses and cavity size are normal. There
+is mild to moderate regional left ventricular systolic
+dysfunction with near akinesis of the inferior and inferolateral
+walls and mild-moderate hypokinesis of the remaining segments
+(LVEF = 30-35%). No masses or thrombi are seen in the left
+ventricle. Right ventricular chamber size and free wall motion
+are normal. The aortic valve leaflets are severely
+thickened/deformed. There is moderate to severe aortic valve
+stenosis (area 0.9cm2). Mild (1+) aortic regurgitation is seen.
+The mitral valve leaflets are mildly thickened. At least mild
+(1+) mitral regurgitation is seen. [Due to acoustic shadowing,
+the severity of mitral regurgitation may be significantly
+UNDERestimated.] There is borderline pulmonary artery systolic
+hypertension. There is a small, primarily anterior (?loculated)
+pericardial effusion without evidence of hemodynamic compromise
+with a prominent anterior fat pad.
+.
+[**7-21**] EKG - Sinus tachycardia. Left atrial abnormality. Left
+bundle-branch block.
+Left axis deviation. Secondary repolarization abnormalities.
+Compared to the
+previous tracing of [**3259-7-19**] heart rate has increased. Otherwise,
+no major
+change.
+.
+CXRs over the course of admission showed slowly improving
+pulmonary edema, no major focal consolidations were seen.
+.
+Renal US - no hydronephrosis, patent renal artery.
+
+Brief Hospital Course:
+# PUMP/Chronic systolic congestive heart failure:
+Patient presented with presumed acute exacerbation of chronic
+systolic heart, which has improved after ultrafiltration. [**Date Range **]
+with EF of 30-40% unchanged from prior. She currently appears
+fairly euvolemic, however her fluid status has remained
+difficult to manage given her low ejection fraction and poor
+urine output.
+- Continued home doses of carvedilol and losartan.  Were held
+initially for low blood pressures, but both restarted during her
+admission.
+- Hemodialysis was considered for fluid managment, but a trial
+of lasix proved successful.  She will now go home on 160 mg PO
+daily lasix and follow up with Dr. [**Last Name (STitle) 117**], her nephrologist.
+She will monitor daily weights/low sodium diet, pt had nutrition
+consult during stay.
+.
+# CAD: No evidence ACS during hospitalization. Patient is s/p
+recent LCx stent.  She was continued on ASA, carvedilol, plavix,
+and Losartan.
+
+.
+#. Valves. No active issues. Severe AS a/p valvuloplasty
+[**3259-6-25**], stable AS per [**Month/Day/Year **]. Discussed with patient and family:
+per their report, patient was previously evaluated by Dr.
+[**Name (NI) 136**] in cardiac surgery and was not a candidate for valve
+replacment due to "calcifications." Patient may be candidate for
+new cath-assisted valve replacement. Also has mild MR on last
+[**Name (NI) 112**].  Pt should likely be re-evaluated after discharge.
+.
+# Respiratory distress resolved -
+Respiratory distress was suspected to be likely multifactorial
+secondary to volume overload and also PNA as supported by
+elevated WBC on presentation, fever, and now GNR in sputum gram
+stain but not growing on culture. Increased sputum overnight
+while afebrile, non-elevated white count likely represents
+resolving infection. Received monotherapy with ceftazadime only
+given GNR in sputum may be pseudomonas; antibiotics started
+[**7-13**], continued for 7 days.  She will continue lasix as
+outpatient to try and prevent pulm edema.
+.
+# ANEMIA/GIB:
+HCT drop was noted several two days into admission, unclear if
+represented true blood loss. NGT removed [**7-15**] and this
+demonstrated frank dark blood (+hemoccult) in NGT, likely
+representing bleed several days ago from gastritis. LDH and
+haptoglobin were checked with HCT drop and were within normal
+limits which is inconsistent with hemolysis. She received 1 u
+PRBCs soon after admission, and HCT has remained stable since.
+Her Hcts were between 26 and 28.  Stools were checked for guiac,
+and were positive two days prior to dicharge.  We discharged her
+home with protonix and recommend follow up with her PCP to
+continue to monitor CBCs for watch for blood loss.  She is not
+actively losing blood as seen by her stable Hcts.  We also
+recommend an outpatient colonoscopy.  Although, she needs to be
+very careful with the bowel prep, as that can cause large fluid
+shifts and drive her into pulmonary edema.
+.
+# Acute on chronic renal failure (stable Cr):
+Acute on chronic renal failure likely due to ATN secondary to
+hypotension versus ongoing pre-renal state. Patient had been
+initiated on HD in [**3259-4-29**]; was taken off HD ~1 week prior to
+admission. Volume overload/CHF on admission, improved with UF,
+now appears euvolemic. Creatinine 1.... on discharge.  Pt has
+history of RCC with nephrectomy.  Renal function has seemed to
+normalize.  Will continue follow up with nephrologist and he
+will also coordinate removal of dialysis catheter.
+
+#  Pt was discharge to home with services for PT and home health
+care for dialysis catheter dressing changes.
+
+Medications on Admission:
+Aspirin 325 mg PO daily
+Carvedilol 3.125 mg PO BID
+Clopidogrel 75 mg PO daily
+Losartan (switched from ramipril 5 mg on [**3259-7-11**])
+B Complex-Vitamin C-Folic Acid 1 mg daily
+Calcium Acetate 667 mg Capsule 1 po tid
+Fexofenadine 60 mg daily
+Sodium Chloride 0.65 % Aerosol, Spray Sig: [**1-29**] Sprays Nasal QID
+
+
+
+Discharge Medications:
+.
+1. Aspirin 325 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+2. Clopidogrel 75 mg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+3. B Complex-Vitamin C-Folic Acid 1 mg Capsule Sig: One (1) Cap
+PO DAILY (Daily).
+4. Fexofenadine 60 mg Tablet Sig: One (1) Tablet PO BID (2 times
+a day).
+5. Polyvinyl Alcohol-Povidone 1.4-0.6 % Dropperette Sig: [**1-29**]
+Drops Ophthalmic PRN (as needed).
+6. Hydrocodone-Acetaminophen 5-500 mg Tablet Sig: 0.5-1 Tablet
+PO every four (4) hours as needed.
+Disp:*30 Tablet(s)* Refills:*0*
+7. Carvedilol 3.125 mg Tablet Sig: One (1) Tablet PO BID (2
+times a day).
+Disp:*60 Tablet(s)* Refills:*2*
+8. Losartan 25 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+9. Epoetin Alfa 2,000 unit/mL Solution Sig: One (1)  Injection
+QMOWEFR (Monday -Wednesday-Friday).
+10. Pantoprazole 40 mg Tablet, Delayed Release (E.C.) Sig: One
+(1) Tablet, Delayed Release (E.C.) PO Q24H (every 24 hours).
+Disp:*30 Tablet, Delayed Release (E.C.)(s)* Refills:*2*
+11. Ipratropium Bromide 0.02 % Solution Sig: One (1)  Inhalation
+Q6H (every 6 hours) as needed.
+Disp:*1 inhaler* Refills:*0*
+12. Furosemide 40 mg Tablet Sig: Four (4) Tablet PO DAILY
+(Daily).
+Disp:*120 Tablet(s)* Refills:*2*
+
+
+Discharge Disposition:
+Home With Service
+
+Facility:
+[**Hospital 118**] Homecare
+
+Discharge Diagnosis:
+Primary Diagnoses:
+1. Respiratory Failure
+2. CHF
+3. Renal Failure
+
+Secondary Diagnoses:
+1. Aortic Stenosis
+2. Anemia
+3. HTN
+
+
+Discharge Condition:
+Stable, afebrile, pt walking with a walker, eating on her own,
+with a normal mental status.
+
+
+Discharge Instructions:
+You were admitted for respiratory distress due to fluid in your
+lungs from an acute episode of worsening heart failure.  You
+were intubated at the time, and when you were able to breath on
+your own, we continued to remove fluid from your lungs with
+diuretics.  We also are continuing to give you the medicines
+carvedilol and losartan for your heart failure.
+
+You also will start taking lasix daily to ensure fluid stays off
+your lungs.
+
+In addition, you had acute renal failure during this admission.
+Your kidney function improved, but you will continue to need
+follow up with Dr. [**Last Name (STitle) 117**].  You also have a dialysis catheter in
+your chest that will need to be taken care of by a home nurse.
+Dr. [**Last Name (STitle) 117**] will discuss removal of the catheter as an
+outpatient.
+
+We also found a trace amount of blood in your stool.  You should
+meet with your PCP and discuss having a colonoscopy.  Make sure
+to tell them you have heart failure because it does affect the
+bowel preparation they plan for you.
+
+Once at home, weigh yourself every morning, [**Name8 (MD) 137**] MD if weight >
+3 lbs.
+Adhere to 2 gm sodium diet.  Call the nutritionist with any
+questions.
+
+Also, if you experience any worsening shortness of breath, chest
+pain, dizziness or fainting or any other worrisome symptoms, do
+not hesitate to call your doctor or call 911 in case of
+emergency.
+
+
+
+Completed by:[**3259-7-29**]
+
+
+DOC CLASS

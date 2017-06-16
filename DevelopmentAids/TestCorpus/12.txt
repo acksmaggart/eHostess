@@ -1,0 +1,235 @@
+Admission Date:  [**2851-8-11**]              Discharge Date:   [**2851-8-16**]
+
+Date of Birth:  [**2777-9-23**]             Sex:   M
+
+Service: CARDIOTHORACIC
+
+Allergies:
+No Known Allergies / Adverse Drug Reactions
+
+Attending:[**First Name3 (LF) 163**]
+Chief Complaint:
+angina and STEMI
+
+Major Surgical or Invasive Procedure:
+[**2851-8-11**] cardiac cath
+[**2851-8-11**] CABG X5 (LIMA to LAD, SVG to DIAG, SVG to OM1>OM2; SVG
+to PDA) with pre-op IABP
+
+
+History of Present Illness:
+Mr. [**Known patient lastname 164**] is a 73 yo who underwent a
+prostate biopsy and OR for ligation of post prostate biopsy
+bleeding on [**8-9**] and was discharged on [**8-10**].  He awoke in the
+morning of [**8-11**] about 2am with crushing substernal chest pain.
+He presented to the ED with a STEMI and was taken emergently to
+the cath lab.  He was found to have severe 3 vessel CAD.  IABP
+was placed to support hemodynamics.  Cardiac Surgery is
+consulted
+for surgical revascularization.
+
+
+Past Medical History:
+hyperlipidemia, coronary artery disease, prostate cancer, gout
+
+Social History:
+Retired as a waiter in a Chinese restaurant. Patient is an
+accomplished poet who has published works in Chinese.  Daughter
+is nurse. Tobacco none  ETOH: None Drugs: None
+
+
+Family History:
+non-contributory
+
+Physical Exam:
+Pulse: 81 SR  Resp: 16  O2 sat: 98%
+B/P  Right:    Left:  118/59
+Height:  5'4"   Weight: 65lb
+
+Five Meter Walk Test: Bedrest (IABP)
+
+General: NAD, WGWN, supine with IABP
+Skin: Dry [x] intact [x] no rash
+HEENT: PERRLA [x] EOMI [x]
+Neck:  Supple [x] Full ROM [x]
+Chest: Lungs clear bilaterally [x]
+Heart: RRR [x]  Irregular []  Murmur [] grade ______
+Abdomen: Soft [x] non-distended [x] non-tender [x]  bowel sounds
++ [x]
+Extremities: Warm [x], well-perfused [x]
+Edema [] none
+Varicosities: None [x]
+Neuro: Grossly intact [x]
+Pulses:
+Femoral      Right:   Left:
+DP           Right: 1+  Left:1+
+PT           [**Name (NI) 165**]: 1+  Left:1+
+Radial       Right: 2+  Left:2+
+
+Carotid Bruit        Right:    Left:
+no bruits
+
+
+Pertinent Results:
+Conclusions
+PRE-BYPASS:
+-No spontaneous echo contrast or thrombus is seen in the body of
+the left atrium or left atrial appendage.
+-No atrial septal defect is seen by 2D or color Doppler.
+- Left ventricular wall thicknesses are normal. The left
+ventricular cavity size is normal. Left ventricular systolic
+function is hyperdynamic (EF>75%).
+-There are simple atheroma in the aortic arch. There are simple
+atheroma in the descending thoracic aorta.
+-There is an intra-aortic balloon pump in the descending aorta
+with the tip termintating 3cm distal to the left subclavian
+artery.
+-The aortic valve leaflets (3) are mildly thickened but aortic
+stenosis is not present. There is no aortic valve stenosis. Mild
+to moderate ([**11-27**]+) aortic regurgitation is seen.
+-The mitral valve leaflets are mildly thickened. Mild (1+)
+mitral regurgitation is seen.
+-There is a small pericardial effusion.
+-There is a left pleural effusion.
+
+POSTBYPASS:
+  I certify that I was present for this procedure in compliance
+with HCFA regulations.
+
+Interpretation assigned to [**First Name8 (NamePattern2) **] [**Last Name (NamePattern1) 166**], MD, Interpreting
+physician
+
+[**2851-8-16**] 05:42AM BLOOD WBC-6.8 RBC-3.50* Hgb-11.0* Hct-30.7*
+MCV-88 MCH-31.5 MCHC-36.0* RDW-15.1 Plt Ct-130*
+[**2851-8-15**] 04:12AM BLOOD WBC-8.4 RBC-3.74* Hgb-11.3* Hct-32.5*
+MCV-87 MCH-30.3 MCHC-34.9 RDW-15.1 Plt Ct-128*
+[**2851-8-14**] 01:25AM BLOOD PT-12.4 PTT-30.7 INR(PT)-1.0
+[**2851-8-13**] 01:28PM BLOOD PT-13.1 PTT-34.3 INR(PT)-1.1
+[**2851-8-16**] 05:42AM BLOOD Glucose-120* UreaN-39* Creat-1.1 Na-141
+K-3.7 Cl-105 HCO3-28 AnGap-12
+[**2851-8-15**] 08:16PM BLOOD Na-144 K-3.4 Cl-106
+[**2851-8-15**] 04:12AM BLOOD Glucose-131* UreaN-39* Creat-1.3* Na-146*
+K-3.6 Cl-106 HCO3-30 AnGap-14
+
+Brief Hospital Course:
+Admitted to CCU after emergency cardiac cath/IABP placement.
+Pre-op w/u completed and taken to the OR directly for surgery
+with Dr. [**First Name (STitle) **]. Transferred to the CVICU in stable condition on
+titrated phenylephrine and propofol drips.  The patient was
+loaded with Plavix pre-cath, on the day of surgery.  Out of the
+OR, he was coagulopathic, requiring multiple blood products.
+Hemodynamics improved and vasoactive drips were weaned by POD 1.
+ The IABP was weaned and discontinued on POD 2. The patient was
+aggressively diuresed and extubated on POD 3.  Beta blocker was
+initiated and titrated as tolerated.  The patient was
+transferred to the telemetry floor for further recovery.  Chest
+tubes and pacing wires were discontinued without complication.
+The patient was evaluated by the physical therapy service for
+assistance with strength and mobility.  Norvasc and Lisinopril
+were added for hypertension.  The patient has poor targets, and
+Plavix was initiated.  By the time of discharge on POD 5 the
+patient was ambulating with assistance, the wound was healing
+and pain was controlled with oral analgesics.  The patient was
+discharged to [**Location (un) 167**] Center of [**Location (un) 55**] in good
+condition with appropriate follow up instructions.
+
+Medications on Admission:
+allopurinol 300mg daily
+finasteride 5mg daily
+metoprolol succinate 50mg daily
+simvastatin 80mg daily
+aspirin
+
+
+Discharge Medications:
+1. clopidogrel 75 mg Tablet Sig: One (1) Tablet PO DAILY (Daily)
+as needed for poor targets.
+2. finasteride 5 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+
+3. magnesium hydroxide 400 mg/5 mL Suspension Sig: Thirty (30)
+ML PO HS (at bedtime) as needed for constipation.
+4. docusate sodium 100 mg Capsule Sig: One (1) Capsule PO BID (2
+times a day).
+5. acetaminophen 325 mg Tablet Sig: Two (2) Tablet PO Q4H (every
+4 hours) as needed for pain, fever.
+6. aspirin 81 mg Tablet, Delayed Release (E.C.) Sig: One (1)
+Tablet, Delayed Release (E.C.) PO DAILY (Daily).
+7. atorvastatin 80 mg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+8. amlodipine 5 mg Tablet Sig: Two (2) Tablet PO DAILY (Daily).
+
+9. allopurinol 100 mg Tablet Sig: Three (3) Tablet PO DAILY
+(Daily).
+10. metoprolol tartrate 25 mg Tablet Sig: Three (3) Tablet PO
+TID (3 times a day).
+11. bisacodyl 10 mg Suppository Sig: One (1) Suppository Rectal
+DAILY (Daily) as needed for constipation.
+12. lisinopril 5 mg Tablet Sig: 0.5 Tablet PO DAILY (Daily).
+13. furosemide 40 mg Tablet Sig: One (1) Tablet PO once a day
+for 10 days.
+14. potassium chloride 10 mEq Tablet Extended Release Sig: Two
+(2) Tablet Extended Release PO once a day for 10 days.
+
+
+Discharge Disposition:
+Extended Care
+
+Facility:
+tba
+
+Discharge Diagnosis:
+coronary artery disease s/p cabg x5
+hyperlipidemia
+prostate CA
+gout
+Past Surgical History
+s/p prostate biopsy and surgery for ligation of bleeding [**8-9**]
+
+
+Discharge Condition:
+Alert and oriented x3 nonfocal
+Ambulating, deconditioned
+Incisional pain managed with oral analgesics
+Incisions:
+Sternal - healing well, no erythema or drainage
+Leg Left - healing well, no erythema or drainage.
+Edema 1+
+
+
+Discharge Instructions:
+Please shower daily including washing incisions gently with mild
+soap, no baths or swimming until cleared by surgeon. Look at
+your incisions daily for redness or drainage
+Please NO lotions, cream, powder, or ointments to incisions
+Each morning you should weigh yourself and then in the evening
+take your temperature, these should be written down on the chart
+
+No driving for approximately one month and while taking
+narcotics, will be discussed at follow up appointment with
+surgeon when you will be able to drive
+No lifting more than 10 pounds for 10 weeks
+Please call with any questions or concerns [**Telephone/Fax (1) 168**]
+**Please call cardiac surgery office with any questions or
+concerns [**Telephone/Fax (1) 168**]. Answering service will contact on call
+person during off hours**
+
+
+Followup Instructions:
+You are scheduled for the following appointments
+Surgeon: Dr. [**First Name (STitle) **] [**Telephone/Fax (1) 168**] Date/Time:[**2851-9-18**] 1:00
+Cardiologist:Dr. [**Last Name (STitle) 169**] [**Telephone/Fax (1) 62**] Date/Time:[**2851-10-23**] 8:00
+
+Please call to schedule appointments with your
+Primary Care Dr. [**Last Name (STitle) 170**] [**Telephone/Fax (1) 132**] in [**2-28**] weeks
+
+**Please call cardiac surgery office with any questions or
+concerns [**Telephone/Fax (1) 168**]. Answering service will contact on call
+person during off hours**
+
+
+                             [**Name6 (MD) **] [**Name8 (MD) **] MD [**MD Number(2) 171**]
+
+Completed by:[**2851-8-16**]
+
+
+DOC CLASS

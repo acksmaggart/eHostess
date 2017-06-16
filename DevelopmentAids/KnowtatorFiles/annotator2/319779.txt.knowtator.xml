@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotations textSource="319779.txt">
+    <annotation>
+        <mention id="EHOST_Instance_7" />
+        <annotator id="01">TestAnnotator2</annotator>
+        <span start="0" end="16" />
+        <spannedText>Chief Complaint:</spannedText>
+        <creationDate>Fri Jun 16 08:42:48 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_10">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_11">
+        <mentionSlot id="manual_v_auto" />
+        <stringSlotMentionValue value="manual" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_7">
+        <hasSlotMention id="EHOST_Instance_10" />
+        <hasSlotMention id="EHOST_Instance_11" />
+        <mentionClass id="bleeding_absent">Chief Complaint:</mentionClass>
+    </classMention>
+    <annotation>
+        <mention id="EHOST_Instance_8" />
+        <annotator id="eHOST_2010">TestAnnotator2</annotator>
+        <span start="0" end="16" />
+        <spannedText>24 Hour Events:</spannedText>
+        <creationDate>Fri Jun 16 09:04:26 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_12">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_13">
+        <mentionSlot id="manual_v_auto" />
+        <stringSlotMentionValue value="manual" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_8">
+        <hasSlotMention id="EHOST_Instance_12" />
+        <hasSlotMention id="EHOST_Instance_13" />
+        <mentionClass id="bleeding_present">24 Hour Events:</mentionClass>
+    </classMention>
+    <annotation>
+        <mention id="EHOST_Instance_9" />
+        <annotator id="eHOST_2010">TestAnnotator2</annotator>
+        <span start="39" end="61" />
+        <spannedText>- Got 1u PRBC w/ lasix</spannedText>
+        <creationDate>Fri Jun 16 09:04:31 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_14">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <stringSlotMention id="EHOST_Instance_15">
+        <mentionSlot id="manual_v_auto" />
+        <stringSlotMentionValue value="manual" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_9">
+        <hasSlotMention id="EHOST_Instance_14" />
+        <hasSlotMention id="EHOST_Instance_15" />
+        <mentionClass id="bleeding_absent">- Got 1u PRBC w/ lasix</mentionClass>
+    </classMention>
+    <eHOST_Adjudication_Status version="1.0">
+        <Adjudication_Selected_Annotators version="1.0" />
+        <Adjudication_Selected_Classes version="1.0" />
+        <Adjudication_Others>
+            <CHECK_OVERLAPPED_SPANS>false</CHECK_OVERLAPPED_SPANS>
+            <CHECK_ATTRIBUTES>false</CHECK_ATTRIBUTES>
+            <CHECK_RELATIONSHIP>false</CHECK_RELATIONSHIP>
+            <CHECK_CLASS>false</CHECK_CLASS>
+            <CHECK_COMMENT>false</CHECK_COMMENT>
+        </Adjudication_Others>
+    </eHOST_Adjudication_Status>
+</annotations>
+
