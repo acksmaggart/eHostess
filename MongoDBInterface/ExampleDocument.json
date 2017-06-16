@@ -1,7 +1,6 @@
 {
-  "document_name" : "14829.txt",
-  "document_id" : "14829.txt-MIMC_v2",
-  "annotation_round" : "MIMC_v2",
+  "document_name" : "14829",
+  "annotation_group" : "MIMC_v2",
   "annotation_method" : "pyConText",
   "annotator_name" : "",
   "annotations" :[

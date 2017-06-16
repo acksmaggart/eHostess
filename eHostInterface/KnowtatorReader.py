@@ -28,7 +28,7 @@ def parseAdjudicationStatus(xmlElement):
     return AdjudicationStatus(overlapping, attributes, relationship, adjudicationClass, comment)
 
 
-def parseMentionLevelAnnotations(documentId, annotationElements, classMentionElements, stringSlotMentionElements):
+def parseMentionLevelAnnotations(annotationElements, classMentionElements, stringSlotMentionElements):
     """This function takes a list of annotation elements, classMention elements, and stringSlotMention elements from
     .knowtator files and combines corresponding elements into MentionLevelAnnotation objects."""
     annotations = {}
@@ -41,7 +41,7 @@ def parseMentionLevelAnnotations(documentId, annotationElements, classMentionEle
         annotationId = annotationXml.find("mention").attrib["id"]
         creationDate = annotationXml.find("creationDate").text
 
-        newAnnotationObj = MentionLevelAnnotation(documentId, text, start, end, annotator, annotationId, attributes={}, creationDate=creationDate)
+        newAnnotationObj = MentionLevelAnnotation(text, start, end, annotator, annotationId, attributes={}, creationDate=creationDate)
         annotations[newAnnotationObj.annotationId] = newAnnotationObj
 
     for mentionXml in classMentionElements:
@@ -73,7 +73,10 @@ def parseMentionLevelAnnotations(documentId, annotationElements, classMentionEle
 
 class KnowtatorReader:
     @classmethod
-    def parseMultipleKnowtatorFiles(cls, directoryList):
+    def parseMultipleKnowtatorFiles(cls, directoryList, annotationGroup="MIMC_v2"):
+        directoryList = directoryList
+        if not isinstance(directoryList, list):
+            directoryList = [directoryList]
         annotationDocuments = []
         fileNames = []
         cleanDirNames = cleanDirectoryList(directoryList)
@@ -81,12 +84,14 @@ class KnowtatorReader:
             fileNames.extend(glob.glob(dirPath))
 
         for filePath in fileNames:
-            annotationDocuments.append(cls.parseSingleKnowtatorFile(filePath))
+            annotationDocuments.append(cls.parseSingleKnowtatorFile(filePath, annotationGroup))
         return annotationDocuments
 
 
     @classmethod
-    def parseSingleKnowtatorFile(cls, filePath):
+    def parseSingleKnowtatorFile(cls, filePath, annotationGroup="MIMC_v2"):
+        """In order to standardize querying and working with notes this  method assigns the document name to be the
+        filename without the extension(s). For example, the file 291997.txt.knowtator.xml would be named 291997."""
         fileName = filePath.split('/')[-1]
 
         tree = ElementTree.parse(filePath)
@@ -105,7 +110,8 @@ class KnowtatorReader:
             if child.tag == "eHOST_Adjudication_Status":
                 adjudicationStatus = parseAdjudicationStatus(child)
 
-        annotations = parseMentionLevelAnnotations(fileName, annotationElements, classMentionElements,
+        annotations = parseMentionLevelAnnotations(annotationElements, classMentionElements,
                                                    stringSlotMentionElements)
+        nameWithoutExtentions = fileName.split('.')[0]
 
-        return Document(fileName, fileName, annotations, adjudicationStatus=adjudicationStatus)
+        return Document(nameWithoutExtentions, annotationGroup, annotations, adjudicationStatus=adjudicationStatus)

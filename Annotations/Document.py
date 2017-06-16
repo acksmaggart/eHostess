@@ -18,7 +18,7 @@ class AdjudicationStatus:
 
 
 class Document:
-    def __init__(self, documentName, documentId, mentionLevelObjects, adjudicationStatus=None):
+    def __init__(self, documentName, annotationGroup, mentionLevelObjects, adjudicationStatus=None):
         self.documentName = documentName
         # mentionLevelObjects may come in as a list. Internally however, it is stored in a dictionary keyed by
         # annotation id.
@@ -36,7 +36,7 @@ class Document:
             self.adjudicationStatus = AdjudicationStatus(False, False, False, False, False)
         else:
             self.adjudicationStatus = adjudicationStatus
-        self.documentId = documentId
+        self.annotationGroup = annotationGroup
 
     @classmethod
     def discrepancies(cls, firstDocument, secondDocument):

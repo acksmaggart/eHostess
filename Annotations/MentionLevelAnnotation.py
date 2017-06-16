@@ -3,7 +3,7 @@ from time import gmtime, strftime
 
 
 class MentionLevelAnnotation:
-    def __init__(self, sourceDocId, text, start, end, annotator, annotationId, attributes, annotationClass = None, creationDate = None):
+    def __init__(self, text, start, end, annotator, annotationId, attributes, annotationClass = None, creationDate = None):
         self.text = text
         self.start = int(start)
         self.end = int(end)
