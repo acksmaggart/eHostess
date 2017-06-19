@@ -1,0 +1,27 @@
+Lex	Type	Regex	Direction
+no history	NEGATED_EXISTENCE	no ((h/o)|(h\\o)]|hx)	forward
+history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of))	forward
+history of	NEGATED_EXISTENCE	history of	forward
+no	NEGATED_EXISTENCE	no\s	forward
+non	NEGATED_EXISTENCE	non(\s|-)	forward
+risk	NEGATED_EXISTENCE	risk of	bidirectional
+no evidence	NEGATED_EXISTENCE	no (evidence|e\\o|e/o)	forward
+did not show	NEGATED_EXISTENCE	did not (show|reveal)	forward
+if	NEGATED_EXISTENCE	if	forward
+transfuse	NEGATED_EXISTENCE	transfuse	forward
+without	NEGATED_EXISTENCE	((without)|(w\\o)|(w/o))	forward
+episode	AFFIRMED_EXISTENCE	episode of	forward
+episodes	AFFIRMED_EXISTENCE	episodes of	forward
+presenting	AFFIRMED_EXISTENCE	presenting* (with|w\\|w/)	forward
+presents	AFFIRMED_EXISTENCE	present[s|e][d]* (with|w\\|w/)	forward
+cc	AFFIRMED_EXISTENCE	(cc:|chief complaint:)	forward
+here with	AFFIRMED_EXISTENCE	here (with|w\\|w/)	forward
+now with	AFFIRMED_EXISTENCE	now (with|w\\|w/)	forward
+found to have	AFFIRMED_EXISTENCE	found to have	forward
+denies	NEGATED_EXISTENCE	denies|denied	forward
+watch	NEGATED_EXISTENCE	watch for	forward
+monitor	NEGATED_EXISTENCE	monitor for	forward
+not	NEGATED_EXISTENCE	not\b	forward
+possible	NEGATED_EXISTENCE	possible	bidirectional
+versus	NEGATED_EXISTENCE	versus|vs	bidirectional
+rule out	NEGATED_EXISTENCE	rule out	forward

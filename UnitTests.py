@@ -37,8 +37,8 @@ print 'Testing MentionLevelAnnotation.overlap()'
 failed = False
 from Annotations.MentionLevelAnnotation import MentionLevelAnnotation
 
-annotation1 = MentionLevelAnnotation("doc1", "annotation 1 text", 0, 0, "annotator1", "annotator1 ID", {})
-annotation2 = MentionLevelAnnotation("doc2", "annotation 2 text", 10, 20, "annotator1", "annotator1 ID", {})
+annotation1 = MentionLevelAnnotation("annotation 1 text", 0, 0, "annotator1", "annotator1 ID", {})
+annotation2 = MentionLevelAnnotation("annotation 2 text", 10, 20, "annotator1", "annotator1 ID", {})
 
 # case 1: same span
 annotation1.start = 10
@@ -111,3 +111,35 @@ if failed:
     print '*****************Test Failed***************************'
 else:
     print 'Passed\n'
+
+
+#### Test PyConTextInterface.SentenceReconstructor ####
+from PyConTextInterface.SentenceReconstructor import SentenceReconstuctor as Reconstructor
+from pyConTextNLP.helpers import sentenceSplitter as Splitter
+print 'Testing PyConTextInterface.SentenceReconstructor.SentenceReconstructor()'
+
+infile = open('./UnitTestDependencies/SentenceReconstructor/11.txt', 'r')
+noteBody1 = infile.read()
+infile.close()
+infile = open('./UnitTestDependencies/SentenceReconstructor/12.txt', 'r')
+noteBody2 = infile.read()
+infile.close()
+
+reconstructor = Reconstructor()
+
+failed = False
+for note in [noteBody1, noteBody2]:
+    reconstructor.startNewNote(note)
+    sentences = Splitter().splitSentences(note)
+    reconstructedNote = ""
+    for sentence in sentences:
+        reconstructedNote += reconstructor.reconstructSentence(sentence)
+    if reconstructedNote != note:
+        failed = True
+        break
+if failed:
+    print '*****************Test Failed***************************'
+else:
+    print 'Passed\n'
+
+

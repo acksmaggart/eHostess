@@ -1,0 +1,147 @@
+Admission Date:  [**2851-8-9**]              Discharge Date:   [**2851-8-10**]
+
+Date of Birth:  [**2777-9-23**]             Sex:   M
+
+Service: SURGERY
+
+Allergies:
+No Known Allergies / Adverse Drug Reactions
+
+Attending:[**First Name3 (LF) 157**]
+Chief Complaint:
+rectal bleeding following prostate biopsy
+
+Major Surgical or Invasive Procedure:
+1. prostate biopsy
+2. exam under anesthesia
+3. ligation of post-prostate biopsy bleeding
+
+
+History of Present Illness:
+The patient is a 73-year-old man who underwent a prostate biopsy
+in Urology clinic complicated by immediate significant bright
+red blood bleeding. Attempts were made to stop the bleeding with
+a dilating Foley balloon and Surgicel packing without success.
+He was admitted for surgical management of bleeding.
+
+
+Past Medical History:
+hyperlipidemia, coronary artery disease, prostate cancer, gout
+
+Social History:
+Retired as a waiter in a Chinese restaurant. Patient is an
+accomplished poet who has published works in Chinese.  Daughter
+is nurse. Tobacco none  ETOH: None Drugs: None
+
+
+Family History:
+non-contributory
+
+Physical Exam:
+VS T 98.5 HR 68 BP 91/52 RR 18 SpO2 98%RA
+Gen: NAD, AOx3
+Cv: RRR
+Pulm: CTAB
+Abd: soft, non-tender
+Rectal: no gross blood
+Ext: warm
+
+Pertinent Results:
+[**2851-8-9**] 05:16PM BLOOD WBC-13.0*# RBC-3.64* Hgb-11.8* Hct-33.7*
+MCV-93 MCH-32.5* MCHC-35.1* RDW-13.0 Plt Ct-138*
+[**2851-8-9**] 08:54PM BLOOD WBC-11.9* RBC-3.61* Hgb-11.8* Hct-33.7*
+MCV-93 MCH-32.7* MCHC-35.0 RDW-12.9 Plt Ct-143*
+[**2851-8-10**] 01:45AM BLOOD Hct-29.6*
+[**2851-8-10**] 05:30AM BLOOD WBC-10.1 RBC-3.07* Hgb-10.1* Hct-28.6*
+MCV-93 MCH-32.9* MCHC-35.3* RDW-13.4 Plt Ct-144*
+
+Brief Hospital Course:
+The patient was admitted to the surgery service for management
+of rectal bleeding following prostate biopsy. He underwent a
+rectal exam under anesthesia followed by ligation of the
+bleeding biopsy site. He tolerated the procedure well and
+recovered briefly in the PACU before being transferred to the
+floor. Please see the operative report for further details. His
+hospital course was relatively uneventful.
+
+N: His pain was managed initially with IV pain medicines and
+then transitioned to po medicines with issue
+Cv: stable, no issues
+Pulm: Excellent oxygen saturations on room air
+GI: overnight the patient passed clotted blood per rectum
+several times. This resolved on POD #1 and no bright red blood
+was observed. Serial hematocrit values were obtained and shown
+to be stable in the AM compared to the post-operative value. He
+was started on a clear liquid diet and was advanced to a regular
+diet without issues.
+GU: voided without difficulty
+HEME: stable as described above. No transfusions required.
+ID: afebrile without issues
+DISPO: The patient was no longer bleeding and felt to be stable.
+He was tolerating a regular diet, voiding, and ambulating
+appropriately. He was discharged home with follow-up
+instructions.
+
+
+Medications on Admission:
+allopurinol, finasteride, metoprolol, simvastatin
+
+Discharge Medications:
+1. finasteride 5 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+Tablet(s)
+2. metoprolol succinate 50 mg Tablet Extended Release 24 hr Sig:
+One (1) Tablet Extended Release 24 hr PO DAILY (Daily).
+3. simvastatin 40 mg Tablet Sig: Two (2) Tablet PO DAILY
+(Daily).
+4. acetaminophen 500 mg Tablet Sig: 1-2 Tablets PO Q6H (every 6
+hours) as needed for pain/fever.
+5. allopurinol 100 mg Tablet Sig: 1.5 Tablets PO DAILY (Daily).
+
+6. oxycodone 5 mg Tablet Sig: 1-2 Tablets PO every 4-6 hours as
+needed for pain.
+Disp:*45 Tablet(s)* Refills:*0*
+
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+rectal bleeding
+
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory - Independent.
+
+
+Discharge Instructions:
+Please resume all regular home medications, unless specifically
+advised not to take a particular medication.  Please take any
+new medications as prescribed.
+Please take the prescribed analgesic medications as needed.  You
+may not drive or heavy machinery while taking narcotic analgesic
+medications.  You may also take acetaminophen (Tylenol) as
+directed, but do not exceed 4000 mg in one day.
+Please get plenty of rest, continue to walk several times per
+day, and drink adequate amounts of fluids.  Avoid strenuous
+physical activity and refrain from heavy lifting greater than 20
+lbs., until you follow-up with your surgeon, who will instruct
+you further regarding activity restrictions.  Please also
+follow-up with your primary care physician.
+
+
+Followup Instructions:
+Please call the surgery clinic at [**Telephone/Fax (1) 158**] to schedule
+follow-up with Dr. [**Last Name (STitle) **] in [**11-27**] weeks or as necessary. Please
+also follow-up with your primary care physician.
+
+Provider [**First Name8 (NamePattern2) 159**] [**Name9 (PRE) 160**] [**Name8 (MD) 161**], MD Phone:[**Telephone/Fax (1) 162**]
+Date/Time:[**2851-8-23**] 1:00
+
+
+
+Completed by:[**2851-8-10**]
+
+
+DOC CLASS
