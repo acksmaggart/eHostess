@@ -4,7 +4,9 @@ The approach chosen to record the document span was to split the document into s
 each sentence in the document to find its original span. However, the sentence splitter alters the white space
 of sentences containing newline characters and multiple contiguous whitespace characters. Therefore it is
 necessary to reconstruct the sentences after they have been split, restoring the original whitespace
-characters, before performing the string match to find the document span.
+characters, before performing the string match to find the document span. Without reconstructing the sentence any
+target that is identified following altered whitespace characters will have an incorrect span when its document
+span is calculated.
 This module assumes that sentences are passed to `reconstructSentence()` in the same order that they appear in
 the note body and that the only alteration that has occured is the addition or deletion of whitespace
 characters.
@@ -24,13 +26,12 @@ class SentenceReconstuctor:
 
     def reconstructSentence(self, alteredSentence):
         """
-        This method first strips the input sentence of any whitespace characters. It then scans through the
-        sentence and through the note from the last place it left off checking to see if they match. If there
+        This method first strips the input sentence of all whitespace characters. It then scans through the
+        sentence and through the note (from the last place it left off) checking to see if they match. If there
         is a mismatch and the note cursor points to a whitespace character it is inserted into the sentence.
         If there is a mismatch and the note cursor does not point to a whitespace character an exception
         is raised.
-        :param alteredSentence: (string) The sentence from the note body that has been altered by the sentence
-        splitter.
+        :param alteredSentence: (string) The sentence from the note body that has been altered by the sentence splitter.
         :return: (string) The reconstructed sentence.
         """
         sentenceWithoutWhitespace = re.sub(r"\n|\r| |\t","",alteredSentence)

@@ -91,7 +91,7 @@ class KnowtatorReader:
     @classmethod
     def parseSingleKnowtatorFile(cls, filePath, annotationGroup="MIMC_v2"):
         """In order to standardize querying and working with notes this  method assigns the document name to be the
-        filename without the extension(s). For example, the file 291997.txt.knowtator.xml would be named 291997."""
+        value returned by Document.ParseDocumentNameFromPath()."""
         fileName = filePath.split('/')[-1]
 
         tree = ElementTree.parse(filePath)
@@ -112,6 +112,6 @@ class KnowtatorReader:
 
         annotations = parseMentionLevelAnnotations(annotationElements, classMentionElements,
                                                    stringSlotMentionElements)
-        nameWithoutExtentions = fileName.split('.')[0]
+        documentName = Document.ParseDocumentNameFromPath(filePath)
 
-        return Document(nameWithoutExtentions, annotationGroup, annotations, adjudicationStatus=adjudicationStatus)
+        return Document(documentName, annotationGroup, annotations, adjudicationStatus=adjudicationStatus)

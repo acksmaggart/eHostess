@@ -1,9 +1,27 @@
+"""
+This module serves as the interface to pyConText. It executes the pyConTextNLP package on the contents of text documents
+using the supplied modifiers and targets found either at the specified paths or at the default location in the
+TargetsAndModifiers directory which should be in the same directory as this module.
+
+It uses the `defaultModifierToAnnotationClassMap` to convert pyConText target and modifier types to eHost annotation
+classses. For example, annotations marked as "NEGATED_EXISTENCE" by pyConText would be instantiated as
+`MentionLevelAnnotation`s with the class "bleeding_absent", if "bleeding_absent" were your eHost annotation class.
+
+Currently this module assigns attributes of
+                            "certainty" : "definite",
+                            "manual_v_auto" : "manual"
+to all the annotations it creates.
+"""
+
 from pyConTextNLP import pyConTextGraph as pyConText
 from pyConTextNLP.helpers import sentenceSplitter
 import pyConTextNLP.itemData as itemData
 from SentenceRepeatManager import SentenceRepeatManager
 from SentenceReconstructor import SentenceReconstuctor
-import re, os
+from ..Annotations.MentionLevelAnnotation import MentionLevelAnnotation
+from ..Annotations.Document import Document
+import re
+import os
 
 
 defaultModifierToAnnotationClassMap = {
@@ -20,9 +38,9 @@ class PyConTextInferface:
 
 
     @classmethod
-    def annotateSingleDocument(cls, documentFilePath, targetFilePath=defaultTargetFilePath,
+    def AnnotateSingleDocument(cls, documentFilePath, targetFilePath=defaultTargetFilePath,
                                modifiersFilePath=defaultModifiersFilePath, sentenceSplitter=sentenceSplitter,
-                               modifierToClassMap=defaultModifierToAnnotationClassMap):
+                               modifierToClassMap=defaultModifierToAnnotationClassMap, annotationGroup="MIMC_v2"):
 
         targets = itemData.instantiateFromCSVtoitemData(targetFilePath)
         modifiers = itemData.instantiateFromCSVtoitemData(modifiersFilePath)
@@ -34,12 +52,13 @@ class PyConTextInferface:
         repeatManager = SentenceRepeatManager()
         sentenceReconstructor = SentenceReconstuctor(noteBody)
         sentences = sentenceSplitter().splitSentences(noteBody)
-        pyConTextMarkups = []
+        mentionLevelAnnotations = {}
+
 
         for sentence in sentences:
-
-            matches = re.findall(re.escape(sentence), noteBody)
-            span = None
+            reconstructedSentence = sentenceReconstructor.reconstructSentence(sentence)
+            matches = re.findall(re.escape(reconstructedSentence), noteBody)
+            sentenceSpan = None
             if not matches:
                 print("eHostess/PyConTextInterface/PyConText: Did not find sentence in text, something is wrong.")
                 print("Note: %s" % documentFilePath)
@@ -50,17 +69,18 @@ class PyConTextInferface:
             # if the sentence appears multiple times in the note we need to make sure we grab them all instead of grabbing
             # the first one multiple times.
             if len(matches) > 1:
-                span = repeatManager.processSentence(sentence, noteBody)
+                sentenceSpan = repeatManager.processSentence(reconstructedSentence, noteBody)
 
             else:
-                # if there is only once instance of the sentence, proceed as normal
-                match = re.search(re.escape(sentence), noteBody)
+                # if there is only once instance of the sentence, proceed as normal. It is necessary to re-perform the
+                # search using re.search() instead of re.findall() in order to get the span.
+                match = re.search(re.escape(reconstructedSentence), noteBody)
                 start = match.start()
                 end = match.end()
-                span = (start, end)
+                sentenceSpan = (start, end)
 
             markup = pyConText.ConTextMarkup()
-            markup.setRawText(sentence)
+            markup.setRawText(reconstructedSentence)
             markup.cleanText()
             markup.markItems(modifiers, mode="modifier")
             markup.markItems(targets, mode="target")
@@ -69,5 +89,32 @@ class PyConTextInferface:
             markup.pruneSelfModifyingRelationships()
             markup.dropInactiveModifiers()
 
-            print "Hi!"
+            for node in markup.nodes():
+                if node.getCategory()[0] == 'target':
 
+                    annotationSpan = node.getSpan()
+                    sentenceStart = sentenceSpan[0]
+                    documentSpan = (annotationSpan[0] + sentenceStart, annotationSpan[1] + sentenceStart)
+                    text = node.getPhrase()
+                    annotationId = "pyConTextNLP_Instance_" + str(len(mentionLevelAnnotations) + 1)
+                    attributes = {
+                        "certainty": "definite",
+                        "manual_v_auto": "manual"
+                    }
+                    annotationClass = None
+                    if markup.isModifiedByCategory(node, "NEGATED_EXISTENCE") and markup.isModifiedByCategory(node, "AFFIRMED_EXISTENCE"):
+                        raise RuntimeError("Node is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTENCE....hmmmm. Sentence: %s"
+                                           % reconstructedSentence)
+                    elif markup.isModifiedByCategory(node, "NEGATED_EXISTENCE"):
+                        annotationClass = defaultModifierToAnnotationClassMap["NEGATED_EXISTENCE"]
+                    # If the node is not modified by NEGATED_EXISTENCE assume it is modified by AFFIRMED_EXISTENCE or it
+                    # is a target with no modifier and consider it a bleeding_present annotation.
+                    else:
+                        annotationClass = defaultModifierToAnnotationClassMap["AFFIRMED_EXISTENCE"]
+                    newAnnotation = MentionLevelAnnotation(text, documentSpan[0], documentSpan[1], "pyConTextNLP",
+                                                           annotationId, attributes, annotationClass)
+                    mentionLevelAnnotations[annotationId] = newAnnotation
+
+
+        documentName = Document.ParseDocumentNameFromPath(documentFilePath)
+        return Document(documentName, annotationGroup, mentionLevelAnnotations)

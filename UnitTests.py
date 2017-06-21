@@ -142,4 +142,27 @@ if failed:
 else:
     print 'Passed\n'
 
+#### Test PyConTextInterface.PyConText.AnnotateSingleDocument() ####
+print 'Testing PyConTextInterface.PyConText.AnnotateSingleDocument()'
+from eHostess.PyConTextInterface.PyConText import PyConTextInferface
 
+failed = False
+
+gotException = False
+try:
+    contradictoryDoc = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/TestAffirmedAndNegatedInSameSentence.txt')
+except RuntimeError as error:
+    gotException = True
+if not gotException:
+    failed = True
+
+document = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
+spans = [(69, 74), (148, 153), (242, 247)]
+for index, annotation in enumerate(document.annotations.values()):
+    if annotation.start != spans[index][0] or annotation.end != spans[index][1]:
+        failed = True
+
+if failed:
+    print '*****************Test Failed***************************'
+else:
+    print 'Passed\n'

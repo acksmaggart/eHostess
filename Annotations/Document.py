@@ -80,3 +80,11 @@ class Document:
         """Creates a new document that combines the two input documents. This method does not check for duplicates after
         combining the documents. If the user wishes to produce the union of two documents they must first use
         Document.discrepancies()."""
+
+    @classmethod
+    def ParseDocumentNameFromPath(cls, filePath):
+        """This method is used to create document names. Rather than implementing several, possibly conflicting, document
+        naming policies throughout the code it is centralized here. Anytime a class needs to produce a Document name it
+        should use this classmethod.
+        The current implementation returns the name of the file without the extension(s)."""
+        return filePath.split('/')[-1].split('.')[0]
