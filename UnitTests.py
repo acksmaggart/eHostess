@@ -1,6 +1,7 @@
+import glob
 
 #### Test Preprocessing. ####
-import NotePreprocessing.Preprocessor as preprocessor
+import eHostess.NotePreprocessing.Preprocessor as preprocessor
 
 print "Testing Preprocesssor duplicate detection."
 dirList = ['./NotePreprocessing/testCorpus/*', './NotePreprocessing/testCorpus2/*']
@@ -19,7 +20,7 @@ else:
 
 
 #### Test path cleaner, turns path strings into glob-able directory strings. ####
-from Utilities.utilities import cleanDirectoryList as cleaner
+from eHostess.Utilities.utilities import cleanDirectoryList as cleaner
 
 print 'Testing Utilities.cleanDirectoryList()'
 dirs = ['/Some/path/to/stuff', '/Some/path/to/stuff/', '/Some/path/to/stuff/*']
@@ -158,9 +159,58 @@ if not gotException:
 
 document = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
 spans = [(69, 74), (148, 153), (242, 247)]
+classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
 for index, annotation in enumerate(document.annotations.values()):
-    if annotation.start != spans[index][0] or annotation.end != spans[index][1]:
+    if annotation.start != spans[index][0] or annotation.end != spans[index][1] \
+            or classifications[index] != annotation.annotationClass:
         failed = True
+
+if failed:
+    print '*****************Test Failed***************************'
+else:
+    print 'Passed\n'
+
+
+#### Test PyConTextInterface.PyConText.AnnotateMultipleDocuments() ####
+print 'Testing PyConTextInterface.PyConText.AnnotateMultipleDocuments()'
+from eHostess.PyConTextInterface.PyConText import PyConTextInferface
+
+failed = False
+
+directories = glob.glob('./UnitTestDependencies/PyConText/AnnotateMultipleDocuments/*')
+
+document = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
+
+doc1spans = [(69, 74), (148, 153), (242, 247)]
+doc1classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
+
+doc2spans = [(72, 77), (166, 171), (242, 247)]
+doc2classifications = ["bleeding_absent", "bleeding_present", "bleeding_present"]
+
+doc3spans = [(84, 89), (160, 165), (239, 244)]
+doc3classifications = ["bleeding_present", "bleeding_present", "bleeding_absent"]
+
+doc4spans = [(69, 74), (160, 165), (239, 244)]
+doc4classifications = ["bleeding_present", "bleeding_present", "bleeding_absent"]
+
+doc5spans = [(72, 77), (151, 156), (242, 247)]
+doc5classifications = ["bleeding_absent", "bleeding_present", "bleeding_present"]
+
+doc6spans = [(84, 89), (163, 168), (242, 247)]
+doc6classifications = ["bleeding_present", "bleeding_absent", "bleeding_absent"]
+
+allSpans = [doc1spans, doc2spans, doc3spans, doc4spans, doc5spans, doc6spans]
+allClassifications = [doc1classifications, doc2classifications, doc3classifications, doc4classifications,
+                   doc5classifications, doc6classifications]
+
+documents = PyConTextInferface.AnnotateMultipleDocuments(directories)
+for docIndex, document in enumerate(documents):
+    spans = allSpans[docIndex]
+    classifications = allClassifications[docIndex]
+    for index, annotation in enumerate(document.annotations.values()):
+        if annotation.start != spans[index][0] or annotation.end != spans[index][1] \
+                or classifications[index] != annotation.annotationClass:
+            failed = True
 
 if failed:
     print '*****************Test Failed***************************'
