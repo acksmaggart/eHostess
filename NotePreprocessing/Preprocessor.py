@@ -1,3 +1,4 @@
+from ..Utilities.utilities import cleanDirectoryList
 import glob
 import re
 import os
@@ -22,22 +23,6 @@ class ExactDuplicateManager:
             self.exactDuplicatesToKeep[name1] = True
             return name2
 
-
-def cleanDirectoryList(corpusDirectoryList):
-    newList = []
-    for dirName in corpusDirectoryList:
-        if dirName[-1] == '/':
-            dirName += '*'
-            newList.append(dirName)
-            continue
-        if dirName[-1] != '*' and dirName[-1] != '/':
-            dirName += '/*'
-            newList.append(dirName)
-            continue
-        if dirName[-2:] == '/*':
-            newList.append(dirName)
-
-    return newList
 
 class DuplicateProcessor:
     """This class detects notes whose content is a duplication or subset of another note."""

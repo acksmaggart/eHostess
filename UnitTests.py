@@ -19,9 +19,9 @@ else:
 
 
 #### Test path cleaner, turns path strings into glob-able directory strings. ####
-from NotePreprocessing.Preprocessor import cleanDirectoryList as cleaner
+from Utilities.utilities import cleanDirectoryList as cleaner
 
-print 'Testing Preprocessor.cleanDirectoryList()'
+print 'Testing Utilities.cleanDirectoryList()'
 dirs = ['/Some/path/to/stuff', '/Some/path/to/stuff/', '/Some/path/to/stuff/*']
 cleanDirs = cleaner(dirs)
 failed = False

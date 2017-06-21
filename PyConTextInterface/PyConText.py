@@ -118,3 +118,9 @@ class PyConTextInferface:
 
         documentName = Document.ParseDocumentNameFromPath(documentFilePath)
         return Document(documentName, annotationGroup, mentionLevelAnnotations)
+
+    @classmethod
+    def AnnotateMultipleDocuments(cls, directoryPaths):
+        if not isinstance(directoryPaths, list):
+            directoryPaths = [directoryPaths]
+        

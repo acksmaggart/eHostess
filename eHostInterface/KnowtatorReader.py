@@ -2,7 +2,7 @@
 them into eHostess.Annotations.Document objects which can be analyzed, possibly using other tools in eHostess."""
 
 import glob
-from ..NotePreprocessing.Preprocessor import cleanDirectoryList
+from ..Utilities.utilities import cleanDirectoryList
 from ..Annotations.MentionLevelAnnotation import MentionLevelAnnotation
 from ..Annotations.Document import Document, AdjudicationStatus
 from xml.etree import ElementTree
