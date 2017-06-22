@@ -44,5 +44,19 @@ A sample annotation is shown below:
         <hasSlotMention id="EHOST_Instance_631" />
         <mentionClass id="doc_classification">DOC CLASS</mentionClass>
     </classMention>
-
+    <annotation>
+        <mention id="EHOST_Instance_447" />
+        <annotator id="eHOST_2010">Shane</annotator>
+        <span start="163" end="184" />
+        <spannedText>evaluation of SDH.</spannedText>
+        <creationDate>Sun Jun 18 19:25:37 EDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_451">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_447">
+        <hasSlotMention id="EHOST_Instance_451" />
+        <mentionClass id="bleeding_present">evaluation of SDH.</mentionClass>
+    </classMention>
 

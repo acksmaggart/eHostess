@@ -39,13 +39,14 @@ DiscrepancyTypes ={
     }
 
 class Discrepancy:
-    def __init__(self, discrepancyType, annotation1, annotation2=None, docLength=None):
+    def __init__(self, documentName, discrepancyType, annotation1, annotation2=None, docLength=None):
         # annotation2 may be None if discrepancyType is "No Overlap", i.e. there is only one annotation to report, not a
         # pair of annotations.
         self.annotation1 = annotation1
         self.annotation2 = annotation2
         self.discrepancyType = discrepancyType
         self.docLength = docLength
+        self.documentName = documentName
 
     @classmethod
     def DetectAllDiscrepancies(cls, document1, document2):
@@ -56,6 +57,8 @@ class Discrepancy:
         doc2Annotations = document2.annotations.values()
         doc1Matches = [False] * len(document1.annotations)
         doc2Matches = [False] * len(document2.annotations)
+
+        documentName = document1.documentName
 
         for index1, annotation1 in enumerate(doc1Annotations):
             if doc1Matches[index1]:
@@ -92,24 +95,27 @@ class Discrepancy:
                     processed2[index2] = True
                     if annotation1.annotationClass != annotation2.annotationClass:
                         if allAttributesMatch(annotation1, annotation2):
-                            newDiscrepancy = cls("Class Mismatch", annotation1, annotation2)
+                            newDiscrepancy = cls(documentName, "Class Mismatch", annotation1, annotation2,
+                                                 docLength=document1.numberOfCharacters)
                             discrepancies.append(newDiscrepancy)
                         else:
-                            newDiscrepancy = cls("Class and Attribute Mismatch", annotation1, annotation2)
+                            newDiscrepancy = cls(documentName, "Class and Attribute Mismatch", annotation1, annotation2,
+                                                 docLength=document1.numberOfCharacters)
                             discrepancies.append(newDiscrepancy)
                     else:
-                        newDiscrepancy = cls("Attribute Mismatch", annotation1, annotation2)
+                        newDiscrepancy = cls(documentName, "Attribute Mismatch", annotation1, annotation2,
+                                             docLength=document1.numberOfCharacters)
                         discrepancies.append(newDiscrepancy)
 
             if not foundOverlap:
-                newDiscrepancy = cls("No Overlap", annotation1)
+                newDiscrepancy = cls(documentName, "No Overlap", annotation1, docLength=document1.numberOfCharacters)
                 discrepancies.append(newDiscrepancy)
 
         for index, annotation2 in enumerate(doc2Mismatches):
             if processed2[index]:
                 continue
             else:
-                newDiscrepancy = cls("No Overlap", annotation2)
+                newDiscrepancy = cls(documentName, "No Overlap", annotation2, docLength=document1.numberOfCharacters)
                 discrepancies.append(newDiscrepancy)
 
         return discrepancies

@@ -1,0 +1,226 @@
+Admission Date:  [**3440-11-6**]              Discharge Date:   [**3440-11-16**]
+
+Date of Birth:  [**3390-10-19**]             Sex:   M
+
+Service: CARDIOTHORACIC
+
+Allergies:
+Bactrim / Sulfa (Sulfonamides) / Seroquel / Heparin Agents
+
+Attending:[**First Name3 (LF) 163**]
+Chief Complaint:
+chest pain
+
+Major Surgical or Invasive Procedure:
+s/p endoscopic CABGx1(LIMA-LAD)via mini-thoracotomy. [**11-6**]
+
+
+History of Present Illness:
+50 yo M with multiple medical problems and single vessel CAD.
+
+Past Medical History:
+HTN, DM, GERD, Hep B&C, IVDU(methadone), OA, BPH, CVA, MI,
+Pancytopenia-thrombocytopenia, HIT-, PNA, anxiety
+gunshot wound-LLE,Appy, L knee arthroscopy, L knee fusion c/b
+infection-hardware removal/flap
+
+
+Social History:
+- Pt currently using [**3-29**] cig/day with a 35 PPY history
+- Per chart there is history of alcohol abuse; per pt sober
+since age 15 yo.
+- History of IVDA but >8 years ago, however in a methadone
+program.
+- Occupation: currently unemployed secondary to leg surgery,
+used to
+be in the Navy seals.
+- Home: lives alone; divorced and has two children that he has
+not
+recently seen.
+- Walks with a cane; sedentary
+
+
+Family History:
+M - died of lung cancer when he was 3 yo
+F - murdered when he was 7
+
+Physical Exam:
+Admission:
+HR 93 RR 18 BP 148/88
+Gen:WDWN M in NAD
+CV RRR
+Lungs CTAB
+Abdomen benign
+No edema, Left knee fused, immoblile, multiple healed inc.
+
+
+Pertinent Results:
+[**Hospital1 18**] ECHOCARDIOGRAPHY REPORT
+Results  Measurements  Normal Range
+Left Ventricle - Inferolateral Thickness:  *1.2 cm  0.6 - 1.1 cm
+
+Left Ventricle - Diastolic Dimension:  5.2 cm  <= 5.6 cm
+Left Ventricle - Ejection Fraction:  30% to 35%  >= 55%
+Aorta - Annulus:  2.9 cm  <= 3.0 cm
+Aorta - Ascending:  3.1 cm  <= 3.4 cm
+Aorta - Descending Thoracic:  2.2 cm  <= 2.5 cm
+Aortic Valve - Valve Area:  *2.8 cm2  >= 3.0 cm2
+Findings
+LEFT ATRIUM: No spontaneous echo contrast is seen in the LAA.
+RIGHT ATRIUM/INTERATRIAL SEPTUM: Normal interatrial septum.
+
+LV WALL MOTION: Regional left ventricular wall motion findings
+as shown below; remaining LV segments contract normally.
+RIGHT VENTRICLE: Moderate global RV free wall hypokinesis.
+AORTA: Normal ascending aorta diameter. Simple atheroma in
+descending aorta.
+AORTIC VALVE: Normal aortic valve leaflets (3). No AS. No AR.
+MITRAL VALVE: Mildly thickened mitral valve leaflets. Mild to
+moderate ([**1-28**]+) MR.
+TRICUSPID VALVE: Mild [1+] TR.
+PULMONIC VALVE/PULMONARY ARTERY: Physiologic (normal) PR.
+PERICARDIUM: No pericardial effusion.
+GENERAL COMMENTS: The patient was under general anesthesia
+throughout the procedure. The TEE probe was passed with
+assistance from the anesthesioology staff using a laryngoscope.
+No TEE related complications.
+Conclusions
+Pre-procedure: No spontaneous echo contrast is seen in the left
+atrial appendage. The basal left ventricular segments contract
+normally. Mid and distal segments are hypokinetic. EF = 30 -
+35%. There is moderate global right ventricular free wall
+hypokinesis. There are simple atheroma in the descending
+thoracic aorta. The aortic valve leaflets (3) appear
+structurally normal with good leaflet excursion and no aortic
+regurgitation. The mitral valve leaflets are mildly thickened.
+Mild to moderate ([**1-28**]+) mitral regurgitation is seen. There is
+no pericardial effusion.
+Post Procedure: Mild improvement in LV systolic fxn. MR remains
+1 - 2+. No AI. Aorta intact. RV mildly hypokinetic. Other
+parameters as pre-procedure.
+
+CHEST (PA & LAT)  [**3440-11-14**] 2:33 PM
+Two views. Comparison with [**3440-11-11**]. There is interval
+improvement in a small focal area of increased density in the
+lower left lung. There is continued blunting of the left
+costophrenic sulcus consistent with pleural fluid. The right
+lung remains clear. Surgical clips are projected in the left
+anterior chest as before. The heart is normal in size.
+Mediastinal structures are unremarkable. The bony thorax is
+grossly intact.
+IMPRESSION: Interval improvement in left basilar infiltrate.
+Persistent left pleural effusion.
+
+[**3440-11-16**] 12:50PM BLOOD Hct-33.7*
+[**3440-11-14**] 06:25AM BLOOD WBC-5.2 RBC-3.18* Hgb-10.2* Hct-28.7*
+MCV-90 MCH-32.0 MCHC-35.5* RDW-15.3 Plt Ct-165
+[**3440-11-14**] 06:25AM BLOOD Plt Ct-165
+[**3440-11-5**] 02:30PM BLOOD WBC-5.4# RBC-3.79* Hgb-12.6* Hct-33.9*
+MCV-90 MCH-33.3* MCHC-37.2* RDW-14.5 Plt Ct-127*#
+[**3440-11-5**] 02:30PM BLOOD PT-15.9* PTT-26.7 INR(PT)-1.4*
+[**3440-11-14**] 06:25AM BLOOD Glucose-95 UreaN-13 Creat-0.9 Na-142
+K-4.4 Cl-104 HCO3-29 AnGap-13
+[**3440-11-5**] 02:30PM BLOOD Glucose-89 UreaN-9 Creat-1.0 Na-140 K-4.2
+Cl-103 HCO3-29 AnGap-12
+
+Brief Hospital Course:
+He was taken to the operating room on 1o/12 where he underwent
+an off pump CABGx1 with thorascopic LIMA harvest via mini
+thoracotomy. He was transferred to the ICU in critical but
+stable condition. He was extubated later that same day. He was
+started on plavix for his off pump CABG. He was seen by the
+chronic pain service, was started on a PCA and then dilaudid and
+motrin, and was restarted on his methadone and neurontin. He was
+seen by psychiatry for coping and conflict with his outpatient
+psychiatrist. He did well postoperatively and was ready for
+discharge home on POD #10.
+
+Medications on Admission:
+ASA 325', Toprol XL 50', Methadone 220', Clonidine 0.3",
+Promethazine 50', Klonopin 1''', Doxapin 300', Lisinopril 10',
+Lantus 10', Thiamine 100', Lipitor 10', Prilosec 40', Neurontin
+300''', Imdur 90',
+
+Discharge Medications:
+1. Aspirin 81 mg Tablet, Delayed Release (E.C.) Sig: One (1)
+Tablet, Delayed Release (E.C.) PO DAILY (Daily).
+Disp:*30 Tablet, Delayed Release (E.C.)(s)* Refills:*0*
+2. Docusate Sodium 100 mg Capsule Sig: One (1) Capsule PO BID (2
+times a day).
+Disp:*60 Capsule(s)* Refills:*0*
+3. Atorvastatin 40 mg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+Disp:*30 Tablet(s)* Refills:*0*
+4. Clopidogrel 75 mg Tablet Sig: One (1) Tablet PO DAILY (Daily)
+as needed for off pump cabg for 3 months.
+Disp:*30 Tablet(s)* Refills:*2*
+5. Lisinopril 10 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+Disp:*30 Tablet(s)* Refills:*0*
+6. Clonazepam 1 mg Tablet Sig: One (1) Tablet PO TID (3 times a
+day).
+Disp:*60 Tablet(s)* Refills:*0*
+7. Gabapentin 300 mg Capsule Sig: One (1) Capsule PO Q8H (every
+8 hours).
+Disp:*90 Capsule(s)* Refills:*0*
+8. Thiamine HCl 100 mg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+Disp:*30 Tablet(s)* Refills:*0*
+9. Lantus 100 unit/mL Solution Sig: Five (5) units Subcutaneous
+at bedtime.
+Disp:*QS 1 month* Refills:*0*
+10. Promethazine 50 mg Tablet Sig: One (1) Tablet PO twice a
+day.
+Disp:*60 Tablet(s)* Refills:*0*
+11. Fentanyl 25 mcg/hr Patch 72 hr Sig: One (1) Patch 72 hr
+Transdermal Q72H (every 72 hours) for 10 days.
+Disp:*3 Patch 72 hr(s)* Refills:*0*
+12. Doxepin 150 mg Capsule Sig: Two (2) Capsule PO at bedtime.
+Disp:*60 Capsule(s)* Refills:*0*
+13. Methadone  Oral
+14. Toprol XL 100 mg Tablet Sustained Release 24 hr Sig: 1.5
+Tablet Sustained Release 24 hrs PO once a day.
+Disp:*45 Tablet Sustained Release 24 hr(s)* Refills:*0*
+15. Percocet 5-325 mg Tablet Sig: 1-2 Tablets PO every [**5-1**]
+hours.
+Disp:*40 Tablet(s)* Refills:*0*
+16. Senna 8.6 mg Tablet Sig: 1-2 Tablets PO twice a day.
+Disp:*90 Tablet(s)* Refills:*0*
+17. Prilosec 40 mg Capsule, Delayed Release(E.C.) Sig: One (1)
+Capsule, Delayed Release(E.C.) PO once a day.
+Disp:*30 Capsule, Delayed Release(E.C.)(s)* Refills:*0*
+
+
+Discharge Disposition:
+Home With Service
+
+Facility:
+[**Hospital 118**] Homecare
+
+Discharge Diagnosis:
+CAD s/p CABG x1  LIMA-LAD  [**11-6**]
+HTN, DM, GERD, Hep B&C, IVDU(methadone), OA, BPH, CVA, MI,
+Pancytopenia-thrombocytopenia, HIT-, PNA, anxiety
+
+
+Discharge Condition:
+Good.
+
+
+Discharge Instructions:
+Call with fever, redness or drainage from incision or weight
+gain more than 2 pounds in one day or five in one week.
+Shower, no baths, no lotions, creams or powders to incisions.
+No lifting more than 10 pounds or driving until follow up with
+surgeon.
+
+Followup Instructions:
+Dr. [**Last Name (STitle) 12711**] (PCP) 2 weeks
+Dr [**First Name (STitle) **] (Cardiac Surgeon) 4 weeks. Patient to call for appt
+
+
+                             [**Name6 (MD) **] [**Name8 (MD) **] MD [**MD Number(2) 171**]
+
+Completed by:[**3440-11-17**]
+
+
+DOC CLASS

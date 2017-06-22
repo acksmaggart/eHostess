@@ -260,3 +260,52 @@ if failed:
     print '*****************Test Failed***************************'
 else:
     print 'Passed\n'
+
+    #### Test PyConTextInterface.PyConText.AnnotateSingleDocument() ####
+    print 'Testing PyConTextInterface.PyConText.AnnotateSingleDocument()'
+    from eHostess.PyConTextInterface.PyConText import PyConTextInferface
+
+    failed = False
+
+    gotException = False
+    try:
+        contradictoryDoc = PyConTextInferface.AnnotateSingleDocument(
+            './UnitTestDependencies/PyConText/AnnotateSingleDocument/TestAffirmedAndNegatedInSameSentence.txt')
+    except RuntimeError as error:
+        gotException = True
+    if not gotException:
+        failed = True
+
+    document = PyConTextInferface.AnnotateSingleDocument(
+        './UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
+    spans = [(69, 74), (148, 153), (242, 247)]
+    classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
+    for index, annotation in enumerate(document.annotations.values()):
+        if annotation.start != spans[index][0] or annotation.end != spans[index][1] \
+                or classifications[index] != annotation.annotationClass:
+            failed = True
+
+    if failed:
+        print '*****************Test Failed***************************'
+    else:
+        print 'Passed\n'
+
+    #### Test Analysis.Output.ConvertDiscrepanciesToCSV() ####
+    print 'Testing Analysis.Output.ConvertDiscrepanciesToCSV()'
+    from eHostess.Analysis.Output import ConvertDiscrepanciesToCSV
+    from eHostess.Analysis.DetectDiscrepancies import Discrepancy
+
+    failed = False
+
+    doc1 = KnowtatorReader.parseSingleKnowtatorFile(
+        './UnitTestDependencies/Output/DiscrepanciesToCSV/annotator1/saved/2530.txt.knowtator.xml')
+    doc2 = KnowtatorReader.parseSingleKnowtatorFile(
+        './UnitTestDependencies/Output/DiscrepanciesToCSV/annotator2/saved/2530.txt.knowtator.xml')
+
+    discrepancies = Discrepancy.DetectAllDiscrepancies(doc1, doc2)
+    ConvertDiscrepanciesToCSV(discrepancies, '../output/discrepancies.txt')
+
+    if failed:
+        print '*****************Test Failed***************************'
+    else:
+        print 'Passed\n'
