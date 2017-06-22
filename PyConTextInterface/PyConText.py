@@ -38,6 +38,7 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
                                     modifierToClassMap, annotationGroup):
     inFileHandle = open(documentFilePath, 'r')
     noteBody = inFileHandle.read()
+    numChars = len(noteBody)
     inFileHandle.close()
 
     repeatManager = SentenceRepeatManager()
@@ -85,7 +86,7 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
                 annotationSpan = node.getSpan()
                 sentenceStart = sentenceSpan[0]
                 documentSpan = (annotationSpan[0] + sentenceStart, annotationSpan[1] + sentenceStart)
-                text = node.getPhrase()
+                text = sentence
                 annotationId = "pyConTextNLP_Instance_" + str(len(mentionLevelAnnotations) + 1)
                 attributes = {
                     "certainty": "definite",
@@ -108,7 +109,7 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
                 mentionLevelAnnotations[annotationId] = newAnnotation
 
     documentName = Document.ParseDocumentNameFromPath(documentFilePath)
-    return Document(documentName, annotationGroup, mentionLevelAnnotations)
+    return Document(documentName, annotationGroup, mentionLevelAnnotations, numChars)
 
 class PyConTextInferface:
     def __init__(self):

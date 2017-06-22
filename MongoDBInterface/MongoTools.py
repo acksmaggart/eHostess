@@ -25,7 +25,8 @@ def constructMongoDocument(annotationDocument):
             "document_name" : annotationDocument.documentName,
             "annotation_group" : annotationDocument.annotationGroup,
             "annotator_name" : annotatorName,
-            "annotations" : annotations
+            "annotations" : annotations,
+            "num_characters" : annotationDocument.numberOfCharacters
         }
 
     return mongoDocument
@@ -35,6 +36,7 @@ def constructAnnotationDocument(mongoDocument):
     annotationGroup = mongoDocument["annotation_group"]
     documentName = mongoDocument["document_name"]
     annotator = mongoDocument["annotator_name"]
+    numChars = mongoDocument["num_characters"]
     annotations = {}
     for annotation in mongoDocument["annotations"]:
         text = annotation["text"]
@@ -48,7 +50,7 @@ def constructAnnotationDocument(mongoDocument):
 
         annotations[annotationId] = MentionLevelAnnotation(text, start, end, annotator, annotationId, attributes, annotationClass)
 
-    return Document(documentName, annotationGroup, annotations)
+    return Document(documentName, annotationGroup, annotations, numChars)
 
 
 class MongoTools:
@@ -59,7 +61,7 @@ class MongoTools:
         client = MongoClient('mongodb://%s:%s/' % (host, port))
         collection = client.NLP.Annotations
 
-        mongoDocument = constructMongoDocument(document, annotationRound)
+        mongoDocument = constructMongoDocument(document)
         result = collection.insert_one(mongoDocument)
 
         client.close()

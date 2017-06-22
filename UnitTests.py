@@ -19,6 +19,50 @@ else:
 # duplicateProcessor.reportDuplicates()
 
 
+#### Test eHostInterface.KnowtatorReader.getOriginalFileLength() ####
+from eHostess.eHostInterface.KnowtatorReader import getOriginalFileLength
+failed = False
+print "Testing eHostInterface.KnowtatorReader.getOriginalFileLength()"
+
+length = getOriginalFileLength('./UnitTestDependencies/eHostInterface/OriginalLengthandParseSingle/saved/2530.txt.knowtator.xml',
+                               None)
+if length != 8442:
+    failed = True
+
+length = getOriginalFileLength(
+    './UnitTestDependencies/eHostInterface/OriginalLengthandParseSingle/saved/2530.txt.knowtator.xml',
+    './UnitTestDependencies/eHostInterface/OriginalLengthandParseSingle/corpus')
+if length != 8442:
+    failed = True
+
+if failed:
+    print '*****************Test Failed***************************'
+else:
+    print "Passed\n"
+
+
+#### Test eHostInterface.KnowtatorReader.parseSingleKnowtatorFile() ####
+from eHostess.eHostInterface.KnowtatorReader import KnowtatorReader
+failed = False
+print "Testing eHostInterface.KnowtatorReader.parseSingleKnowtatorFile()"
+
+document = KnowtatorReader.parseSingleKnowtatorFile('./UnitTestDependencies/eHostInterface/OriginalLengthandParseSingle/saved/2530.txt.knowtator.xml')
+
+if document.numberOfCharacters != 8442 \
+    or len(document.annotations) != 1 \
+    or document.annotations.values()[0].attributes["present_or_absent"] != 'absent' \
+    or document.documentName != '2530' \
+    or document.annotations.values()[0].annotationClass != 'doc_classification' \
+    or document.annotations.values()[0].annotationId != 'EHOST_Instance_438' \
+    or document.annotations.values()[0].annotator != 'Shane':
+    failed = True
+
+if failed:
+    print '*****************Test Failed***************************'
+else:
+    print "Passed\n"
+
+
 #### Test path cleaner, turns path strings into glob-able directory strings. ####
 from eHostess.Utilities.utilities import cleanDirectoryList as cleaner
 
@@ -197,7 +241,7 @@ doc5spans = [(72, 77), (151, 156), (242, 247)]
 doc5classifications = ["bleeding_absent", "bleeding_present", "bleeding_present"]
 
 doc6spans = [(84, 89), (163, 168), (242, 247)]
-doc6classifications = ["bleeding_present", "bleeding_absent", "bleeding_absent"]
+doc6classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
 
 allSpans = [doc1spans, doc2spans, doc3spans, doc4spans, doc5spans, doc6spans]
 allClassifications = [doc1classifications, doc2classifications, doc3classifications, doc4classifications,

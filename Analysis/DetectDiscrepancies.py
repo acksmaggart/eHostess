@@ -39,12 +39,13 @@ DiscrepancyTypes ={
     }
 
 class Discrepancy:
-    def __init__(self, discrepancyType, annotation1, annotation2=None):
+    def __init__(self, discrepancyType, annotation1, annotation2=None, docLength=None):
         # annotation2 may be None if discrepancyType is "No Overlap", i.e. there is only one annotation to report, not a
         # pair of annotations.
         self.annotation1 = annotation1
         self.annotation2 = annotation2
         self.discrepancyType = discrepancyType
+        self.docLength = docLength
 
     @classmethod
     def DetectAllDiscrepancies(cls, document1, document2):
