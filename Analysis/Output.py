@@ -1,45 +1,47 @@
 """
 The purpose of this module is to produce human-readable output after conducting analysis. For example, converting
-`Discrepancy` objects to lines in a .csv file for review.
+`Comparison` objects to lines in a .csv file for review.
 """
 
-from DetectDiscrepancies import DiscrepancyTypes
+from DocumentComparison import ComparisonResults
 
-def ConvertDiscrepanciesToCSV(discrepancies, outputPath):
-    """This function creates a CSV file using tabs as the delimiter. It encloses the text fields in quotes, assuming
+def ConvertComparisonsToTSV(comparisons, outputPath):
+    """This function creates a TSV with a summary of the comparisons. It encloses the text fields in quotes, assuming
     that any software used to parse the CSV file will know to ignore any tabs inside of quotes. It also assumes
     that the reader would rather see the text highlighted by the human rather than the whole sentence. It also assumes
-    that the `MentionLevelAnnotation` objects contained in the discrepancies all have a value for `annotator` and that
+    that the `MentionLevelAnnotation` objects contained in the comparisons all have a value for `annotator` and that
     all values of `annotator` belong to a set of size 2. In other words, there are only two different values for
-    `annotator` and all annotation objects have exactly one of those two values."""
-    if not isinstance(discrepancies, list):
-        discrepancies = [discrepancies]
+    `annotator` and all annotation objects have exactly one of those two values. This function may not output the tsv
+    file correctly if the annotation text contains both tab characters and double quotes."""
+
+    if not isinstance(comparisons, list):
+        comparisons = [comparisons]
 
     outFile = open(outputPath, 'w')
-    discrepancyWithTwoNamesHopefully = None
-    # grabs a discrepancy instance with two annotations in order to get both annotator names. If all discrepancies
-    # contain only one annotation it grabs the last discrepancy
-    for discrepancy in discrepancies:
-        discrepancyWithTwoNamesHopefully = discrepancy
-        if discrepancy.annotation2 != None:
-            discrepancyWithTwoNamesHopefully = discrepancy
+    comparisonWithTwoNamesHopefully = None
+    # grabs a comparison instance with two annotations in order to get both annotator names. If all comparisons
+    # contain only one annotation it grabs the last comparison
+    for comparison in comparisons:
+        comparisonWithTwoNamesHopefully = comparison
+        if comparison.annotation2 != None:
+            comparisonWithTwoNamesHopefully = comparison
             break
-    firstName = discrepancyWithTwoNamesHopefully.annotation1.annotator
+    firstName = comparisonWithTwoNamesHopefully.annotation1.annotator
     secondName = ""
-    if discrepancyWithTwoNamesHopefully.annotation2 != None:
-        secondName = discrepancyWithTwoNamesHopefully.annotation2.annotator
-    outFile.write("DocumentName\tText\tMismatchType\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (firstName, secondName))
+    if comparisonWithTwoNamesHopefully.annotation2 != None:
+        secondName = comparisonWithTwoNamesHopefully.annotation2.annotator
+    outFile.write("DocumentName\tText\tComparisonResult\tAgreement\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (firstName, secondName))
 
-    for discrepancy in discrepancies:
-        documentName = discrepancy.documentName
+    for comparison in comparisons:
+        documentName = comparison.documentName
         annotationWithFirstName = None
         annotationWithSecondName = None
-        if discrepancy.annotation1.annotator == firstName:
-            annotationWithFirstName = discrepancy.annotation1
-            annotationWithSecondName = discrepancy.annotation2
+        if comparison.annotation1.annotator == firstName:
+            annotationWithFirstName = comparison.annotation1
+            annotationWithSecondName = comparison.annotation2
         else:
-            annotationWithSecondName = discrepancy.annotation1
-            annotationWithFirstName = discrepancy.annotation2
+            annotationWithSecondName = comparison.annotation1
+            annotationWithFirstName = comparison.annotation2
 
         # Get the text, giving preference to the human annotation when present.
         text = None
@@ -51,24 +53,28 @@ def ConvertDiscrepanciesToCSV(discrepancies, outputPath):
             text = annotationWithFirstName.text
         else:
             text = annotationWithSecondName.text
+        # Text must be enclosed in quotes in case it contains tab characters.
+        text = '"' + text + '"'
 
-        if discrepancy.discrepancyType == DiscrepancyTypes["1"]: # No Overlap
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, discrepancy.discrepancyType,
-                                                          annotationWithFirstName.annotationClass, "",
-                                                          discrepancy.annotation1.start, discrepancy.annotation1.end,
-                                                          discrepancy.docLength))
+        if comparison.comparisonResult == ComparisonResults["1"]: # No Overlap
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
+                                                                    "0", annotationWithFirstName.annotationClass,
+                                                                    "", comparison.annotation1.start,
+                                                                    comparison.annotation1.end, comparison.docLength))
             continue
 
-        if discrepancy.discrepancyType == DiscrepancyTypes["2"]: # Class mismatch
+        if comparison.comparisonResult == ComparisonResults["2"]: # Class mismatch
             firstResult = annotationWithFirstName.annotationClass
             secondResult = annotationWithSecondName.annotationClass
 
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, discrepancy.discrepancyType, firstResult, secondResult,
-                                                          discrepancy.annotation1.start, discrepancy.annotation1.end,
-                                                          discrepancy.docLength))
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
+                                                                    "0", firstResult, secondResult,
+                                                                    comparison.annotation1.start,
+                                                                    comparison.annotation1.end,
+                                                                    comparison.docLength))
             continue
 
-        if discrepancy.discrepancyType == DiscrepancyTypes["3"]: # Attribute mismatch
+        if comparison.comparisonResult == ComparisonResults["3"]: # Attribute mismatch
             firstResult = None
             secondResult = None
             if annotationWithFirstName.annotationClass == 'doc_classification':
@@ -77,20 +83,35 @@ def ConvertDiscrepanciesToCSV(discrepancies, outputPath):
             else:
                 firstResult = str(annotationWithFirstName.attributes)
                 secondResult = str(annotationWithSecondName.attributes)
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, discrepancy.discrepancyType, firstResult, secondResult,
-                                                          discrepancy.annotation1.start, discrepancy.annotation1.end,
-                                                          discrepancy.docLength))
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
+                                                                    "0", firstResult, secondResult,
+                                                                    comparison.annotation1.start,
+                                                                    comparison.annotation1.end,
+                                                                    comparison.docLength))
             continue
 
-        if discrepancy.discrepancyType == DiscrepancyTypes["4"]: # Class and attribute mismatch
+        if comparison.comparisonResult == ComparisonResults["4"]: # Class and attribute mismatch
             firstResult = "Class: %s,  Attributes: %s" % (annotationWithFirstName.annotationClass,
                                                           annotationWithFirstName.attributes)
             secondResult = "Class: %s,  Attributes: %s" % (annotationWithSecondName.annotationClass,
                                                           annotationWithSecondName.attributes)
 
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, discrepancy.discrepancyType, firstResult, secondResult,
-                                                          discrepancy.annotation1.start, discrepancy.annotation1.end,
-                                                          discrepancy.docLength))
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
+                                                                    "0", firstResult, secondResult,
+                                                                    comparison.annotation1.start,
+                                                                    comparison.annotation1.end,
+                                                                    comparison.docLength))
+            continue
+
+        if comparison.comparisonResult == ComparisonResults["5"]: # Match
+            firstResult = annotationWithFirstName.annotationClass
+            secondResult = annotationWithSecondName.annotationClass
+
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
+                                                                    "1", firstResult, secondResult,
+                                                                    comparison.annotation1.start,
+                                                                    comparison.annotation1.end,
+                                                                    comparison.docLength))
             continue
 
     outFile.close()

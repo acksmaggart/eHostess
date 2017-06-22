@@ -1,69 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <annotations textSource="2530.txt">
     <annotation>
-        <mention id="EHOST_Instance_34" />
+        <mention id="EHOST_Instance_56" />
         <annotator id="eHOST_2010">TestAnnotator2</annotator>
         <span start="46" end="80" />
         <spannedText>Discharge Date: [**3440-11-16**]</spannedText>
         <creationDate>Thu Jun 22 11:19:56 MDT 2017</creationDate>
     </annotation>
-    <stringSlotMention id="EHOST_Instance_38">
+    <stringSlotMention id="EHOST_Instance_61">
         <mentionSlot id="certainty" />
         <stringSlotMentionValue value="definite" />
     </stringSlotMention>
-    <classMention id="EHOST_Instance_34">
-        <hasSlotMention id="EHOST_Instance_38" />
+    <classMention id="EHOST_Instance_56">
+        <hasSlotMention id="EHOST_Instance_61" />
         <mentionClass id="bleeding_absent">Discharge Date: [**3440-11-16**]</mentionClass>
     </classMention>
     <annotation>
-        <mention id="EHOST_Instance_35" />
+        <mention id="EHOST_Instance_57" />
         <annotator id="eHOST_2010">TestAnnotator2</annotator>
         <span start="82" end="114" />
         <spannedText>Date of Birth: [**3390-10-19**]</spannedText>
         <creationDate>Thu Jun 22 11:18:12 MDT 2017</creationDate>
     </annotation>
-    <stringSlotMention id="EHOST_Instance_39">
+    <stringSlotMention id="EHOST_Instance_62">
         <mentionSlot id="certainty" />
         <stringSlotMentionValue value="possible" />
     </stringSlotMention>
-    <classMention id="EHOST_Instance_35">
-        <hasSlotMention id="EHOST_Instance_39" />
+    <classMention id="EHOST_Instance_57">
+        <hasSlotMention id="EHOST_Instance_62" />
         <mentionClass id="bleeding_present">Date of Birth: [**3390-10-19**]</mentionClass>
     </classMention>
     <annotation>
-        <mention id="EHOST_Instance_36" />
+        <mention id="EHOST_Instance_58" />
         <annotator id="eHOST_2010">TestAnnotator2</annotator>
         <span start="127" end="135" />
         <spannedText>Sex: M</spannedText>
         <creationDate>Thu Jun 22 11:20:11 MDT 2017</creationDate>
     </annotation>
-    <stringSlotMention id="EHOST_Instance_40">
+    <stringSlotMention id="EHOST_Instance_63">
         <mentionSlot id="certainty" />
         <stringSlotMentionValue value="possible" />
     </stringSlotMention>
-    <classMention id="EHOST_Instance_36">
-        <hasSlotMention id="EHOST_Instance_40" />
+    <classMention id="EHOST_Instance_58">
+        <hasSlotMention id="EHOST_Instance_63" />
         <mentionClass id="bleeding_absent">Sex: M</mentionClass>
     </classMention>
     <annotation>
-        <mention id="EHOST_Instance_37" />
+        <mention id="EHOST_Instance_59" />
         <annotator id="eHOST_2010">TestAnnotator2</annotator>
         <span start="137" end="160" />
         <spannedText>Service: CARDIOTHORACIC</spannedText>
         <creationDate>Thu Jun 22 11:18:25 MDT 2017</creationDate>
     </annotation>
-    <stringSlotMention id="EHOST_Instance_41">
+    <stringSlotMention id="EHOST_Instance_64">
         <mentionSlot id="certainty" />
         <stringSlotMentionValue value="definite" />
     </stringSlotMention>
-    <stringSlotMention id="EHOST_Instance_42">
+    <stringSlotMention id="EHOST_Instance_65">
         <mentionSlot id="present_or_absent" />
         <stringSlotMentionValue value="present" />
     </stringSlotMention>
-    <classMention id="EHOST_Instance_37">
-        <hasSlotMention id="EHOST_Instance_41" />
-        <hasSlotMention id="EHOST_Instance_42" />
+    <classMention id="EHOST_Instance_59">
+        <hasSlotMention id="EHOST_Instance_64" />
+        <hasSlotMention id="EHOST_Instance_65" />
         <mentionClass id="doc_classification">Service: CARDIOTHORACIC</mentionClass>
+    </classMention>
+    <annotation>
+        <mention id="EHOST_Instance_60" />
+        <annotator id="eHOST_2010">TestAnnotator2</annotator>
+        <span start="162" end="172" />
+        <spannedText>Allergies:</spannedText>
+        <creationDate>Thu Jun 22 12:25:18 MDT 2017</creationDate>
+    </annotation>
+    <stringSlotMention id="EHOST_Instance_66">
+        <mentionSlot id="certainty" />
+        <stringSlotMentionValue value="definite" />
+    </stringSlotMention>
+    <classMention id="EHOST_Instance_60">
+        <hasSlotMention id="EHOST_Instance_66" />
+        <mentionClass id="bleeding_absent">Allergies:</mentionClass>
     </classMention>
     <eHOST_Adjudication_Status version="1.0">
         <Adjudication_Selected_Annotators version="1.0" />

@@ -31,34 +31,37 @@ def allAttributesMatch(annotation1, annotation2):
 
     return True
 
-DiscrepancyTypes ={
+ComparisonResults ={
     "1" : "No Overlap",
     "2" : "Class Mismatch",
     "3" : "Attribute Mismatch",
-    "4" : "Class and Attribute Mismatch"
+    "4" : "Class and Attribute Mismatch",
+    "5" : "Match"
     }
 
-class Discrepancy:
-    def __init__(self, documentName, discrepancyType, annotation1, annotation2=None, docLength=None):
-        # annotation2 may be None if discrepancyType is "No Overlap", i.e. there is only one annotation to report, not a
+class Comparison:
+    def __init__(self, documentName, comparisonResult, annotation1, annotation2=None, docLength=None):
+        # annotation2 may be None if comparisonType is "No Overlap", i.e. there is only one annotation to report, not a
         # pair of annotations.
         self.annotation1 = annotation1
         self.annotation2 = annotation2
-        self.discrepancyType = discrepancyType
+        self.comparisonResult = comparisonResult
         self.docLength = docLength
         self.documentName = documentName
 
     @classmethod
-    def DetectAllDiscrepancies(cls, document1, document2):
+    def CompareAllAnnotations(cls, document1, document2):
         """ This function makes a list of all the annotations in both documents that do not have matches. It then reviews
         those lists to determine which discrepancies are due to class/attribute mismatches and which are due to
-        non-overlapping spans. Finally, it returns a list of Discrepancy objects."""
+        non-overlapping spans. Finally, it returns a list of all the annotations along with their match or mismatch
+        types as a list of `Comparison` objects."""
         doc1Annotations = document1.annotations.values()
         doc2Annotations = document2.annotations.values()
         doc1Matches = [False] * len(document1.annotations)
         doc2Matches = [False] * len(document2.annotations)
 
         documentName = document1.documentName
+        comparisons = []
 
         for index1, annotation1 in enumerate(doc1Annotations):
             if doc1Matches[index1]:
@@ -77,13 +80,15 @@ class Discrepancy:
                             # We have a match!
                             doc1Matches[index1] = True
                             doc2Matches[index2] = True
+                            comparisons.append(Comparison(documentName, ComparisonResults["5"], annotation1,
+                                                          annotation2, docLength=document1.numberOfCharacters))
                             break
 
         doc1Mismatches = [a for index, a in enumerate(doc1Annotations) if not doc1Matches[index]]
         doc2Mismatches = [a for index, a in enumerate(doc2Annotations) if not doc2Matches[index]]
 
         processed2 = [False] * len(doc2Annotations)
-        discrepancies = []
+
 
         for index1, annotation1 in enumerate(doc1Mismatches):
             foundOverlap = False
@@ -94,36 +99,65 @@ class Discrepancy:
                     foundOverlap = True
                     processed2[index2] = True
                     if annotation1.annotationClass != annotation2.annotationClass:
+                        # Class mismatch
                         if allAttributesMatch(annotation1, annotation2):
-                            newDiscrepancy = cls(documentName, "Class Mismatch", annotation1, annotation2,
+                            newComparison = cls(documentName, ComparisonResults["2"], annotation1, annotation2,
                                                  docLength=document1.numberOfCharacters)
-                            discrepancies.append(newDiscrepancy)
+                            comparisons.append(newComparison)
+                        # Class and attribute mismatch
                         else:
-                            newDiscrepancy = cls(documentName, "Class and Attribute Mismatch", annotation1, annotation2,
+                            newComparison = cls(documentName, ComparisonResults["4"], annotation1, annotation2,
                                                  docLength=document1.numberOfCharacters)
-                            discrepancies.append(newDiscrepancy)
+                            comparisons.append(newComparison)
+                    # Attribute mismatch
                     else:
-                        newDiscrepancy = cls(documentName, "Attribute Mismatch", annotation1, annotation2,
+                        newComparison = cls(documentName, ComparisonResults["3"], annotation1, annotation2,
                                              docLength=document1.numberOfCharacters)
-                        discrepancies.append(newDiscrepancy)
-
+                        comparisons.append(newComparison)
+            # No-overlap mismatch
             if not foundOverlap:
-                newDiscrepancy = cls(documentName, "No Overlap", annotation1, docLength=document1.numberOfCharacters)
-                discrepancies.append(newDiscrepancy)
+                newComparison = cls(documentName, ComparisonResults["1"], annotation1, docLength=document1.numberOfCharacters)
+                comparisons.append(newComparison)
 
         for index, annotation2 in enumerate(doc2Mismatches):
             if processed2[index]:
                 continue
+            # No-overlap mismatch
             else:
-                newDiscrepancy = cls(documentName, "No Overlap", annotation2, docLength=document1.numberOfCharacters)
-                discrepancies.append(newDiscrepancy)
+                newComparison = cls(documentName, ComparisonResults["1"], annotation2, docLength=document1.numberOfCharacters)
+                comparisons.append(newComparison)
 
-        return discrepancies
-
-
+        return comparisons
 
 
+    @classmethod
+    def CompareDocumentBatches(cls, batch1, batch2):
+        """This method assumes that batch1 and batch2 contain the same number of documents and that the set of names in
+        both batches is the same and that all names in a given batch are unique. It returns a dictionary keyed by the
+        names of the documents where the values are an array of `Comparison` objects.
+
+        :param batch1 A list of `Document` objects.
+        :param batch2 A list of `Document` objects.
+        :return A dictionary of `Comparison` arrays keyed by document name.
+        """
+
+        comparisons = {}
+
+        sorted1 = sorted(batch1, key=lambda doc: doc.documentName)
+        sorted2 = sorted(batch2, key=lambda doc: doc.documentName)
+
+        for index, document in enumerate(sorted1):
+            if sorted1[index].documentName != sorted2[index].documentName:
+                raise RuntimeError("The batches were not sorted correctly or contain different documents.")
+
+            comparisons[document.documentName] = Comparison.CompareAllAnnotations(sorted1[index], sorted2[index])
+
+        return comparisons
 
 
-#def DetectDocClassDiscrepancies(document1, document2, documentClassName="doc_classification"):
+
+
+    @classmethod
+    def CompareDocClassAnnotations(cls, document1, document2, documentClassName="doc_classification"):
+        raise NotImplementedError("This method hasn't been implemented yet....but you can implement it if you want!")
 

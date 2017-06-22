@@ -1,5 +1,6 @@
 import glob
 
+failCount = 0
 #### Test Preprocessing. ####
 import eHostess.NotePreprocessing.Preprocessor as preprocessor
 
@@ -15,6 +16,7 @@ numUnion = len(duplicateProcessor._getUnionOfDuplicatesAndSubsets())
 if numSubsets == 3 and numDuplicates == 4 and numUnion == 6:
     print "Passed\n"
 else:
+    failCount += 1
     print '*****************Test Failed***************************'
 # duplicateProcessor.reportDuplicates()
 
@@ -36,6 +38,7 @@ if length != 8442:
     failed = True
 
 if failed:
+    failCount += 1
     print '*****************Test Failed***************************'
 else:
     print "Passed\n"
@@ -58,6 +61,7 @@ if document.numberOfCharacters != 8442 \
     failed = True
 
 if failed:
+    failCount += 1
     print '*****************Test Failed***************************'
 else:
     print "Passed\n"
@@ -74,6 +78,7 @@ for dirName in cleanDirs:
     if dirName != '/Some/path/to/stuff/*':
         print '*****************Test Failed***************************'
         failed = True
+        failCount += 1
 if not failed:
     print 'Passed\n'
 
@@ -153,6 +158,7 @@ if MentionLevelAnnotation.overlap(annotation1, annotation2) != True:
 
 
 if failed:
+    failCount += 1
     print '*****************Test Failed***************************'
 else:
     print 'Passed\n'
@@ -183,6 +189,7 @@ for note in [noteBody1, noteBody2]:
         failed = True
         break
 if failed:
+    failCount += 1
     print '*****************Test Failed***************************'
 else:
     print 'Passed\n'
@@ -210,6 +217,7 @@ for index, annotation in enumerate(document.annotations.values()):
         failed = True
 
 if failed:
+    failCount += 1
     print '*****************Test Failed***************************'
 else:
     print 'Passed\n'
@@ -257,6 +265,7 @@ for docIndex, document in enumerate(documents):
             failed = True
 
 if failed:
+    failCount += 1
     print '*****************Test Failed***************************'
 else:
     print 'Passed\n'
@@ -286,26 +295,38 @@ else:
             failed = True
 
     if failed:
+        failCount += 1
         print '*****************Test Failed***************************'
     else:
         print 'Passed\n'
 
-    #### Test Analysis.Output.ConvertDiscrepanciesToCSV() ####
-    print 'Testing Analysis.Output.ConvertDiscrepanciesToCSV()'
-    from eHostess.Analysis.Output import ConvertDiscrepanciesToCSV
-    from eHostess.Analysis.DetectDiscrepancies import Discrepancy
+    #### Test Analysis.Output.ConvertComparisonsToTSV() ####
+    print 'Testing Analysis.Output.ConvertComparisonsToTSV()'
+    # !!!!! This test doesn't really verify anything except that ConvertComparisonToTSV() doesn't raise any exceptions.
+    # To verify that the method is working correctly it is currently necessary to check the output file located at
+    # ./UnitTestDependencies/Output/ComparisonsToTSV/TestOutput/discrepancies.tsv
+    from eHostess.Analysis.Output import ConvertComparisonsToTSV
+    from eHostess.Analysis.DocumentComparison import Comparison
 
     failed = False
 
     doc1 = KnowtatorReader.parseSingleKnowtatorFile(
-        './UnitTestDependencies/Output/DiscrepanciesToCSV/annotator1/saved/2530.txt.knowtator.xml')
+        './UnitTestDependencies/Output/ComparisonsToTSV/annotator1/saved/2530.txt.knowtator.xml')
     doc2 = KnowtatorReader.parseSingleKnowtatorFile(
-        './UnitTestDependencies/Output/DiscrepanciesToCSV/annotator2/saved/2530.txt.knowtator.xml')
+        './UnitTestDependencies/Output/ComparisonsToTSV/annotator2/saved/2530.txt.knowtator.xml')
 
-    discrepancies = Discrepancy.DetectAllDiscrepancies(doc1, doc2)
-    ConvertDiscrepanciesToCSV(discrepancies, '../output/discrepancies.txt')
+    discrepancies = Comparison.CompareAllAnnotations(doc1, doc2)
+    ConvertComparisonsToTSV(discrepancies, './UnitTestDependencies/Output/ComparisonsToTSV/TestOutput/discrepancies.tsv')
 
     if failed:
+        failCount += 1
         print '*****************Test Failed***************************'
     else:
         print 'Passed\n'
+
+
+
+    if failCount == 0:
+        print "ALL TESTS PASSED"
+    else:
+        print "TESTS FAILED: %d" % failCount
