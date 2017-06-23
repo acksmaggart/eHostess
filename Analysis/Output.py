@@ -58,7 +58,7 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
 
         if comparison.comparisonResult == ComparisonResults["1"]: # No Overlap
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
-                                                                    "0", annotationWithFirstName.annotationClass,
+                                                                    "0", comparison.annotation1.annotationClass,
                                                                     "", comparison.annotation1.start,
                                                                     comparison.annotation1.end, comparison.docLength))
             continue
@@ -78,11 +78,11 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             firstResult = None
             secondResult = None
             if annotationWithFirstName.annotationClass == 'doc_classification':
-                firstResult = "DOC CLASS: " + annotationWithFirstName.attributes["present_or_absent"]
-                secondResult = "DOC CLASS: " + annotationWithSecondName.attributes["present_or_absent"]
+                firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
+                secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
             else:
-                firstResult = str(annotationWithFirstName.attributes)
-                secondResult = str(annotationWithSecondName.attributes)
+                firstResult = annotationWithFirstName.annotationClass + str(annotationWithFirstName.attributes)
+                secondResult = annotationWithSecondName.annotationClass + str(annotationWithSecondName.attributes)
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
                                                                     comparison.annotation1.start,
@@ -104,8 +104,14 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             continue
 
         if comparison.comparisonResult == ComparisonResults["5"]: # Match
-            firstResult = annotationWithFirstName.annotationClass
-            secondResult = annotationWithSecondName.annotationClass
+            firstResult = None
+            secondResult = None
+            if annotationWithFirstName.annotationClass == 'doc_classification':
+                firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
+                secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+            else:
+                firstResult = annotationWithFirstName.annotationClass
+                secondResult = annotationWithSecondName.annotationClass
 
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
                                                                     "1", firstResult, secondResult,

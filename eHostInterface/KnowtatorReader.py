@@ -109,11 +109,8 @@ class KnowtatorReader:
     that the original file has a .txt extension."""
     @classmethod
     def parseMultipleKnowtatorFiles(cls, directoryList, originalFileSearchDirs=None, annotationGroup="MIMC_v2"):
-        directoryList = directoryList
         if not isinstance(directoryList, list):
             directoryList = [directoryList]
-        if not isinstance(originalFileSearchDirs, list):
-            originalFileSearchDirs = [originalFileSearchDirs]
         annotationDocuments = []
         fileNames = []
         cleanDirNames = cleanDirectoryList(directoryList)
