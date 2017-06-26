@@ -11,7 +11,11 @@ attributes in common they are matches, even if there may be multiple overlapping
 two annotators highlighted the same span which contained two different terms, and their intended term was different from
  the other annotator's intended term. This would produce a situation in which there were really two mismatches but it
  got recorded as a single match. This flaw was judged to be acceptable since the odds of its occurrence are low and the
- document-level classification is more important and immune to this possibility anyway.
+ document-level classification is more important and immune to this possibility anyway. The second case that will produce
+an error is if there are multiple terms in quick succession and one annotator highlights them all as a single annotation
+while the other annotates each one individually. The first annotation created by the second annotator will match the
+first annotator's long annotation and the rest of the smaller annotations will show up as mismatches. This is of course
+not desireable, however, it has yet to be determined if it constitutes a problem worth fixing.
 """
 
 from ..Annotations.Document import Document

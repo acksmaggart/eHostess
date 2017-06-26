@@ -42,16 +42,13 @@ class SentenceRepeatManager:
             self.sentences.append(foundSentence)
 
         # find the start and end of the appropriate match and return it as a string-ified tuple
-        regex = re.compile(sentence)
+        regex = re.compile(re.escape(sentence))
         # only search from where we left off last time we saw the sentence
         match = regex.search(note, foundSentence.endOfLastSearch)
         if match:
             foundSentence.endOfLastSearch = match.end()
             return (match.start(), match.end())
         else:
-            print("Sentence Repeat Manger: Could not find sentence in note.")
-            print("Sentence:")
-            print(sentence + '\n')
-            print("Note:")
-            print(note)
-            exit(1)
+            raise RuntimeError ("Sentence Repeat Manger: Could not find sentence in note.\n\nSentence:********************************************** \n%s\n\nNote:******************************************************\n %s"
+                                % (sentence, note))
+

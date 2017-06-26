@@ -8,8 +8,7 @@ classses. For example, annotations marked as "NEGATED_EXISTENCE" by pyConText wo
 `MentionLevelAnnotation`s with the class "bleeding_absent", if "bleeding_absent" were your eHost annotation class.
 
 Currently this module assigns attributes of
-                            "certainty" : "definite",
-                            "manual_v_auto" : "manual"
+                            "certainty" : "definite"
 to all the annotations it creates.
 """
 
@@ -36,7 +35,7 @@ defaultModifiersFilePath = os.path.dirname(__file__) + '/TargetsAndModifiers/mod
 
 def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, sentenceSplitter,
                                     modifierToClassMap, annotationGroup):
-    inFileHandle = open(documentFilePath, 'r')
+    inFileHandle = open(documentFilePath, mode='rU')
     noteBody = inFileHandle.read()
     numChars = len(noteBody)
     inFileHandle.close()
@@ -48,7 +47,8 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
 
     for sentence in sentences:
         reconstructedSentence = sentenceReconstructor.reconstructSentence(sentence)
-        matches = re.findall(re.escape(reconstructedSentence), noteBody)
+        escapedSentence = re.escape(reconstructedSentence)
+        matches = re.findall(escapedSentence, noteBody)
         sentenceSpan = None
         if not matches:
             print("eHostess/PyConTextInterface/PyConText: Did not find sentence in text, something is wrong.")
@@ -89,15 +89,14 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
                 text = sentence
                 annotationId = "pyConTextNLP_Instance_" + str(len(mentionLevelAnnotations) + 1)
                 attributes = {
-                    "certainty": "definite",
-                    "manual_v_auto": "manual"
+                    "certainty": "definite"
                 }
                 annotationClass = None
-                if markup.isModifiedByCategory(node, "NEGATED_EXISTENCE") and markup.isModifiedByCategory(node,
-                                                                                                          "AFFIRMED_EXISTENCE"):
-                    raise RuntimeError(
-                        "Node is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTENCE....hmmmm. Sentence: %s"
-                        % reconstructedSentence)
+                if markup.isModifiedByCategory(node, "NEGATED_EXISTENCE") \
+                        and markup.isModifiedByCategory(node, "AFFIRMED_EXISTENCE"):
+
+                    print("Node is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTENCE....hmmmm.\n\nNote: %s\nSentence: %s" % (documentFilePath, reconstructedSentence))
+                    annotationClass = modifierToClassMap["NEGATED_EXISTENCE"]
                 elif markup.isModifiedByCategory(node, "NEGATED_EXISTENCE"):
                     annotationClass = modifierToClassMap["NEGATED_EXISTENCE"]
                 # If the node is not modified by NEGATED_EXISTENCE assume it is modified by AFFIRMED_EXISTENCE or it

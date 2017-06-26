@@ -57,9 +57,17 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
         text = '"' + text + '"'
 
         if comparison.comparisonResult == ComparisonResults["1"]: # No Overlap
+            firstResult = ""
+            secondResult = ""
+            if annotationWithFirstName:
+                firstResult = annotationWithFirstName.annotationClass
+            elif annotationWithSecondName:
+                secondResult = annotationWithSecondName.annotationClass
+            else:
+                raise RuntimeError("Either the first annotation or the second annotation should be non-null.")
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, text, comparison.comparisonResult,
-                                                                    "0", comparison.annotation1.annotationClass,
-                                                                    "", comparison.annotation1.start,
+                                                                    "0", firstResult,
+                                                                    secondResult, comparison.annotation1.start,
                                                                     comparison.annotation1.end, comparison.docLength))
             continue
 
