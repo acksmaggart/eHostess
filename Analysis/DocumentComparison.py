@@ -9,9 +9,9 @@ Implicitly then, a match is defined as a pair of annotations whose spans overlap
 match. The algorithm implemented in this module assumes that if two annotations overlap and share their classes and all
 attributes in common they are matches, even if there may be multiple overlapping annotations. This could also be a problem if
 two annotators highlighted the same span which contained two different terms, and their intended term was different from
- the other annotator's intended term. This would produce a situation in which there were really two mismatches but it
- got recorded as a single match. This flaw was judged to be acceptable since the odds of its occurrence are low and the
- document-level classification is more important and immune to this possibility anyway. The second case that will produce
+the other annotator's intended term. This would produce a situation in which there were really two mismatches but it
+got recorded as a single match. This flaw was judged to be acceptable since the odds of its occurrence are low and the
+document-level classification is more important and immune to this possibility anyway. The second case that will produce
 an error is if there are multiple terms in quick succession and one annotator highlights them all as a single annotation
 while the other annotates each one individually. The first annotation created by the second annotator will match the
 first annotator's long annotation and the rest of the smaller annotations will show up as mismatches. This is of course

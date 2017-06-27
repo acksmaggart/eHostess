@@ -2,3 +2,6 @@
 
 # Compiled python files
 *.pyc
+
+#Contents of the documentation _build directory
+Documentation/_build/
