@@ -55,9 +55,16 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             firstResult = ""
             secondResult = ""
             if annotationWithFirstName:
-                firstResult = annotationWithFirstName.annotationClass
+                if annotationWithFirstName.annotationClass == 'doc_classification':
+                    firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
+                else:
+                    firstResult = annotationWithFirstName.annotationClass + str(annotationWithFirstName.attributes)
+
             elif annotationWithSecondName:
-                secondResult = annotationWithSecondName.annotationClass
+                if annotationWithSecondName.annotationClass == 'doc_classification':
+                    secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+                else:
+                    secondResult = annotationWithSecondName.annotationClass + str(annotationWithSecondName.attributes)
             else:
                 raise RuntimeError("Either the first annotation or the second annotation should be non-null.")
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
@@ -67,9 +74,14 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             continue
 
         if comparison.comparisonResult == ComparisonResults["2"]: # Class mismatch
-            firstResult = annotationWithFirstName.annotationClass
-            secondResult = annotationWithSecondName.annotationClass
-
+            firstResult = None
+            secondResult = None
+            if annotationWithFirstName.annotationClass == 'doc_classification':
+                firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
+                secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+            else:
+                firstResult = annotationWithFirstName.annotationClass + str(annotationWithFirstName.attributes)
+                secondResult = annotationWithSecondName.annotationClass + str(annotationWithSecondName.attributes)
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
                                                                     comparison.annotation1.start,
