@@ -14,4 +14,3 @@ The package will have the following modules.
 6. UnitTestDependencies: This directory contains files that are necessary to run the tests in the `UnitTests.py` module.
 
 The package also contains a `Documentation` directory whose contents can be used to produce HTML documentation pages using sphinx. To generate the documentation simply execute `make html` in the Documentation directory after installing sphinx. After executing `make` the documentation may then be found in the `Documentation/_build/` directory.
-
