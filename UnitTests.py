@@ -165,7 +165,7 @@ else:
 
 
 #### Test PyConTextInterface.SentenceReconstructor ####
-from PyConTextInterface.SentenceReconstructor import SentenceReconstuctor as Reconstructor
+from PyConTextInterface.SentenceReconstructor import SentenceReconstructor as Reconstructor
 from pyConTextNLP.helpers import sentenceSplitter as Splitter
 print 'Testing PyConTextInterface.SentenceReconstructor.SentenceReconstructor()'
 
@@ -196,19 +196,19 @@ else:
 
 #### Test PyConTextInterface.PyConText.AnnotateSingleDocument() ####
 print 'Testing PyConTextInterface.PyConText.AnnotateSingleDocument()'
-from eHostess.PyConTextInterface.PyConText import PyConTextInferface
+from eHostess.PyConTextInterface.PyConText import PyConTextInterface
 
 failed = False
 
 gotException = False
 try:
-    contradictoryDoc = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/TestAffirmedAndNegatedInSameSentence.txt')
+    contradictoryDoc = PyConTextInterface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/TestAffirmedAndNegatedInSameSentence.txt')
 except RuntimeError as error:
     gotException = True
 if not gotException:
     failed = True
 
-document = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
+document = PyConTextInterface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
 spans = [(69, 74), (148, 153), (242, 247)]
 classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
 for index, annotation in enumerate(document.annotations.values()):
@@ -225,13 +225,13 @@ else:
 
 #### Test PyConTextInterface.PyConText.AnnotateMultipleDocuments() ####
 print 'Testing PyConTextInterface.PyConText.AnnotateMultipleDocuments()'
-from eHostess.PyConTextInterface.PyConText import PyConTextInferface
+from eHostess.PyConTextInterface.PyConText import PyConTextInterface
 
 failed = False
 
 directories = glob.glob('./UnitTestDependencies/PyConText/AnnotateMultipleDocuments/*')
 
-document = PyConTextInferface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
+document = PyConTextInterface.AnnotateSingleDocument('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
 
 doc1spans = [(69, 74), (148, 153), (242, 247)]
 doc1classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
@@ -255,7 +255,7 @@ allSpans = [doc1spans, doc2spans, doc3spans, doc4spans, doc5spans, doc6spans]
 allClassifications = [doc1classifications, doc2classifications, doc3classifications, doc4classifications,
                    doc5classifications, doc6classifications]
 
-documents = PyConTextInferface.AnnotateMultipleDocuments(directories)
+documents = PyConTextInterface.AnnotateMultipleDocuments(directories)
 for docIndex, document in enumerate(documents):
     spans = allSpans[docIndex]
     classifications = allClassifications[docIndex]
@@ -272,20 +272,20 @@ else:
 
     #### Test PyConTextInterface.PyConText.AnnotateSingleDocument() ####
     print 'Testing PyConTextInterface.PyConText.AnnotateSingleDocument()'
-    from eHostess.PyConTextInterface.PyConText import PyConTextInferface
+    from eHostess.PyConTextInterface.PyConText import PyConTextInterface
 
     failed = False
 
     gotException = False
     try:
-        contradictoryDoc = PyConTextInferface.AnnotateSingleDocument(
+        contradictoryDoc = PyConTextInterface.AnnotateSingleDocument(
             './UnitTestDependencies/PyConText/AnnotateSingleDocument/TestAffirmedAndNegatedInSameSentence.txt')
     except RuntimeError as error:
         gotException = True
     if not gotException:
         failed = True
 
-    document = PyConTextInferface.AnnotateSingleDocument(
+    document = PyConTextInterface.AnnotateSingleDocument(
         './UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
     spans = [(69, 74), (148, 153), (242, 247)]
     classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]

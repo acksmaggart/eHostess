@@ -1,17 +1,20 @@
 """
 The purpose of this module is to produce human-readable output after conducting analysis. For example, converting
-`Comparison` objects to lines in a .csv file for review.
+:class:`Comparison <eHostess.Analysis.DocumentComparison.Comparison>` objects to lines in a .csv file for review.
 """
 
 from DocumentComparison import ComparisonResults
 
 def ConvertComparisonsToTSV(comparisons, outputPath):
-    """This function creates a TSV with a summary of the comparisons. It encloses the text fields in quotes, assuming
-    that any software used to parse the CSV file will know to ignore any tabs inside of quotes. It also assumes
-    that the `MentionLevelAnnotation` objects contained in the comparisons all have a value for `annotator` and that
-    all values of `annotator` belong to a set of size 2. In other words, there are only two different values for
-    `annotator` and all annotation objects have exactly one of those two values. This function may not output the tsv
-    file correctly if the annotation text contains both tab characters and double quotes."""
+    """
+    This function creates a TSV with a summary of the comparisons. Each line in the output file represents one :class:`Comparison <eHostess.Analysis.DocumentComparison.Comparison>` object. Specifically for each annotation comparison it will show the text highlighted by the two annotators or annotation methods, the type of agreement or disagreement, the span of the text, the annotator name, and the document length.
+
+    This method encloses the text fields in quotes, assuming that any software used to parse the TSV file will know to ignore any tabs inside of quotes. It also assumes that the :class:`MentionLevelAnnotation <eHostess.Annotations.MentionLevelAnnotation.MentionLevelAnnotation>` objects contained in the comparisons all have a value for `annotator` and that all values of `annotator` belong to a set of size 2. In other words, there are only two different values for `annotator` and all annotation objects have exactly one of those two values. This function may not output the tsv file correctly if the annotation text contains both tab characters and double quotes.
+
+    :param comparisons: [list of objects | object] A list of :class:`Comparison <eHostess.Analysis.DocumentComparison.Comparison>` objects or a single comparison object to output.
+    :param outputPath: [string] The path specifying where to write the output TSV file.
+    :return: None
+    """
 
     if not isinstance(comparisons, list):
         comparisons = [comparisons]
@@ -136,3 +139,4 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             continue
 
     outFile.close()
+    print "Done writing TSV file to %s" % outputPath

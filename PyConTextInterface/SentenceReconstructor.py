@@ -15,7 +15,7 @@ characters.
 import re
 
 
-class SentenceReconstuctor:
+class SentenceReconstructor:
     def __init__(self, noteBody=""):
         self.noteBody = noteBody
         self.noteCursor = 0
@@ -31,8 +31,8 @@ class SentenceReconstuctor:
         is a mismatch and the note cursor points to a whitespace character it is inserted into the sentence.
         If there is a mismatch and the note cursor does not point to a whitespace character an exception
         is raised.
-        :param alteredSentence: (string) The sentence from the note body that has been altered by the sentence splitter.
-        :return: (string) The reconstructed sentence.
+        :param alteredSentence: [string] The sentence from the note body that has been altered by the sentence splitter.
+        :return: [string] The reconstructed sentence.
         """
         sentenceWithoutWhitespace = re.sub(r"\n|\r| |\t","",alteredSentence)
         sentenceCursor = 0

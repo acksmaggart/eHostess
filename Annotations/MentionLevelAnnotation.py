@@ -1,8 +1,8 @@
-"""This class represents a single mention-level annotation. """
 from time import gmtime, strftime
 
 
 class MentionLevelAnnotation:
+    """This class represents a single mention-level annotation. For example, a single highlight in eHost or a single node in PyConText. It currently only has one method, a class method for determining if two mention-level annotations overlap with one another."""
     def __init__(self, text, start, end, annotator, annotationId, attributes, annotationClass = None, creationDate = None):
         self.text = text
         self.start = int(start)
@@ -22,7 +22,15 @@ class MentionLevelAnnotation:
 
     @classmethod
     def overlap(cls, firstAnnotation, secondAnnotation):
-        """There should be 11 different possible cases:"""
+        """
+        This method determines if the spans of two mention-level annotations overlap. This is a crucial consideration when calculating agreement between two annotators or two annotation methods.
+
+        :param firstAnnotation: [Object] An instance of MentionLevelAnnotation.
+        :param secondAnnotation: [Object] A second instance of MentionLevelAnnotation.
+        :return: [boolean] True if the two annotations overlap, otherwise False.
+        """
+        # There should be 11 cases where spans overlap:
+
         # firstAnnotation and secondAnnotation have the same span
         # firstAnnotation begins in same place as secondAnnotation but ends inside secondAnnotation
         # firstAnnotation begins inside secondAnnotation and they share an end

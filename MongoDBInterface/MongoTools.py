@@ -1,3 +1,7 @@
+"""
+This module contains several functions that allow the user to read and write annotation documents using a MongoDB backing store. I recommend creating a unique index in whichever collection will hold the annotation documents to ensure that no two documents have the same combination of document name, annotator name, and annotation round.
+"""
+
 from pymongo import MongoClient
 import pymongo.errors
 from ..Annotations.MentionLevelAnnotation import MentionLevelAnnotation
@@ -53,61 +57,100 @@ def constructAnnotationDocument(mongoDocument):
     return Document(documentName, annotationGroup, annotations, numChars)
 
 
-class MongoTools:
+def InsertSingleDocument(cls, document, annotationRound, database='NLP', collection="Annotations", host='localhost', port='27017'):
+    """
+    Writes a single Document object to the MongoDB store using the specified database parameters.
 
-    @classmethod
-    def InsertSingleDocument(cls, document, annotationRound, database='Annotations', host='localhost', port='27017'):
+    :param document: [Object] A Document object to store in the MongoDB database.
+    :param annotationRound: [string] The name of the current annotation round.
+    :param database: [string] The name of the MongoDB database instance that holds "collection". Defaults to NLP.
+    :param collection: [string] The name of the collection that stores the document instances. Defaults to "Annotations".
+    :param host: [string] The host IP address, defaults to localhost.
+    :param port: [string] The port on which the MongoDB server is listening. Defaults to 27017.
+    :return: [object] An instance of pymongo.results.InsertOneResult, the default object returned by MongoDB following an "insert_one" operation.
+    """
+    client = MongoClient('mongodb://%s:%s/' % (host, port))
+    collection = client[database][collection]
 
-        client = MongoClient('mongodb://%s:%s/' % (host, port))
-        collection = client.NLP.Annotations
+    mongoDocument = constructMongoDocument(document)
+    result = collection.insert_one(mongoDocument)
 
-        mongoDocument = constructMongoDocument(document)
-        result = collection.insert_one(mongoDocument)
+    client.close()
+    return result
 
-        client.close()
-        return result
 
-    @classmethod
-    def InsertMultipleDocuments(cls, documents, annotationRound):
+def InsertMultipleDocuments(cls, documents, annotationRound, database='NLP', collection="Annotations", host='localhost', port='27017'):
+    """
+    Writes multiple Document objects to the MongoDB store using the specified database parameters.
 
-        mongoDocuments = []
+    :param documents: [list of Objects] A list of Document objects to store in the MongoDB database.
+    :param annotationRound: [string] The name of the current annotation round.
+    :param database: [string] The name of the MongoDB database instance that holds "collection". Defaults to NLP.
+    :param collection: [string] The name of the collection that stores the document instances. Defaults to "Annotations".
+    :param host: [string] The host IP address, defaults to localhost.
+    :param port: [string] The port on which the MongoDB server is listening. Defaults to 27017.
+    :return: [object] An instance of pymongo.results.InsertManyResult, the default object returned by MongoDB following an "insert_many" operation.
+    """
 
-        for document in documents:
-            mongoDocuments.append(constructMongoDocument(document))
+    mongoDocuments = []
 
-        client = MongoClient()
-        collection = client.NLP.Annotations
-        result = None
-        try:
-            result = collection.insert_many(mongoDocuments)
-        except pymongo.errors.BulkWriteError as bulkError:
-            print "A bulk write exception occured:"
-            print bulkError.details
-            exit(1)
+    for document in documents:
+        mongoDocuments.append(constructMongoDocument(document))
 
-        client.close()
+    client = MongoClient('mongodb://%s:%s/' % (host, port))
+    collection = client[database][collection]
+    result = None
+    try:
+        result = collection.insert_many(mongoDocuments)
+    except pymongo.errors.BulkWriteError as bulkError:
+        print "A bulk write exception occured:"
+        print bulkError.details
+        exit(1)
 
-        return result
+    client.close()
 
-    @classmethod
-    def findOneDocument(cls, queryDocument):
-        client = MongoClient()
-        collection = client.NLP.Annotations
+    return result
 
-        mongoDoc = collection.find_one(queryDocument)
-        client.close()
-        return constructAnnotationDocument(mongoDoc)
+def FindOneDocument(cls, queryDocument, database='NLP', collection="Annotations", host='localhost', port='27017'):
+    """
+    This method returns the first document in the backing store that matches the criteria specified in queryDocument.
 
-    @classmethod
-    def findMultipleDocuments(cls, queryDocument):
-        client = MongoClient()
-        collection = client.NLP.Annotations
+    :param queryDocument: [dict] A pymongo document used to query the MongoDB instance.
+    :param database: [string] The name of the MongoDB database instance that holds "collection". Defaults to NLP.
+    :param collection: [string] The name of the collection that stores the document instances. Defaults to "Annotations".
+    :param host: [string] The host IP address, defaults to localhost.
+    :param port: [string] The port on which the MongoDB server is listening. Defaults to 27017.
+    :return: [object | None] A single Document object if the query matches any documents, otherwise None.
+    """
 
-        mongoDocs = collection.find(queryDocument)
-        annotationDocs = []
+    client = MongoClient('mongodb://%s:%s/' % (host, port))
+    collection = client[database][collection]
 
-        for mongoDoc in mongoDocs:
-            annotationDocs.append(constructAnnotationDocument(mongoDoc))
+    mongoDoc = collection.find_one(queryDocument)
+    client.close()
 
-        client.close()
-        return annotationDocs
+    return constructAnnotationDocument(mongoDoc)
+
+def FindMultipleDocuments(cls, queryDocument, database='NLP', collection="Annotations", host='localhost', port='27017'):
+    """
+    Executes a "find" operation on the MongoDB instances and returns a list of all the annotation documents that match the criteria specified in queryDocument.
+
+    :param queryDocument: [dict] A pymongo document used to query the MongoDB instance.
+    :param database: [string] The name of the MongoDB database instance that holds "collection". Defaults to NLP.
+    :param collection: [string] The name of the collection that stores the document instances. Defaults to "Annotations".
+    :param host: [string] The host IP address, defaults to localhost.
+    :param port: [string] The port on which the MongoDB server is listening. Defaults to 27017.
+    :return: [list of objects | None] A list of Document objects, or None if queryDocument does not match any documents in the backing store.
+    """
+
+    client = MongoClient('mongodb://%s:%s/' % (host, port))
+    collection = client[database][collection]
+
+    mongoDocs = collection.find(queryDocument)
+    annotationDocs = []
+
+    for mongoDoc in mongoDocs:
+        annotationDocs.append(constructAnnotationDocument(mongoDoc))
+
+    client.close()
+    return annotationDocs

@@ -1,22 +1,21 @@
 """
-This module serves as the interface to pyConText. It executes the pyConTextNLP package on the contents of text documents
-using the supplied modifiers and targets found either at the specified paths or at the default location in the
-TargetsAndModifiers directory which should be in the same directory as this module.
+This module serves as the interface to pyConText. It executes the pyConTextNLP package on the contents of text documents using the supplied modifiers and targets found either at the specified paths or at the default location in the TargetsAndModifiers directory which should be in the same directory as this module.
 
-It uses the `defaultModifierToAnnotationClassMap` to convert pyConText target and modifier types to eHost annotation
-classses. For example, annotations marked as "NEGATED_EXISTENCE" by pyConText would be instantiated as
-`MentionLevelAnnotation`s with the class "bleeding_absent", if "bleeding_absent" were your eHost annotation class.
+It uses the "defaultModifierToAnnotationClassMap" to convert pyConText target and modifier types to eHost annotation classes. For example, annotations marked as "NEGATED_EXISTENCE" by pyConText would be instantiated as"MentionLevelAnnotation"s with the class "bleeding_absent", if "bleeding_absent" were your eHost annotation class.
 
-Currently this module assigns attributes of
-                            "certainty" : "definite"
+Currently this module assigns attributes of ::
+
+    { "certainty" : "definite" }
+
 to all the annotations it creates.
+
 """
 
 from pyConTextNLP import pyConTextGraph as pyConText
 from pyConTextNLP.helpers import sentenceSplitter
 import pyConTextNLP.itemData as itemData
 from SentenceRepeatManager import SentenceRepeatManager
-from SentenceReconstructor import SentenceReconstuctor
+from SentenceReconstructor import SentenceReconstructor
 from ..Annotations.MentionLevelAnnotation import MentionLevelAnnotation
 from ..Annotations.Document import Document
 from ..Utilities.utilities import cleanDirectoryList
@@ -35,13 +34,14 @@ defaultModifiersFilePath = os.path.dirname(__file__) + '/TargetsAndModifiers/mod
 
 def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, sentenceSplitter,
                                     modifierToClassMap, annotationGroup):
+    """Here is  another method."""
     inFileHandle = open(documentFilePath, mode='rU')
     noteBody = inFileHandle.read()
     numChars = len(noteBody)
     inFileHandle.close()
 
     repeatManager = SentenceRepeatManager()
-    sentenceReconstructor = SentenceReconstuctor(noteBody)
+    sentenceReconstructor = SentenceReconstructor(noteBody)
     sentences = sentenceSplitter().splitSentences(noteBody)
     mentionLevelAnnotations = {}
 
@@ -110,15 +110,26 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
     documentName = Document.ParseDocumentNameFromPath(documentFilePath)
     return Document(documentName, annotationGroup, mentionLevelAnnotations, numChars)
 
-class PyConTextInferface:
+class PyConTextInterface:
     def __init__(self):
-        self.stuff = "stuff"
+        pass
 
 
     @classmethod
     def AnnotateSingleDocument(cls, documentFilePath, targetFilePath=defaultTargetFilePath,
                                modifiersFilePath=defaultModifiersFilePath, sentenceSplitter=sentenceSplitter,
                                modifierToClassMap=defaultModifierToAnnotationClassMap, annotationGroup="MIMC_v2"):
+        """
+        This method runs PyConText on the specified note and returns a Document object.
+
+        :param documentFilePath: [string] The relative or absolute path to the note.
+        :param targetFilePath: [string] The path to the tsv file containing the PyConText target terms.
+        :param modifiersFilePath: [string] The path to the tsv file containing the PyConText modifier terms.
+        :param sentenceSplitter: [Class] The class possessing a class method called "splitSentence()", used to split the sentences of the target note.
+        :param modifierToClassMap: [dict] A dictionary used to map eHost classes to pyConText modifier types.
+        :param annotationGroup: [string] The current annotation round.
+        :return: A single Document instance.
+        """
 
         targets = itemData.instantiateFromCSVtoitemData(targetFilePath)
         modifiers = itemData.instantiateFromCSVtoitemData(modifiersFilePath)
@@ -131,6 +142,18 @@ class PyConTextInferface:
     def AnnotateMultipleDocuments(cls, directoryPaths, targetFilePath=defaultTargetFilePath,
                                modifiersFilePath=defaultModifiersFilePath, sentenceSplitter=sentenceSplitter,
                                modifierToClassMap=defaultModifierToAnnotationClassMap, annotationGroup="MIMC_v2"):
+        """
+        This method runs PyConText on multiple notes and returns a list of Documents.
+
+        :param directoryPaths: [string | list of strings] A list of directories containing notes to be annotated.
+        :param targetFilePath: [string] The path to the tsv file containing the PyConText target terms.
+        :param modifiersFilePath: [string] The path to the tsv file containing the PyConText modifier terms.
+        :param sentenceSplitter: [Class] The class possessing a class method called "splitSentence()", used to split the sentences of the target note.
+        :param modifierToClassMap: [dict] A dictionary used to map eHost classes to pyConText modifier types.
+        :param annotationGroup: [string] The current annotation round.
+        :return: A single Document instance.
+        """
+
         if not isinstance(directoryPaths, list):
             directoryPaths = [directoryPaths]
 
