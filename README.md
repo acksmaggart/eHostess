@@ -12,3 +12,5 @@ The package will have the following modules.
 4. NotePreprocessing: A module containing tools to manipulate text notes, usually in preparation for manual annotation in eHost.
 5. DevelopmentAids: This module cantains content that is useful for developers such as example `.knowtator` files, sample cardiology notes, eHost annotation schemas, etc.
 6. UnitTestDependencies: This directory contains files that are necessary to run the tests in the `UnitTests.py` module.
+
+The package also contains a `Documentation` directory whose contents can be used to produce HTML documentation pages using sphinx. To generate the documentation simply execute `make html` in the Documentation directory after installing sphinx. After executing `make` the documentation may then be found in the `Documentation/_build/` directory.

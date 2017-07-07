@@ -1,3 +1,7 @@
+"""
+This module was created to handle notes with multiple instances of the same sentence. This is only necessary because the PyConText module determines a sentence's location within a note based on a string search. If a sentence appears multiple times in a note then the string search will return all instances of that sentence. We need some way to keep track of which instance we are analyzing. That is the job of this module.
+"""
+
 import re
 
 
@@ -14,6 +18,7 @@ class SentenceRepeatManager:
     def reset(self):
         """
         Erases this instance's memory of the sentences it has seen before.
+
         :return: None
         """
         self.sentences = []
@@ -24,9 +29,10 @@ class SentenceRepeatManager:
         processSentence return the span of the next instance of the sentence instead of returning the
         same span multiple  times. For each new note the `reset` method must be called or a new instance
         of `SentenceRepeatManger` must be created.
-        :param sentence: A string to search for in `note`.
-        :param note: A string; the note body which contains `sentence`.
-        :return: A 2-tuple of integers, (spanStart, spanEnd).
+
+        :param sentence: [string] A string to search for in `note`.
+        :param note: [string] The note body which contains `sentence`.
+        :return: [tuple] A 2-tuple of integers, (spanStart, spanEnd).
         """
         foundSentence = None
 
