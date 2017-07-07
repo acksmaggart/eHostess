@@ -13,6 +13,8 @@ The package will have the following modules.
 5. DevelopmentAids: This module cantains content that is useful for developers such as example `.knowtator` files, sample cardiology notes, eHost annotation schemas, etc.
 6. UnitTestDependencies: This directory contains files that are necessary to run the tests in the `UnitTests.py` module.
 
+Project documentation can be found at [ehostess.readthedocs.io][2].
 The package also contains a `Documentation` directory whose contents can be used to produce HTML documentation pages using sphinx. To generate the documentation simply execute `make html` in the Documentation directory after installing sphinx. After executing `make` the documentation may then be found in the `Documentation/_build/` directory.
 
 [1]: http://ehostdoc.com/
+[2]: http://ehostess.readthedocs.io
