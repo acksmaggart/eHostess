@@ -57,7 +57,7 @@ def constructAnnotationDocument(mongoDocument):
     return Document(documentName, annotationGroup, annotations, numChars)
 
 
-def InsertSingleDocument(cls, document, annotationRound, database='NLP', collection="Annotations", host='localhost', port='27017'):
+def InsertSingleDocument(document, annotationRound, database='NLP', collection="Annotations", host='localhost', port='27017'):
     """
     Writes a single Document object to the MongoDB store using the specified database parameters.
 
@@ -79,7 +79,7 @@ def InsertSingleDocument(cls, document, annotationRound, database='NLP', collect
     return result
 
 
-def InsertMultipleDocuments(cls, documents, annotationRound, database='NLP', collection="Annotations", host='localhost', port='27017'):
+def InsertMultipleDocuments(documents, annotationRound, database='NLP', collection="Annotations", host='localhost', port='27017'):
     """
     Writes multiple Document objects to the MongoDB store using the specified database parameters.
 
@@ -111,7 +111,7 @@ def InsertMultipleDocuments(cls, documents, annotationRound, database='NLP', col
 
     return result
 
-def FindOneDocument(cls, queryDocument, database='NLP', collection="Annotations", host='localhost', port='27017'):
+def FindOneDocument(queryDocument, database='NLP', collection="Annotations", host='localhost', port='27017'):
     """
     This method returns the first document in the backing store that matches the criteria specified in queryDocument.
 
@@ -131,7 +131,7 @@ def FindOneDocument(cls, queryDocument, database='NLP', collection="Annotations"
 
     return constructAnnotationDocument(mongoDoc)
 
-def FindMultipleDocuments(cls, queryDocument, database='NLP', collection="Annotations", host='localhost', port='27017'):
+def FindMultipleDocuments(queryDocument, database='NLP', collection="Annotations", host='localhost', port='27017'):
     """
     Executes a "find" operation on the MongoDB instances and returns a list of all the annotation documents that match the criteria specified in queryDocument.
 

@@ -1,6 +1,6 @@
 # eHostess
 ### The Extra Helpful, Overly Syntactic, Thoroughly Enjoyable Software Suite
-### (And Companion to [eHost][1])
+###### (And Companion to [eHost][1])
 
 The guiding assumption of this package is that there may be multiple annotation sources, e.g. eHost, PyConText, machine learning algorithms, but that the annotations produced by all the sources share common attributes such as a source document name, text span, annotation class, etc. The second assumption is that the reason we are producing annotations is to compare the annotations produced by different methods and to calculate arbitrary annotation metrics. Given these two assumptions, the proposed design of this package is to build a central set of classes that represent abstract notation objects that contain information about their source, but are otherwise totally generic to allow comparison between annotations produced by different sources. These objects may then be analyzed to produce the desired metrics. In addition to the modules that describe annotation objects and their analysis there will be a set of modules to generate annotation objects from different sources. For example, a module to bring in annotations from eHost, a module to generate annotations using PyConText, etc. Using this structure any ideosyncracies in annotation sources will be handled by classes that bring in annotations from that source.
 

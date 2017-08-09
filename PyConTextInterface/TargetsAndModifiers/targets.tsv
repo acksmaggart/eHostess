@@ -21,6 +21,6 @@ vomitting	TARGET	vomit[a-z]* blood	backward
 hematuria	TARGET	hematuria	backward
 hemoperitoneum	TARGET	hemoperitoneum	backward
 ng lavage pre	TARGET	((positive)|(pos)|\+) (ng|ngt) lavage	backward
-ng lavage post	TARGET	(ng|ngt) lavage ((positive)|(pos)|\+)	backward
+ng lavage post	TARGET	(ng|ngt)\s+lavage\s+((positive)|(pos)|\+)	backward
 epistaxsis	TARGET	epistaxsis	backward
 hematochezia	TARGET	hematochezia	backward

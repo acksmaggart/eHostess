@@ -125,7 +125,7 @@ class PyConTextInterface:
         :param documentFilePath: [string] The relative or absolute path to the note.
         :param targetFilePath: [string] The path to the tsv file containing the PyConText target terms.
         :param modifiersFilePath: [string] The path to the tsv file containing the PyConText modifier terms.
-        :param sentenceSplitter: [Class] The class possessing a class method called "splitSentence()", used to split the sentences of the target note.
+        :param sentenceSplitter: [Class] The class possessing a class method called "splitSentences()", used to split the sentences of the target note.
         :param modifierToClassMap: [dict] A dictionary used to map eHost classes to pyConText modifier types.
         :param annotationGroup: [string] The current annotation round.
         :return: A single Document instance.

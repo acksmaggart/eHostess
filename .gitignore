@@ -5,3 +5,6 @@
 
 #Contents of the documentation _build directory
 Documentation/_build/
+
+# IDE Files
+.idea
