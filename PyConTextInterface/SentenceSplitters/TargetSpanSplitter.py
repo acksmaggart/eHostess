@@ -47,13 +47,9 @@ Issues:
 """
 
 import re
+from Sentence import Sentence
 
-class SpanBasedSentence:
-    def __init__(self, sentenceText, span):
-        self.sentence = sentenceText
-        self.span = span
-
-def splitDocumentByTargetLocation(documentText, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
+def splitSentences(documentText, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
     """
     This function splits the input documentText into sections, taking a span around the document as specified by
     numLeadingWords and numTrailingWords. The span is taken by finding all matches of the regular expression
@@ -88,7 +84,7 @@ def splitDocumentByTargetLocation(documentText, targets, numLeadingWords, numTra
 
     matches = re.finditer(combinedRegexString, documentText)
 
-    return [SpanBasedSentence(match.group(), (match.start(), match.end())) for match in matches]
+    return [Sentence(match.group(), (match.start(), match.end())) for match in matches]
 
 
 
