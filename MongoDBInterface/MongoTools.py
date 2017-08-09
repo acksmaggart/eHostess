@@ -41,7 +41,7 @@ def constructAnnotationDocument(mongoDocument):
     documentName = mongoDocument["document_name"]
     annotator = mongoDocument["annotator_name"]
     numChars = mongoDocument["num_characters"]
-    annotations = {}
+    annotations = []
     for annotation in mongoDocument["annotations"]:
         text = annotation["text"]
         start = annotation["span_start"]
@@ -52,7 +52,7 @@ def constructAnnotationDocument(mongoDocument):
             attributes[key] = value
         annotationClass = annotation["class"]
 
-        annotations[annotationId] = MentionLevelAnnotation(text, start, end, annotator, annotationId, attributes, annotationClass)
+        annotations.append(MentionLevelAnnotation(text, start, end, annotator, annotationId, attributes, annotationClass))
 
     return Document(documentName, annotationGroup, annotations, numChars)
 

@@ -69,7 +69,7 @@ def parseMentionLevelAnnotations(annotationElements, classMentionElements, strin
         correspondingAnnotation.annotationClass = mentionClass
         correspondingAnnotation.attributes = attributes
 
-    return annotations
+    return annotations.values()
 
 def getOriginalFileLength(knowtatorFilePath, searchPaths):
     """This class assumes that fileName is passed as a name without an extension."""

@@ -30,25 +30,17 @@ class Document:
 
     :param documentName: [string] The name you want the document to have.
     :param annotationGroup: [string] The annotation group that the document will belong to.
-    :param mentionLevelObjects: [list | dict] A list of MentionLevelAnnotation objects or dictionary of MentionLevelAnnotation objects keyed by annotationID. These will be the document's annotations.
+    :param mentionLevelObjects: [list] A list of MentionLevelAnnotation objects. These will be the document's annotations.
     :param numberOfCharacters: [int] The number of characters in the document.
     :param adjudicationStatus: [object] An instance of :class:`AdjudicationStatus <eHostess.Annotations.Document.AdjudicationStatus>`. Useful only if you plan to perform adjudication using eHost. Defaults all adjudication values to False.
     """
 
     def __init__(self, documentName, annotationGroup, mentionLevelObjects, numberOfCharacters, adjudicationStatus=None):
         self.documentName = documentName
-        # mentionLevelObjects may come in as a list. Internally however, it is stored in a dictionary keyed by
-        # annotation id.
-        if isinstance(mentionLevelObjects, list):
-            annotations = {}
-            for annotation in mentionLevelObjects:
-                annotations[annotation.annotationId] = annotation
-            self.annotations = annotations
-        elif isinstance(mentionLevelObjects, dict):
-            self.annotations = mentionLevelObjects
-        else:
-            raise ValueError("The mentionLevelObjects argument must be either a list or a dictionary keyed by" +
-                             " annotation ID. Got %s." % type(mentionLevelObjects))
+
+        if not isinstance(mentionLevelObjects, list):
+            raise ValueError("The mentionLevelObjects argument must be list. Got %s." % type(mentionLevelObjects))
+        self.annotations = mentionLevelObjects
         if not adjudicationStatus:
             self.adjudicationStatus = AdjudicationStatus()
         else:
@@ -62,6 +54,8 @@ class Document:
         span-based sentence splitter found in PyConTextInterface.SentenceSplitters.TargetSpanSplitter."""
 
         raise NotImplementedError("You should implement this, it's would be pretty cool...")
+
+
 
     @classmethod
     def discrepancies(cls, firstDocument, secondDocument):

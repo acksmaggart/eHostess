@@ -24,7 +24,9 @@ There are two target terms in this sentence: "blood" and "coffee-grounds". And a
 splitter will return two sentences, one for each target term. Unless the module is configured to take only a few
 characters on either side of the target term both terms will be included in both sentences. As a result, both terms will
 be annotated twice by pyConText. In consideration of this problem Document objects posses a method called
-removeDuplicates() to eliminate MentionLevelAnnotation objects that refer to the same target.
+removeDuplicates() to eliminate MentionLevelAnnotation objects that refer to the same target. removeDuplicates() is
+automatically called on every document object as soon as it is created by PyConText, regardless of the sentence splitter
+used so that the user doesn't have to remember to call it themselves.
 
 IMPORTANT: This module uses the same ItemData targets that PyConText uses to perform its annotations.
 If the user wishes to match target terms that include multiple words they should ensure that they account for

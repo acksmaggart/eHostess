@@ -30,7 +30,7 @@ defaultModifiersFilePath = os.path.dirname(__file__) + '/TargetsAndModifiers/mod
 def _annotateSingleDocumentInternal(sentenceList, targets, modifiers,
                                     modifierToClassMap, annotationGroup):
 
-    mentionLevelAnnotations = {}
+    mentionLevelAnnotations = []
 
     for sentence in sentenceList:
         escapedSentence = re.escape(sentence.text)
@@ -70,9 +70,12 @@ def _annotateSingleDocumentInternal(sentenceList, targets, modifiers,
                     annotationClass = modifierToClassMap["AFFIRMED_EXISTENCE"]
                 newAnnotation = MentionLevelAnnotation(text, documentSpan[0], documentSpan[1], "pyConTextNLP",
                                                        annotationId, attributes, annotationClass)
-                mentionLevelAnnotations[annotationId] = newAnnotation
+                mentionLevelAnnotations.append(newAnnotation)
 
-    return Document(sentenceList[0].documentName, annotationGroup, mentionLevelAnnotations, sentenceList[0].documentLength)
+    newDocument = Document(sentenceList[0].documentName, annotationGroup, mentionLevelAnnotations, sentenceList[0].documentLength)
+    # Delete duplicates in case the document was annotated using output from the span-based splitter.
+    newDocument.removeDuplicates()
+    return newDocument
 
 
 class PyConTextInterface:
