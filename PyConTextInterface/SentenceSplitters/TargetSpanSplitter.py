@@ -23,8 +23,8 @@ said that this..."
 There are two target terms in this sentence: "blood" and "coffee-grounds". And as a result the span-based sentence
 splitter will return two sentences, one for each target term. Unless the module is configured to take only a few
 characters on either side of the target term both terms will be included in both sentences. As a result, both terms will
-be annotated twice by pyConText. In consideration of this problem this module includes functions to remove duplicate
-pyConText annotations by checking the span of the target term and ensuring that each node refers to a unique target.
+be annotated twice by pyConText. In consideration of this problem Document objects posses a method called
+removeDuplicates() to eliminate MentionLevelAnnotation objects that refer to the same target.
 
 IMPORTANT: This module uses the same ItemData targets that PyConText uses to perform its annotations.
 If the user wishes to match target terms that include multiple words they should ensure that they account for
@@ -49,7 +49,7 @@ Issues:
 import re
 from Sentence import Sentence
 
-def splitSentences(documentText, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
+def splitSentences(documentText, documentName, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
     """
     This function splits the input documentText into sections, taking a span around the document as specified by
     numLeadingWords and numTrailingWords. The span is taken by finding all matches of the regular expression
@@ -84,7 +84,7 @@ def splitSentences(documentText, targets, numLeadingWords, numTrailingWords, spa
 
     matches = re.finditer(combinedRegexString, documentText)
 
-    return [Sentence(match.group(), (match.start(), match.end())) for match in matches]
+    return [Sentence(match.group(), (match.start(), match.end()), documentName, len(documentText)) for match in matches]
 
 
 

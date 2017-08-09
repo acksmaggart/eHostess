@@ -12,14 +12,9 @@ to all the annotations it creates.
 """
 
 from pyConTextNLP import pyConTextGraph as pyConText
-from pyConTextNLP.helpers import sentenceSplitter
 import pyConTextNLP.itemData as itemData
-from SentenceRepeatManager import SentenceRepeatManager
-from SentenceReconstructor import SentenceReconstructor
 from ..Annotations.MentionLevelAnnotation import MentionLevelAnnotation
 from ..Annotations.Document import Document
-from ..Utilities.utilities import cleanDirectoryList
-import glob
 import re
 import os
 
@@ -32,46 +27,16 @@ defaultModifierToAnnotationClassMap = {
 defaultTargetFilePath = os.path.dirname(__file__) + '/TargetsAndModifiers/targets.tsv'
 defaultModifiersFilePath = os.path.dirname(__file__) + '/TargetsAndModifiers/modifiers.tsv'
 
-def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, sentenceSplitter,
+def _annotateSingleDocumentInternal(sentenceList, targets, modifiers,
                                     modifierToClassMap, annotationGroup):
-    """Here is  another method."""
-    inFileHandle = open(documentFilePath, mode='rU')
-    noteBody = inFileHandle.read()
-    numChars = len(noteBody)
-    inFileHandle.close()
 
-    repeatManager = SentenceRepeatManager()
-    sentenceReconstructor = SentenceReconstructor(noteBody)
-    sentences = sentenceSplitter().splitSentences(noteBody)
     mentionLevelAnnotations = {}
 
-    for sentence in sentences:
-        reconstructedSentence = sentenceReconstructor.reconstructSentence(sentence)
-        escapedSentence = re.escape(reconstructedSentence)
-        matches = re.findall(escapedSentence, noteBody)
-        sentenceSpan = None
-        if not matches:
-            print("eHostess/PyConTextInterface/PyConText: Did not find sentence in text, something is wrong.")
-            print("Note: %s" % documentFilePath)
-            print("Sentence:")
-            print(sentence + '\n')
-            exit(1)
-
-        # if the sentence appears multiple times in the note we need to make sure we grab them all instead of grabbing
-        # the first one multiple times.
-        if len(matches) > 1:
-            sentenceSpan = repeatManager.processSentence(reconstructedSentence, noteBody)
-
-        else:
-            # if there is only once instance of the sentence, proceed as normal. It is necessary to re-perform the
-            # search using re.search() instead of re.findall() in order to get the span.
-            match = re.search(re.escape(reconstructedSentence), noteBody)
-            start = match.start()
-            end = match.end()
-            sentenceSpan = (start, end)
+    for sentence in sentenceList:
+        escapedSentence = re.escape(sentence.text)
 
         markup = pyConText.ConTextMarkup()
-        markup.setRawText(reconstructedSentence)
+        markup.setRawText(sentence)
         markup.cleanText()
         markup.markItems(modifiers, mode="modifier")
         markup.markItems(targets, mode="target")
@@ -84,7 +49,7 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
             if node.getCategory()[0] == 'target':
 
                 annotationSpan = node.getSpan()
-                sentenceStart = sentenceSpan[0]
+                sentenceStart = sentence.span[0]
                 documentSpan = (annotationSpan[0] + sentenceStart, annotationSpan[1] + sentenceStart)
                 text = sentence
                 annotationId = "pyConTextNLP_Instance_" + str(len(mentionLevelAnnotations) + 1)
@@ -95,7 +60,7 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
                 if markup.isModifiedByCategory(node, "NEGATED_EXISTENCE") \
                         and markup.isModifiedByCategory(node, "AFFIRMED_EXISTENCE"):
 
-                    print("Node is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTENCE....hmmmm.\n\nNote: %s\nSentence: %s" % (documentFilePath, reconstructedSentence))
+                    print("Node is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTENCE....hmmmm.\n\nNote: %s\nSentence: %s" % (sentence.documentName, sentence.text))
                     annotationClass = modifierToClassMap["NEGATED_EXISTENCE"]
                 elif markup.isModifiedByCategory(node, "NEGATED_EXISTENCE"):
                     annotationClass = modifierToClassMap["NEGATED_EXISTENCE"]
@@ -107,8 +72,8 @@ def _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, senten
                                                        annotationId, attributes, annotationClass)
                 mentionLevelAnnotations[annotationId] = newAnnotation
 
-    documentName = Document.ParseDocumentNameFromPath(documentFilePath)
-    return Document(documentName, annotationGroup, mentionLevelAnnotations, numChars)
+    return Document(sentenceList[0].documentName, annotationGroup, mentionLevelAnnotations, sentenceList[0].documentLength)
+
 
 class PyConTextInterface:
     def __init__(self):
@@ -116,16 +81,15 @@ class PyConTextInterface:
 
 
     @classmethod
-    def AnnotateSingleDocument(cls, documentFilePath, targetFilePath=defaultTargetFilePath,
-                               modifiersFilePath=defaultModifiersFilePath, sentenceSplitter=sentenceSplitter,
+    def AnnotateSingleDocument(cls, sentences, targetFilePath=defaultTargetFilePath,
+                               modifiersFilePath=defaultModifiersFilePath,
                                modifierToClassMap=defaultModifierToAnnotationClassMap, annotationGroup="MIMC_v2"):
         """
-        This method runs PyConText on the specified note and returns a Document object.
+        This method runs PyConText on the input sentence objects and returns a Document object.
 
-        :param documentFilePath: [string] The relative or absolute path to the note.
+        :param sentences: [list] The list of Sentence objects to be annotated, produced using one of the sentence splitters.
         :param targetFilePath: [string] The path to the tsv file containing the PyConText target terms.
         :param modifiersFilePath: [string] The path to the tsv file containing the PyConText modifier terms.
-        :param sentenceSplitter: [Class] The class possessing a class method called "splitSentences()", used to split the sentences of the target note.
         :param modifierToClassMap: [dict] A dictionary used to map eHost classes to pyConText modifier types.
         :param annotationGroup: [string] The current annotation round.
         :return: A single Document instance.
@@ -134,42 +98,33 @@ class PyConTextInterface:
         targets = itemData.instantiateFromCSVtoitemData(targetFilePath)
         modifiers = itemData.instantiateFromCSVtoitemData(modifiersFilePath)
 
-        return _annotateSingleDocumentInternal(documentFilePath, targets, modifiers, sentenceSplitter,
+        return _annotateSingleDocumentInternal(sentences, targets, modifiers,
                                                modifierToClassMap, annotationGroup)
 
 
     @classmethod
-    def AnnotateMultipleDocuments(cls, directoryPaths, targetFilePath=defaultTargetFilePath,
-                               modifiersFilePath=defaultModifiersFilePath, sentenceSplitter=sentenceSplitter,
+    def AnnotateMultipleDocuments(cls, sentenceLists, targetFilePath=defaultTargetFilePath,
+                               modifiersFilePath=defaultModifiersFilePath,
                                modifierToClassMap=defaultModifierToAnnotationClassMap, annotationGroup="MIMC_v2"):
         """
         This method runs PyConText on multiple notes and returns a list of Documents.
 
-        :param directoryPaths: [string | list of strings] A list of directories containing notes to be annotated.
+        :param sentenceLists: [list of strings] A list of lists of sentence objects, e.g. as produced by
+        PyConTextBuiltinSplitter.SplitSentencesMultipleDocuments.
         :param targetFilePath: [string] The path to the tsv file containing the PyConText target terms.
         :param modifiersFilePath: [string] The path to the tsv file containing the PyConText modifier terms.
-        :param sentenceSplitter: [Class] The class possessing a class method called "splitSentence()", used to split the sentences of the target note.
         :param modifierToClassMap: [dict] A dictionary used to map eHost classes to pyConText modifier types.
         :param annotationGroup: [string] The current annotation round.
         :return: A single Document instance.
         """
-
-        if not isinstance(directoryPaths, list):
-            directoryPaths = [directoryPaths]
-
-        cleanPaths = cleanDirectoryList(directoryPaths)
-        filePathList = []
-
-        for dirpath in cleanPaths:
-            filePathList.extend(glob.glob(dirpath))
 
         targets = itemData.instantiateFromCSVtoitemData(targetFilePath)
         modifiers = itemData.instantiateFromCSVtoitemData(modifiersFilePath)
 
         annotationDocuments = []
 
-        for filepath in filePathList:
-            annotationDocuments.append(_annotateSingleDocumentInternal(filepath, targets, modifiers, sentenceSplitter,
+        for sentenceList in sentenceLists:
+            annotationDocuments.append(_annotateSingleDocumentInternal(sentenceList, targets, modifiers,
                                                                        modifierToClassMap, annotationGroup))
 
         return annotationDocuments
