@@ -7,16 +7,23 @@ from pyConTextNLP.helpers import sentenceSplitter
 from eHostess.PyConTextInterface.SentenceReconstructor import SentenceReconstructor as Reconstructor
 from eHostess.PyConTextInterface.SentenceRepeatManager import SentenceRepeatManager as RepeatManger
 from Sentence import Sentence
+from eHostess.Annotations.Document import Document
+import eHostess.Utilities.utilities as utilities
+import glob
 
 
-def splitSentencesSingleDocument(documentText, documentName):
+def splitSentencesSingleDocument(documentPath):
     """
     This function splits the input text into sentences and returns a list of Sentence objects which can be consumed
     by PyConText.
-    :param documentText: (string) The raw note body to split.
+    :param documentText: (string) The path to the note to be split.
     :return: (list) A list of Sentence objects.
     """
 
+    with open(documentPath, 'rU') as inFile:
+        documentText = inFile.read()
+
+    documentName = Document.ParseDocumentNameFromPath(documentPath)
     sentences = sentenceSplitter().splitSentences(documentText)
     repeatManager = RepeatManger(documentText)
     reconstructor = Reconstructor(documentText)
@@ -31,12 +38,22 @@ def splitSentencesSingleDocument(documentText, documentName):
     return sentenceObjects
 
 
-def splitSentencesMultipleDocuments(textList):
+def splitSentencesMultipleDocuments(directoryList):
     """This method splits a list of document texts and outputs them in a form that is consumable by
     PyConText.AnnotateMultipleDocuments.
 
-    :param textList: (list of strings) A list of document texts.
+    :param directoryList: (list of strings) A list of directory paths containing notes to split.
     :return: (list of lists) A list of sentence lists, one for each document text.
     """
-    return [splitSentencesSingleDocument(text) for text in textList]
+    if type(directoryList) != list:
+        directoryList = [directoryList]
+
+    cleanNames = utilities.cleanDirectoryList(directoryList)
+    fileList = [filepath for directory in cleanNames for filepath in glob.glob(directory)]
+
+    sentences = []
+    for filepath in fileList:
+        sentences.extend(splitSentencesSingleDocument(filepath))
+
+    return sentences
 

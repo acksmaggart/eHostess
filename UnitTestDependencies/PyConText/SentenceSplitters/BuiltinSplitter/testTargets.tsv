@@ -1,0 +1,26 @@
+Lex	Type	Regex	Direction
+brbpr	TARGET	brbpr	backward
+bleed	TARGET	(?<!non)(?<!non-)bleed	backward
+gib	TARGET	gib	backward
+bloody	TARGET	bloody	backward
+hemorrhage	TARGET	hem{1,2}or{1,2}h{1,2}age?	backward
+melena	TARGET	melena	backward
+hematemesis	TARGET	hematem[a-z]+	backward
+blood per rectum	TARGET	blood per rectum	backward
+guaiac	TARGET	guaiac ((positive)|(pos)|\+)	backward
+hemoptysis	TARGET	hemoptysis	backward
+ich	TARGET	\bich	backward
+sah	TARGET	sah	backward
+sdh	TARGET	sdh	backward
+coffee grounds	TARGET	coffee (ground|grounds)	bidirectional
+stool	TARGET	(maroon|red) (stool|bowel movement|bm)	backward
+bloody	TARGET	(bloody)	backward
+hematoma	TARGET	hematoma	backward
+blood loss	TARGET	blood loss	backward
+vomitting	TARGET	vomit[a-z]* blood	backward
+hematuria	TARGET	hematuria	backward
+hemoperitoneum	TARGET	hemoperitoneum	backward
+ng lavage pre	TARGET	((positive)|(pos)|\+) (ng|ngt) lavage	backward
+ng lavage post	TARGET	(ng|ngt)\s+lavage\s+((positive)|(pos)|\+)	backward
+epistaxsis	TARGET	epistaxsis	backward
+hematochezia	TARGET	hematochezia	backward

@@ -23,10 +23,8 @@ said that this..."
 There are two target terms in this sentence: "blood" and "coffee-grounds". And as a result the span-based sentence
 splitter will return two sentences, one for each target term. Unless the module is configured to take only a few
 characters on either side of the target term both terms will be included in both sentences. As a result, both terms will
-be annotated twice by pyConText. In consideration of this problem Document objects posses a method called
-removeDuplicates() to eliminate MentionLevelAnnotation objects that refer to the same target. removeDuplicates() is
-automatically called on every document object as soon as it is created by PyConText, regardless of the sentence splitter
-used so that the user doesn't have to remember to call it themselves.
+be annotated twice by pyConText. In consideration of this problem the PyConText module always checks to make sure that
+no two nodes point to the same target before creating the annotation document regardless of the sentence splitter used.
 
 IMPORTANT: This module uses the same ItemData targets that PyConText uses to perform its annotations.
 If the user wishes to match target terms that include multiple words they should ensure that they account for
@@ -50,15 +48,18 @@ Issues:
 
 import re
 from Sentence import Sentence
+from eHostess.Annotations.Document import Document
+import eHostess.Utilities.utilities as utilities
+import glob
 
-def splitSentences(documentText, documentName, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
+def splitSentencesSingleDocument(documentPath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
     """
     This function splits the input documentText into sections, taking a span around the document as specified by
     numLeadingWords and numTrailingWords. The span is taken by finding all matches of the regular expression
     (?:[^\.\s]+\s+){0,<numLeadingWords>}(<targetRegularExpression>)<punctuationToIgnore>(?:\s+[^\.\s]+){0,<numTrailingWords>}
     See the explanation of the 'spanTargetPunctuation' argument for more info about <punctuationToIgnore>.
 
-    :param documentText: (string) The text to split into target-span regions.
+    :param documentPath: (string) The path to the document to split into target-span regions.
     :param targets: (pyConText.itemData.itemData) The pyConText itemData instance that contains the target ContextItems.
     :param numLeadingWords: (int) The number of words before the target term to include in the span.
     :param numTrailingWords: (int) The number of words following the target term to include in the span.
@@ -73,6 +74,11 @@ def splitSentences(documentText, documentName, targets, numLeadingWords, numTrai
     See `SpanBasedSentence` for more info.
     """
 
+    with open(documentPath, 'rU') as inFile:
+        documentText = inFile.read()
+
+    documentName = Document.ParseDocumentNameFromPath(documentPath)
+
     defaultPunctuationToIgnore = "[,:-]?"
     punctuationToIgnore = ""
     if spanTargetPunctuation == None:
@@ -81,15 +87,45 @@ def splitSentences(documentText, documentName, targets, numLeadingWords, numTrai
         punctuationToIgnore = spanTargetPunctuation
 
 
-    combinedRegexString = '|'.join([r"(?:[^\.\s]+\s+){0,%i}(%s)%s(?:\s+[^\.\s]+){0,%i}" %
-                                    (numLeadingWords, item.getRE(), punctuationToIgnore, numTrailingWords) for item in targets])
+    regexStrings = [(r"(?:[^\.\s]+\s+){0,%i}(%s)%s(?:\s+[^\.\s]+){0,%i}" %
+                                    (numLeadingWords, item.getRE(), punctuationToIgnore, numTrailingWords), item.getRE()) for item in targets]
 
-    matches = re.finditer(combinedRegexString, documentText)
+    matches = [(match, targetRegex) for regexString, targetRegex in regexStrings for match in re.finditer(regexString, documentText)]
 
-    return [Sentence(match.group(), (match.start(), match.end()), documentName, len(documentText)) for match in matches]
+    return [Sentence(match[0].group(), (match[0].start(), match[0].end()), documentName, len(documentText), match[1]) for match in matches]
 
 
+def splitSentencesMultipleDocuments(directoryList, targets, numLeadingWords, numTrailingWords,
+                                 spanTargetPunctuation=None):
+    """
+    This function splits the input documentText into sections, taking a span around the document as specified by
+    numLeadingWords and numTrailingWords. The span is taken by finding all matches of the regular expression
+    (?:[^\.\s]+\s+){0,<numLeadingWords>}(<targetRegularExpression>)<punctuationToIgnore>(?:\s+[^\.\s]+){0,<numTrailingWords>}
+    See the explanation of the 'spanTargetPunctuation' argument for more info about <punctuationToIgnore>.
 
+    :param documentPath: (string) The path to the document to split into target-span regions.
+    :param targets: (pyConText.itemData.itemData) The pyConText itemData instance that contains the target ContextItems.
+    :param numLeadingWords: (int) The number of words before the target term to include in the span.
+    :param numTrailingWords: (int) The number of words following the target term to include in the span.
+    :param spanTargetPunctuation: (optional) If False, the regex will not grab any words after the target if the target is
+    followed immediately by punctuation. e.g. "History of GI Bleed, and some other things you might want" will only
+    return up through "Bleed" since the comma does not match a word boundary. By default this function will continue past
+    the punctuation characters "," ":" and "-" but not ".". The user may specify different non-word characters to ignore
+    by passing a string as an argument. This string is inserted without modification at the
+     <punctuationToIgnore> position in the regular expression used to find the spans. The default string is "[,:-]?"
+     See function doc string for more info about the regular expression used to find the spans.
+    :return:(list) A list of SpanBasedSentence objects containing information about the spans identified in the docuemnt.
+    See `SpanBasedSentence` for more info.
+    """
+    if type(directoryList) != list:
+        directoryList = [directoryList]
+
+    cleanList = utilities.cleanDirectoryList(directoryList)
+
+    fileList = [filename for directory in cleanList for filename in glob.glob(directory)]
+
+    return [sentence for filepath in fileList
+            for sentence in splitSentencesSingleDocument(filepath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation)]
 
 
 

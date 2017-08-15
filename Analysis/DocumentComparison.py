@@ -59,8 +59,8 @@ class Comparison:
         :param document2: [object] A second instance of :class:`Document <eHostess.Annotations.Document.Document>`, whose source note is the same as document1.
         :return: [object] An instance of :class:`Comparison <eHostess.Analysis.DocumentComparison.Comparison>`, detailing the results of the comparison.
         """
-        doc1Annotations = document1.annotations.values()
-        doc2Annotations = document2.annotations.values()
+        doc1Annotations = document1.annotations
+        doc2Annotations = document2.annotations
         doc1Matches = [False] * len(document1.annotations)
         doc2Matches = [False] * len(document2.annotations)
 

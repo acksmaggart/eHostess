@@ -1,0 +1,4 @@
+And here is
+the third sentence, the first
+from doc 2. This is the
+second sentence from doc 2.

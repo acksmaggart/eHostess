@@ -1,7 +1,7 @@
-DocumentName	Text	ComparisonResult	Agreement	TestAnnotator1	TestAnnotator2	SpanStart	SpanEnd	DocLength
-2530	"Allergies:"	Match	1	bleeding_absent	bleeding_absent	162	172	8442
-2530	"Service: CARDIOTHORACIC"	Attribute Mismatch	0	DOC CLASS: absent	DOC CLASS: present	137	160	8442
-2530	"Sex: M"	Class and Attribute Mismatch	0	Class: bleeding_present,  Attributes: {'certainty': 'definite'}	Class: bleeding_absent,  Attributes: {'certainty': 'possible'}	127	135	8442
-2530	"Date of Birth: [**3390-10-19**]"	Attribute Mismatch	0	{'certainty': 'definite'}	{'certainty': 'possible'}	82	114	8442
-2530	"Discharge Date: [**3440-11-16**]"	Class Mismatch	0	bleeding_present	bleeding_absent	46	80	8442
-2530	"Admission Date: [**3440-11-6**]"	No Overlap	0	bleeding_present		0	32	8442
+DocumentName	TestAnnotator1Text	TestAnnotator2Text	ComparisonResult	Agreement	TestAnnotator1	TestAnnotator2	SpanStart	SpanEnd	DocLength
+2530	"Allergies:"	"Allergies:"	Match	1	bleeding_absent	bleeding_absent	162	172	8442
+2530	"Service: CARDIOTHORACIC"	"Service: CARDIOTHORACIC"	Attribute Mismatch	0	DOC CLASS: {'present_or_absent': 'absent', 'certainty': 'definite'}	DOC CLASS: {'present_or_absent': 'present', 'certainty': 'definite'}	137	160	8442
+2530	"Sex: M"	"Sex: M"	Class and Attribute Mismatch	0	Class: bleeding_present,  Attributes: {'certainty': 'definite'}	Class: bleeding_absent,  Attributes: {'certainty': 'possible'}	127	135	8442
+2530	"Date of Birth: [**3390-10-19**]"	"Date of Birth: [**3390-10-19**]"	Attribute Mismatch	0	bleeding_present{'certainty': 'definite'}	bleeding_present{'certainty': 'possible'}	82	114	8442
+2530	"Discharge Date: [**3440-11-16**]"	"Discharge Date: [**3440-11-16**]"	Class Mismatch	0	bleeding_present{'certainty': 'definite'}	bleeding_absent{'certainty': 'definite'}	46	80	8442
+2530	"Admission Date: [**3440-11-6**]"		No Overlap	0	bleeding_present{'certainty': 'definite'}		0	32	8442

@@ -48,15 +48,6 @@ class Document:
         self.annotationGroup = annotationGroup
         self.numberOfCharacters = numberOfCharacters
 
-    def removeDuplicates(self):
-        """This method checks all the MentionLevelAnnotation objects that belong to this instance of Document and
-        any objects that refer to the same target. Duplicate annotation objects may be produced as a result of using the
-        span-based sentence splitter found in PyConTextInterface.SentenceSplitters.TargetSpanSplitter."""
-
-        raise NotImplementedError("You should implement this, it's would be pretty cool...")
-
-
-
     @classmethod
     def discrepancies(cls, firstDocument, secondDocument):
         """
