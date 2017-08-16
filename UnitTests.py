@@ -211,33 +211,33 @@ else:
     printTestName('Testing PyConTextInterface.SentenceSplitters.PyConTextBuiltinSplitter')
     from eHostess.PyConTextInterface.SentenceSplitters.PyConTextBuiltinSplitter import splitSentencesSingleDocument
     from eHostess.PyConTextInterface.SentenceSplitters.PyConTextBuiltinSplitter import splitSentencesMultipleDocuments
-    from eHostess.PyConTextInterface.SentenceSplitters.Sentence import Sentence
 
     failed = False
     testDocPath = "./UnitTestDependencies/PyConText/SentenceSplitters/BuiltinSplitter/Docs/TestDocToSplit.txt"
 
-    sentences = splitSentencesSingleDocument(testDocPath)
-    if len(sentences) != 2:
+    pyConTextInput = splitSentencesSingleDocument(testDocPath)
+    if len(pyConTextInput.keys()) != 1:
         failed = True
-    if sentences[0].text != 'Here is the first\nsentence.' or sentences[1].text != ' And, here\nis the second sentence.':
+    if pyConTextInput['TestDocToSplit'][0].text != 'Here is the first\nsentence.' or \
+                    pyConTextInput['TestDocToSplit'][1].text != ' And, here\nis the second sentence.':
         print "Text was parsed incorrectly."
         failed = True
-    if sentences[0].documentSpan != (0, 27) or sentences[1].documentSpan != (27, 61):
+    if pyConTextInput['TestDocToSplit'][0].documentSpan != (0, 27) or pyConTextInput['TestDocToSplit'][1].documentSpan != (27, 61):
         print "Span parsed incorrectly."
         failed = True
-    if sentences[0].documentName != 'TestDocToSplit' or sentences[1].documentName != 'TestDocToSplit':
+    if pyConTextInput['TestDocToSplit'][0].documentName != 'TestDocToSplit' or pyConTextInput['TestDocToSplit'][1].documentName != 'TestDocToSplit':
         print "Document name parsed incorrectly."
         failed = True
-    if sentences[0].documentLength != 61 or sentences[1].documentLength != 61:
+    if pyConTextInput['TestDocToSplit'][0].documentLength != 61 or pyConTextInput['TestDocToSplit'][1].documentLength != 61:
         print "Document length parsed incorrectly."
         failed = True
 
     testDirPath = "./UnitTestDependencies/PyConText/SentenceSplitters/BuiltinSplitter/Docs"
-    multiDocSentences = splitSentencesMultipleDocuments(testDirPath)
+    multiDocInput = splitSentencesMultipleDocuments(testDirPath)
 
-    if multiDocSentences[0].text != sentences[0].text or multiDocSentences[0].documentSpan != sentences[0].documentSpan\
-            or multiDocSentences[0].documentName != sentences[0].documentName\
-            or multiDocSentences[0].documentLength != sentences[0].documentLength:
+    if multiDocInput['TestDocToSplit'][0].text != pyConTextInput['TestDocToSplit'][0].text or multiDocInput['TestDocToSplit'][0].documentSpan != pyConTextInput['TestDocToSplit'][0].documentSpan\
+            or multiDocInput['TestDocToSplit'][0].documentName != pyConTextInput['TestDocToSplit'][0].documentName\
+            or multiDocInput['TestDocToSplit'][0].documentLength != pyConTextInput['TestDocToSplit'][0].documentLength:
         failed = True
 
     if failed:
@@ -251,35 +251,40 @@ else:
     from eHostess.PyConTextInterface.SentenceSplitters.TargetSpanSplitter import splitSentencesSingleDocument
     from eHostess.PyConTextInterface.SentenceSplitters.TargetSpanSplitter import splitSentencesMultipleDocuments
     import pyConTextNLP.itemData as itemData
+    from eHostess.PyConTextInterface.SentenceSplitters.PyConTextInput import DocumentPlaceholder
     failed = False
     testDocPath = "./UnitTestDependencies/PyConText/SentenceSplitters/TargetSpanSplitter/Docs/TestDocToSplit.txt"
     testTargetsPath = os.path.join(os.getcwd(), "./UnitTestDependencies/PyConText/SentenceSplitters/TargetSpanSplitter/testTargets.tsv")
     targets = itemData.instantiateFromCSVtoitemData(testTargetsPath)
-    sentences = splitSentencesSingleDocument(testDocPath, targets, 4, 4)
+    pyConTextInput = splitSentencesSingleDocument(testDocPath, targets, 4, 4)
 
-    if len(sentences) != 3:
+    if len(pyConTextInput.keys()) != 1 or len(pyConTextInput['TestDocToSplit']) != 3:
         failed = True
-    if sentences[0].text != 'twelve thir^$#)(teen hemorrhage fourteen, brbpr [fifteen]' \
-            or sentences[1].text != 'three, four% five s^$#)ix bleed seven, eight [nine]'\
-            or sentences[2].text != 'ten,\neleven% twelve thir^$#)(teen hemorrhage fourteen, brbpr [fifteen]':
+    if pyConTextInput['TestDocToSplit'][0].text != 'twelve thir^$#)(teen hemorrhage fourteen, brbpr [fifteen]' \
+            or pyConTextInput['TestDocToSplit'][1].text != 'three, four% five s^$#)ix bleed seven, eight [nine]'\
+            or pyConTextInput['TestDocToSplit'][2].text != 'ten,\neleven% twelve thir^$#)(teen hemorrhage fourteen, brbpr [fifteen]':
         print "Text was parsed incorrectly."
         failed = True
-    if sentences[0].documentSpan != (74, 131) or sentences[1].documentSpan != (8, 59) \
-            or sentences[2].documentSpan != (61, 131):
+    if pyConTextInput['TestDocToSplit'][0].documentSpan != (74, 131) or pyConTextInput['TestDocToSplit'][1].documentSpan != (8, 59) \
+            or pyConTextInput['TestDocToSplit'][2].documentSpan != (61, 131):
         print "Span parsed incorrectly."
         failed = True
-    if sentences[0].documentName != 'TestDocToSplit' or sentences[1].documentName != 'TestDocToSplit'\
-            or sentences[2].documentName != 'TestDocToSplit':
+    if pyConTextInput['TestDocToSplit'][0].documentName != 'TestDocToSplit' or pyConTextInput['TestDocToSplit'][1].documentName != 'TestDocToSplit'\
+            or pyConTextInput['TestDocToSplit'][2].documentName != 'TestDocToSplit':
         print "Document name parsed incorrectly."
         failed = True
-    if sentences[0].documentLength != 140 or sentences[1].documentLength != 140 \
-            or sentences[2].documentLength != 140:
+    if pyConTextInput['TestDocToSplit'][0].documentLength != 140 or pyConTextInput['TestDocToSplit'][1].documentLength != 140 \
+            or pyConTextInput['TestDocToSplit'][2].documentLength != 140:
         print "Document length parsed incorrectly."
         failed = True
 
     testDirPath = "./UnitTestDependencies/PyConText/SentenceSplitters/TargetSpanSplitter/Docs"
-    multiDocSentences = splitSentencesMultipleDocuments(testDirPath, targets, 4, 4)
-    if len(multiDocSentences) != 5:
+    pyConTextInput = splitSentencesMultipleDocuments(testDirPath, targets, 4, 4)
+    if len(pyConTextInput.keys()) != 3:
+        failed = True
+    if not isinstance(pyConTextInput['TestDocToSplit3'], DocumentPlaceholder):
+        failed = True
+    if not isinstance(pyConTextInput['TestDocToSplit'], list) or not isinstance(pyConTextInput['TestDocToSplit2'], list):
         failed = True
 
     if failed:
@@ -298,10 +303,10 @@ failed = False
 
 #Test with sentences from a single document, builtin splitter.
 testDocPath = './UnitTestDependencies/PyConText/AnnotateSingleDocument/TestAffirmedAndNegatedInSameSentence.txt'
-sentences = splitBuiltin(testDocPath)
+pyConTextInput = splitBuiltin(testDocPath)
 
 #Contradictory Document, single annotation
-contradictoryDoc = PyConTextInterface.AnnotateSentences(sentences)
+contradictoryDoc = PyConTextInterface.PerformAnnotation(pyConTextInput)
 if contradictoryDoc.documentName != 'TestAffirmedAndNegatedInSameSentence':
     failed = True
 if len(contradictoryDoc.annotations) != 1:
@@ -313,8 +318,8 @@ if contradictoryAnnotation.annotationClass != 'bleeding_absent':
     outcome for a target that is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTANCE.""" % (contradictoryAnnotation.text, contradictoryAnnotation.annotationClass)
 
 #Normal document, multiple annotations
-sentences = splitBuiltin('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
-document = PyConTextInterface.AnnotateSentences(sentences)
+pyConTextInput = splitBuiltin('./UnitTestDependencies/PyConText/AnnotateSingleDocument/testDoc.txt')
+document = PyConTextInterface.PerformAnnotation(pyConTextInput)
 spans = [(0, 75), (75, 157), (157, 248)]
 # [(69, 74), (148, 153), (242, 247)]
 classifications = ["bleeding_present", "bleeding_absent", "bleeding_present"]
@@ -349,7 +354,7 @@ allClassifications = [doc1classifications, doc2classifications, doc3classificati
 
 directories = glob.glob('./UnitTestDependencies/PyConText/AnnotateMultipleDocuments/*')
 sentences = splitBuiltinMultiple(directories)
-documents = PyConTextInterface.AnnotateSentences(sentences)
+documents = PyConTextInterface.PerformAnnotation(sentences)
 documents.sort(key=lambda x: x.documentName)
 for docIndex, document in enumerate(documents):
     spans = allSpans[docIndex]
@@ -376,7 +381,7 @@ singleDocPath = "./UnitTestDependencies/PyConText/RemoveDuplicateAnnotations/Doc
 targets = itemData.instantiateFromCSVtoitemData(os.path.join(os.getcwd(), "./UnitTestDependencies/PyConText/RemoveDuplicateAnnotations/testTargets.tsv"))
 sentences = targetSpanSingleSplit(singleDocPath, targets, 3, 3)
 
-document = PyConTextInterface.AnnotateSentences(sentences)
+document = PyConTextInterface.PerformAnnotation(sentences)
 
 if len(document.annotations) != 2:
     failed = True
@@ -401,9 +406,9 @@ from eHostess.Analysis.DocumentComparison import Comparison
 failed = False
 
 doc1 = KnowtatorReader.parseSingleKnowtatorFile(
-    './UnitTestDependencies/Output/ComparisonsToTSV/annotator1/saved/2530.txt.knowtator.xml')
-doc2 = KnowtatorReader.parseSingleKnowtatorFile(
     './UnitTestDependencies/Output/ComparisonsToTSV/annotator2/saved/2530.txt.knowtator.xml')
+doc2 = KnowtatorReader.parseSingleKnowtatorFile(
+    './UnitTestDependencies/Output/ComparisonsToTSV/annotator1/saved/2530.txt.knowtator.xml')
 
 discrepancies = Comparison.CompareAllAnnotations(doc1, doc2)
 ConvertComparisonsToTSV(discrepancies, './UnitTestDependencies/Output/ComparisonsToTSV/TestOutput/discrepancies.tsv')
@@ -414,11 +419,67 @@ if failed:
 else:
     print passedColor + "Passed\n" + resetColor
 
+#### Test Analysis.Metrics.calculateRecallPrecisionFScoreAndSupport() ####
+printTestName('Analysis.Metrics.calculateRecallPrecisionFScoreAndSupport()')
+from eHostess.Analysis.Metrics import CalculateRecallPrecisionFScoreAndSupport
+failed = False
 
+recall, precision, fscore, support = CalculateRecallPrecisionFScoreAndSupport(discrepancies)
+
+if recall != .25 or precision != .5:
+    failed = True
+
+if failed:
+    failCount += 1
+    print failedColor + '*****************Test Failed***************************' + resetColor
+else:
+    print passedColor + "Passed\n" + resetColor
+
+
+#### Test PyConTextInterface.SentenceSplitters.PyConTextInput ####
+printTestName('PyConTextInterface.SentenceSplitters.PyConTextInput')
+from eHostess.PyConTextInterface.SentenceSplitters.PyConTextInput import PyConTextInput
+failed = False
+
+pyConTextInput = PyConTextInput()
+pyConTextInput.addSentence("TestDoc1 1", (0, 0), "TestDoc1", 0)
+pyConTextInput.addSentence("TestDoc1 2", (0, 0), "TestDoc1", 0)
+pyConTextInput.addSentence("TestDoc2 1", (0, 0), "TestDoc2", 0)
+
+
+if len(pyConTextInput.keys()) != 2:
+    failed = True
+if len(pyConTextInput["TestDoc1"]) != 2 or len(pyConTextInput["TestDoc2"]) != 1:
+    failed = True
+
+gotException = False
+try:
+    pyConTextInput.addDocumentPlaceholder("TestDoc1")
+except RuntimeError as error:
+    gotException = True
+if not gotException:
+    failed = True
+
+gotException = False
+pyConTextInput.addDocumentPlaceholder("TestDoc3")
+try:
+    pyConTextInput.addSentence("TestDoc3 1", (0, 0), "TestDoc3", 0)
+except RuntimeError as error:
+    gotException = True
+if not gotException:
+    failed = True
+
+
+
+if failed:
+    failCount += 1
+    print failedColor + '*****************Test Failed***************************' + resetColor
+else:
+    print passedColor + "Passed\n" + resetColor
 
 if failCount == 0:
     print boldPassedColor + "ALL TESTS PASSED" + resetColor
 else:
-    print failedColor + "%d TESTS FAILED" % failCount + resetColor
+    print failedColor + "%d TEST(S) FAILED" % failCount + resetColor
 if warnCount != 0:
     print warnBoldColor + "%i Warning(s)" % warnCount + resetColor

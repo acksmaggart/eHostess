@@ -16,75 +16,92 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
     :return: None
     """
 
-    if not isinstance(comparisons, list):
-        comparisons = [comparisons]
+    comparisonList = []
+    for comparisonSublist in comparisons.values():
+        comparisonList.extend(comparisonSublist)
 
-    outFile = open(outputPath, 'w')
-    comparisonWithTwoNamesHopefully = None
-    # grabs a comparison instance with two annotations in order to get both annotator names. If all comparisons
-    # contain only one annotation it grabs the last comparison
+    comparisons = comparisonList
+
+    # Get the names of the annotators for each annotation group.
+    name1 = ''
+    name2 = ''
+    foundNames = False
     for comparison in comparisons:
-        comparisonWithTwoNamesHopefully = comparison
-        if comparison.annotation2 != None:
-            comparisonWithTwoNamesHopefully = comparison
+        if name1 != '' and name2 != '':
+            foundNames = True
             break
-    firstName = comparisonWithTwoNamesHopefully.annotation1.annotator
-    secondName = ""
-    if comparisonWithTwoNamesHopefully.annotation2 != None:
-        secondName = comparisonWithTwoNamesHopefully.annotation2.annotator
-    outFile.write("DocumentName\t%sText\t%sText\tComparisonResult\tAgreement\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (firstName, secondName, firstName, secondName))
+        if name1 == '' and comparison.annotation1 != None:
+            name1 = comparison.annotation1.annotator
+        if name2 == '' and comparison.annotation2 != None:
+            name2 = comparison.annotation1.annotator
+    if not foundNames:
+        raise RuntimeError("No names were found for either group of annotations.")
+
+    #Prepare the column headers for the output file.
+    outFile = open(outputPath, 'w')
+    outFile.write("DocumentName\t%sText\t%sText\tComparisonResult\tAgreement\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (name1, name2, name1, name2))
 
     for comparison in comparisons:
         documentName = comparison.documentName
-        annotationWithFirstName = None
-        annotationWithSecondName = None
-        if comparison.annotation1.annotator == firstName:
-            annotationWithFirstName = comparison.annotation1
-            annotationWithSecondName = comparison.annotation2
-        else:
-            annotationWithSecondName = comparison.annotation1
-            annotationWithFirstName = comparison.annotation2
+        annotation1 = comparison.annotation1
+        annotation2 = comparison.annotation2
+
 
         # Text must be enclosed in quotes in case it contains tab characters.
         firstNameText = ""
-        if annotationWithFirstName:
-            firstNameText = '"' + annotationWithFirstName.text + '"'
+        if annotation1:
+            firstNameText = '"' + annotation1.text + '"'
         secondNameText = ""
-        if annotationWithSecondName:
-            secondNameText = '"' + annotationWithSecondName.text + '"'
+        if annotation2:
+            secondNameText = '"' + annotation2.text + '"'
 
 
         if comparison.comparisonResult == ComparisonResults["1"]: # No Overlap
             firstResult = ""
             secondResult = ""
-            if annotationWithFirstName:
-                if annotationWithFirstName.annotationClass == 'doc_classification':
-                    firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
-                else:
-                    firstResult = annotationWithFirstName.annotationClass + str(annotationWithFirstName.attributes)
 
-            elif annotationWithSecondName:
-                if annotationWithSecondName.annotationClass == 'doc_classification':
-                    secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+            spanStart = None
+            spanEnd = None
+            docLength = None
+
+            if annotation1:
+                if annotation1.annotationClass == 'doc_classification':
+                    firstResult = "DOC CLASS: " + str(annotation1.attributes)
                 else:
-                    secondResult = annotationWithSecondName.annotationClass + str(annotationWithSecondName.attributes)
+                    firstResult = annotation1.annotationClass + str(annotation1.attributes)
+
+                spanStart = annotation1.start
+                spanEnd = annotation1.end
+                docLength = comparison.docLength
+
+            elif annotation2:
+                if annotation2.annotationClass == 'doc_classification':
+                    secondResult = "DOC CLASS: " + str(annotation2.attributes)
+                else:
+                    secondResult = annotation2.annotationClass + str(annotation2.attributes)
+
+                spanStart = annotation2.start
+                spanEnd = annotation2.end
+                docLength = comparison.docLength
+
             else:
                 raise RuntimeError("Either the first annotation or the second annotation should be non-null.")
+
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult,
-                                                                    secondResult, comparison.annotation1.start,
-                                                                    comparison.annotation1.end, comparison.docLength))
+                                                                    secondResult, spanStart,
+                                                                    spanEnd, docLength))
             continue
 
         if comparison.comparisonResult == ComparisonResults["2"]: # Class mismatch
             firstResult = None
             secondResult = None
-            if annotationWithFirstName.annotationClass == 'doc_classification':
-                firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
-                secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+            if annotation1.annotationClass == 'doc_classification':
+                firstResult = "DOC CLASS: " + str(annotation1.attributes)
+                secondResult = "DOC CLASS: " + str(annotation2.attributes)
             else:
-                firstResult = annotationWithFirstName.annotationClass + str(annotationWithFirstName.attributes)
-                secondResult = annotationWithSecondName.annotationClass + str(annotationWithSecondName.attributes)
+                firstResult = annotation1.annotationClass + str(annotation1.attributes)
+                secondResult = annotation2.annotationClass + str(annotation2.attributes)
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
                                                                     comparison.annotation1.start,
@@ -95,12 +112,12 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
         if comparison.comparisonResult == ComparisonResults["3"]: # Attribute mismatch
             firstResult = None
             secondResult = None
-            if annotationWithFirstName.annotationClass == 'doc_classification':
-                firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
-                secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+            if annotation1.annotationClass == 'doc_classification':
+                firstResult = "DOC CLASS: " + str(annotation1.attributes)
+                secondResult = "DOC CLASS: " + str(annotation2.attributes)
             else:
-                firstResult = annotationWithFirstName.annotationClass + str(annotationWithFirstName.attributes)
-                secondResult = annotationWithSecondName.annotationClass + str(annotationWithSecondName.attributes)
+                firstResult = annotation1.annotationClass + str(annotation1.attributes)
+                secondResult = annotation2.annotationClass + str(annotation2.attributes)
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
                                                                     comparison.annotation1.start,
@@ -109,10 +126,10 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             continue
 
         if comparison.comparisonResult == ComparisonResults["4"]: # Class and attribute mismatch
-            firstResult = "Class: %s,  Attributes: %s" % (annotationWithFirstName.annotationClass,
-                                                          annotationWithFirstName.attributes)
-            secondResult = "Class: %s,  Attributes: %s" % (annotationWithSecondName.annotationClass,
-                                                          annotationWithSecondName.attributes)
+            firstResult = "Class: %s,  Attributes: %s" % (annotation1.annotationClass,
+                                                          annotation1.attributes)
+            secondResult = "Class: %s,  Attributes: %s" % (annotation2.annotationClass,
+                                                          annotation2.attributes)
 
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
@@ -124,12 +141,12 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
         if comparison.comparisonResult == ComparisonResults["5"]: # Match
             firstResult = None
             secondResult = None
-            if annotationWithFirstName.annotationClass == 'doc_classification':
-                firstResult = "DOC CLASS: " + str(annotationWithFirstName.attributes)
-                secondResult = "DOC CLASS: " + str(annotationWithSecondName.attributes)
+            if annotation1.annotationClass == 'doc_classification':
+                firstResult = "DOC CLASS: " + str(annotation1.attributes)
+                secondResult = "DOC CLASS: " + str(annotation2.attributes)
             else:
-                firstResult = annotationWithFirstName.annotationClass
-                secondResult = annotationWithSecondName.annotationClass
+                firstResult = annotation1.annotationClass
+                secondResult = annotation2.annotationClass
 
             outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "1", firstResult, secondResult,

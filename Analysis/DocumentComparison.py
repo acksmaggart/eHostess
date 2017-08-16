@@ -33,17 +33,21 @@ class Comparison:
     1. An annotation in one document does not overlap with any annotations in the other document.
     2. An annotation in one document has class or attribute mismatches with all overalapping annotations in the other document.
 
-    Implicitly then, a match is defined as a pair of annotations whose spans overlap and whose classes and attributes all match. The algorithm implemented in this module assumes that if two annotations overlap and share their classes and all attributes in common they are matches, even if there may be multiple overlapping annotations. This could also be a problem if two annotators highlighted the same span which contained two different terms, and their intended term was different from the other annotator's intended term. This would produce a situation in which there were really two mismatches but it got recorded as a single match. This flaw was judged to be acceptable since the odds of its occurrence are low and the document-level classification is more important and immune to this possibility anyway. The second case that will produce an error is if there are multiple terms in quick succession and one annotator highlights them all as a single annotation while the other annotates each one individually. The first annotation created by the second annotator will match the first annotator's long annotation and the rest of the smaller annotations will show up as mismatches. This is of course not desireable, however, it has yet to be determined if it constitutes a problem worth fixing.
+    Implicitly then, a match is defined as a pair of annotations whose spans overlap and whose classes and attributes all match.
+
+    In order to facilitate the calculation of metrics using the comparison objects produced by this class the methods of this class ensure that whichever document or group of documents was passed as 'document1' to CompareAllAnnotations or as 'batch1' to CompareDocumentBatches will be passed as 'annotation1' to the Comparison class initializer. The same is true for the document or documents passed as the second argument to CompareAllAnnotations or CompareDocumentBatches. e.g. when comparing a group of annotations produces using a gold-standard method to a group of annotation produced using a new method, if the user passes the gold-standard annotations as the first argument to CompareAllAnnotations then all the Comparison objects produced will have an annotation from the gold-standard group as annotation1 and an annotation from the new method as annotation2. This is true except in cases of non-overlapping annotations. In these cases there will be a 'None' value in place of the missing annotation.
+
+    The algorithm implemented in this module assumes that if two annotations overlap and share their classes and all attributes in common they are matches, even if there may be multiple overlapping annotations. This could also be a problem if two annotators highlighted the same span which contained two different terms, and their intended term was different from the other annotator's intended term. This would produce a situation in which there were really two mismatches but it got recorded as a single match. This flaw was judged to be acceptable since the odds of its occurrence are low and the document-level classification is more important and immune to this possibility anyway. The second case that will produce an error is if there are multiple terms in quick succession and one annotator highlights them all as a single annotation while the other annotates each one individually. The first annotation created by the second annotator will match the first annotator's long annotation and the rest of the smaller annotations will show up as mismatches. This is of course not desirable, however, it has yet to be determined if it constitutes a problem worth fixing.
 
     :param documentName: [string] Typically a user wishes to compare two sets of annotations produced from the same note. This parameter is the name of that note.
     :param comparisonResult: [string] One of the values from DocumentComparison.ComparisonResults indicating whether there was a mismatch, and if so what kind.
-    :param annotation1: [object] An instance of MentionLevelAnnotation.
-    :param annotation2: [object] An optional second instance of mention level annotation. This value will be none if comparisonResult is "No Overlap".
+    :param annotation1: [object] An instance of MentionLevelAnnotation from the document or document groups entered as the first argument to CompareAllAnnotations or CompareDocumentBatches, May be None if there is no overlap.
+    :param annotation2: [object] An instance of MentionLevelAnnotation from the document or document groups entered as the second argument to CompareAllAnnotations or CompareDocumentBatches, May be None if there is no overlap.
     :param docLength: [int] The number of characters in the original note. Used in Analysis.Output.
     """
-    def __init__(self, documentName, comparisonResult, annotation1, annotation2=None, docLength=None):
-        # annotation2 may be None if comparisonType is "No Overlap", i.e. there is only one annotation to report, not a
-        # pair of annotations.
+    def __init__(self, documentName, comparisonResult, annotation1, annotation2, docLength=None):
+        # in cases of non-overlapping annotations either annotation1 or annotation 2 may be None depending on
+        # which annotation group was missing an annotation.
         self.annotation1 = annotation1
         self.annotation2 = annotation2
         self.comparisonResult = comparisonResult
@@ -120,7 +124,7 @@ class Comparison:
                         comparisons.append(newComparison)
             # No-overlap mismatch
             if not foundOverlap:
-                newComparison = cls(documentName, ComparisonResults["1"], annotation1, docLength=document1.numberOfCharacters)
+                newComparison = cls(documentName, ComparisonResults["1"], annotation1, None, docLength=document1.numberOfCharacters)
                 comparisons.append(newComparison)
 
         for index, annotation2 in enumerate(doc2Mismatches):
@@ -128,7 +132,7 @@ class Comparison:
                 continue
             # No-overlap mismatch
             else:
-                newComparison = cls(documentName, ComparisonResults["1"], annotation2, docLength=document1.numberOfCharacters)
+                newComparison = cls(documentName, ComparisonResults["1"], None, annotation2, docLength=document1.numberOfCharacters)
                 comparisons.append(newComparison)
 
         return comparisons
@@ -150,6 +154,15 @@ class Comparison:
 
         for index, document in enumerate(sorted1):
             if sorted1[index].documentName != sorted2[index].documentName:
+                print "Batch 1:"
+                docList1 = [document.documentName for document in sorted1]
+                print docList1
+                print len(docList1)
+
+                print "Batch 2:"
+                docList2 = [document.documentName for document in sorted2]
+                print len(docList2)
+
                 raise RuntimeError("The batches were not sorted correctly or contain different documents.")
 
             comparisons[document.documentName] = Comparison.CompareAllAnnotations(sorted1[index], sorted2[index])

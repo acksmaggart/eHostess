@@ -47,10 +47,36 @@ Issues:
 """
 
 import re
-from Sentence import Sentence
+from PyConTextInput import PyConTextInput
 from eHostess.Annotations.Document import Document
 import eHostess.Utilities.utilities as utilities
 import glob
+
+def _splitSentencesSingleDocumentInternal(documentPath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation):
+    """This function takes a document path and splits it up according to the other paramaters, returning a tuple of the form (text, docSpanTuple, docName, docLength, None) to be fed to PyConTextInput. Or (None, <docName>) if no target terms were matched in the input doc."""
+
+    with open(documentPath, 'rU') as inFile:
+        documentText = inFile.read()
+
+    documentName = Document.ParseDocumentNameFromPath(documentPath)
+
+    defaultPunctuationToIgnore = "[,:-]?"
+    punctuationToIgnore = ""
+    if spanTargetPunctuation == None:
+        punctuationToIgnore = defaultPunctuationToIgnore
+    if spanTargetPunctuation != False and spanTargetPunctuation != None:
+        punctuationToIgnore = spanTargetPunctuation
+
+
+    regexStrings = [(r"(?:[^\.\s]+\s+){0,%i}(%s)%s(?:\s+[^\.\s]+){0,%i}" %
+                                    (numLeadingWords, item.getRE(), punctuationToIgnore, numTrailingWords), item.getRE()) for item in targets]
+
+    matches = [(match, targetRegex) for regexString, targetRegex in regexStrings for match in re.finditer(regexString, documentText)]
+
+    if len(matches) == 0:
+        return (None, documentName)
+    else:
+        return [(match[0].group(), (match[0].start(), match[0].end()), documentName, len(documentText), match[1]) for match in matches]
 
 def splitSentencesSingleDocument(documentPath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation=None):
     """
@@ -74,25 +100,17 @@ def splitSentencesSingleDocument(documentPath, targets, numLeadingWords, numTrai
     See `SpanBasedSentence` for more info.
     """
 
-    with open(documentPath, 'rU') as inFile:
-        documentText = inFile.read()
+    pyConTextInput = PyConTextInput()
 
-    documentName = Document.ParseDocumentNameFromPath(documentPath)
+    sentenceTuples = _splitSentencesSingleDocumentInternal(documentPath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation)
 
-    defaultPunctuationToIgnore = "[,:-]?"
-    punctuationToIgnore = ""
-    if spanTargetPunctuation == None:
-        punctuationToIgnore = defaultPunctuationToIgnore
-    if spanTargetPunctuation != False and spanTargetPunctuation != None:
-        punctuationToIgnore = spanTargetPunctuation
-
-
-    regexStrings = [(r"(?:[^\.\s]+\s+){0,%i}(%s)%s(?:\s+[^\.\s]+){0,%i}" %
-                                    (numLeadingWords, item.getRE(), punctuationToIgnore, numTrailingWords), item.getRE()) for item in targets]
-
-    matches = [(match, targetRegex) for regexString, targetRegex in regexStrings for match in re.finditer(regexString, documentText)]
-
-    return [Sentence(match[0].group(), (match[0].start(), match[0].end()), documentName, len(documentText), match[1]) for match in matches]
+    if sentenceTuples[0][0] == None:
+        pyConTextInput.addDocumentPlaceholder(sentenceTuples[0][1])
+        return pyConTextInput
+    else:
+        for sentenceTuple in sentenceTuples:
+            pyConTextInput.addSentence(*sentenceTuple)
+        return pyConTextInput
 
 
 def splitSentencesMultipleDocuments(directoryList, targets, numLeadingWords, numTrailingWords,
@@ -124,9 +142,27 @@ def splitSentencesMultipleDocuments(directoryList, targets, numLeadingWords, num
 
     fileList = [filename for directory in cleanList for filename in glob.glob(directory)]
 
-    return [sentence for filepath in fileList
-            for sentence in splitSentencesSingleDocument(filepath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation)]
+    sentenceTuples = []
+    for filepath in fileList:
+        tupleList = _splitSentencesSingleDocumentInternal(filepath, targets, numLeadingWords, numTrailingWords,spanTargetPunctuation)
+        #If the splitter returns (None, <docname>) instead of a list then we should append the tuple rather than
+        # extending the list with the contents of the tuple.
+        if isinstance(tupleList, list):
+            sentenceTuples.extend(tupleList)
+        else:
+            sentenceTuples.append(tupleList)
 
+    pyConTextInput = PyConTextInput(numDocs=len(fileList))
+    for sentenceTuple in sentenceTuples:
+        if sentenceTuple[0] == None:
+            pyConTextInput.addDocumentPlaceholder(sentenceTuple[1])
+        else:
+            pyConTextInput.addSentence(*sentenceTuple)
+
+    if not pyConTextInput.containsExpectedNumberOfDocKeys():
+        raise RuntimeError("The PyConTextInput object produced by PyConTextBuiltinSplitter does not contain the expected number of documents. Expected: %i, Contains: %i" % (pyConTextInput.numDocs, len(pyConTextInput.keys())))
+
+    return pyConTextInput
 
 
 

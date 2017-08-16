@@ -170,6 +170,13 @@ class KnowtatorReader:
         for dirPath in cleanDirNames:
             fileNames.extend(glob.glob(dirPath))
 
+        if len(fileNames) == 0:
+            raise RuntimeError("KnowtatorReader was unable to find any files in the directories listed in directoryList, please ensure that the paths are valid.")
+        warnBoldColor = '\033[1;33m'
+        resetColor = '\033[0m'
+        if len(fileNames) < len(directoryList):
+           print warnBoldColor + "WARNING: There are fewer knowtator files to read than there were directories in 'directoryList' please ensure that you entered the directory paths correctly." + resetColor
+
         for filePath in fileNames:
             annotationDocuments.append(cls.parseSingleKnowtatorFile(filePath, originalFileSearchDirs, annotationGroup))
         return annotationDocuments

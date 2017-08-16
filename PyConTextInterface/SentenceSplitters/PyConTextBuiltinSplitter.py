@@ -6,11 +6,33 @@ span. You can read more in those two modules about why they are necessary."""
 from pyConTextNLP.helpers import sentenceSplitter
 from eHostess.PyConTextInterface.SentenceReconstructor import SentenceReconstructor as Reconstructor
 from eHostess.PyConTextInterface.SentenceRepeatManager import SentenceRepeatManager as RepeatManger
-from Sentence import Sentence
+from PyConTextInput import PyConTextInput
 from eHostess.Annotations.Document import Document
 import eHostess.Utilities.utilities as utilities
 import glob
 
+
+def _splitSentencesSingleDocInternal(documentPath):
+    """Takes a string, returns a list of reconstructed sentences of the form (text, docSpanTuple, docName, docLength, None) to be fed to PyConTextInput."""
+
+    sentenceTuples = []
+
+    with open(documentPath, 'rU') as inFile:
+        documentText = inFile.read()
+
+    documentName = Document.ParseDocumentNameFromPath(documentPath)
+    docLength = len(documentText)
+    sentences = sentenceSplitter().splitSentences(documentText)
+    repeatManager = RepeatManger(documentText)
+    reconstructor = Reconstructor(documentText)
+
+
+    for sentence in sentences:
+        reconstructedSentence = reconstructor.reconstructSentence(sentence)
+        span = repeatManager.determineSpan(reconstructedSentence)
+
+        sentenceTuples.append((reconstructedSentence, span, documentName, docLength, None))
+    return sentenceTuples
 
 def splitSentencesSingleDocument(documentPath):
     """
@@ -20,22 +42,13 @@ def splitSentencesSingleDocument(documentPath):
     :return: (list) A list of Sentence objects.
     """
 
-    with open(documentPath, 'rU') as inFile:
-        documentText = inFile.read()
+    pyConTextInput = PyConTextInput()
+    sentenceTuples = _splitSentencesSingleDocInternal(documentPath)
 
-    documentName = Document.ParseDocumentNameFromPath(documentPath)
-    sentences = sentenceSplitter().splitSentences(documentText)
-    repeatManager = RepeatManger(documentText)
-    reconstructor = Reconstructor(documentText)
+    for sentenceTuple in sentenceTuples:
+        pyConTextInput.addSentence(*sentenceTuple)
 
-    sentenceObjects = []
-    for sentence in sentences:
-        reconstructedSentence = reconstructor.reconstructSentence(sentence)
-        span = repeatManager.determineSpan(reconstructedSentence)
-
-        sentenceObjects.append(Sentence(reconstructedSentence, span, documentName, len(documentText)))
-
-    return sentenceObjects
+    return pyConTextInput
 
 
 def splitSentencesMultipleDocuments(directoryList):
@@ -51,9 +64,15 @@ def splitSentencesMultipleDocuments(directoryList):
     cleanNames = utilities.cleanDirectoryList(directoryList)
     fileList = [filepath for directory in cleanNames for filepath in glob.glob(directory)]
 
-    sentences = []
-    for filepath in fileList:
-        sentences.extend(splitSentencesSingleDocument(filepath))
+    sentenceTuples = []
+    tupleLists = map(_splitSentencesSingleDocInternal, fileList)
+    map(sentenceTuples.extend, tupleLists)
 
-    return sentences
+    pyConTextInput = PyConTextInput(numDocs=len(fileList))
+    for sentenceTuple in sentenceTuples:
+        pyConTextInput.addSentence(*sentenceTuple)
+
+    if not pyConTextInput.containsExpectedNumberOfDocKeys():
+        raise RuntimeError("The PyConTextInput object produced by PyConTextBuiltinSplitter does not contain the expected number of documents. Expected: %i, Contains: %i" % (pyConTextInput.numDocs, len(pyConTextInput.keys())))
+    return pyConTextInput
 
