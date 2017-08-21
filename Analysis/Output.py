@@ -4,6 +4,7 @@ The purpose of this module is to produce human-readable output after conducting 
 """
 
 from DocumentComparison import ComparisonResults
+import re
 
 def ConvertComparisonsToTSV(comparisons, outputPath):
     """
@@ -16,12 +17,6 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
     :return: None
     """
 
-    comparisonList = []
-    for comparisonSublist in comparisons.values():
-        comparisonList.extend(comparisonSublist)
-
-    comparisons = comparisonList
-
     # Get the names of the annotators for each annotation group.
     name1 = ''
     name2 = ''
@@ -33,13 +28,13 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
         if name1 == '' and comparison.annotation1 != None:
             name1 = comparison.annotation1.annotator
         if name2 == '' and comparison.annotation2 != None:
-            name2 = comparison.annotation1.annotator
+            name2 = comparison.annotation2.annotator
     if not foundNames:
         raise RuntimeError("No names were found for either group of annotations.")
 
     #Prepare the column headers for the output file.
     outFile = open(outputPath, 'w')
-    outFile.write("DocumentName\t%sText\t%sText\tComparisonResult\tAgreement\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (name1, name2, name1, name2))
+    outFile.write("DocumentName\t%s Text\t%s Text\tComparisonResult\tAgreement\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (name1, name2, name1, name2))
 
     for comparison in comparisons:
         documentName = comparison.documentName
@@ -55,6 +50,9 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
         if annotation2:
             secondNameText = '"' + annotation2.text + '"'
 
+        # Remove any separator characters from the text.
+        firstNameText = re.sub("\t|\n|\r", "    ", firstNameText)
+        secondNameText = re.sub("\t|\n|\r", "    ", secondNameText)
 
         if comparison.comparisonResult == ComparisonResults["1"]: # No Overlap
             firstResult = ""

@@ -147,7 +147,7 @@ class Comparison:
         :return: [dict] A dictionary of `Comparison` arrays keyed by document name.
         """
 
-        comparisons = {}
+        comparisons = []
 
         sorted1 = sorted(batch1, key=lambda doc: doc.documentName)
         sorted2 = sorted(batch2, key=lambda doc: doc.documentName)
@@ -165,7 +165,7 @@ class Comparison:
 
                 raise RuntimeError("The batches were not sorted correctly or contain different documents.")
 
-            comparisons[document.documentName] = Comparison.CompareAllAnnotations(sorted1[index], sorted2[index])
+            comparisons.extend(Comparison.CompareAllAnnotations(sorted1[index], sorted2[index]))
 
         return comparisons
 

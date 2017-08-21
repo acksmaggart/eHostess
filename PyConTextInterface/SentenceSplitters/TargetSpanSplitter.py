@@ -71,7 +71,7 @@ def _splitSentencesSingleDocumentInternal(documentPath, targets, numLeadingWords
     regexStrings = [(r"(?:[^\.\s]+\s+){0,%i}(%s)%s(?:\s+[^\.\s]+){0,%i}" %
                                     (numLeadingWords, item.getRE(), punctuationToIgnore, numTrailingWords), item.getRE()) for item in targets]
 
-    matches = [(match, targetRegex) for regexString, targetRegex in regexStrings for match in re.finditer(regexString, documentText)]
+    matches = [(match, targetRegex) for regexString, targetRegex in regexStrings for match in re.finditer(regexString, documentText, flags=re.IGNORECASE)]
 
     if len(matches) == 0:
         return (None, documentName)

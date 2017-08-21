@@ -11,12 +11,6 @@ def CalculateRecallPrecisionFScoreAndSupport(comparisons, goldStandardPosition='
     :return: [tuple (float, float, float, int)] A tuple containing the recall, precision, F-Score, (as decimal values) and support.
     """
 
-    #Convert the comparisons to a list.
-    comparisonList = []
-    for sublist in comparisons.values():
-        comparisonList.extend(sublist)
-    comparisons = comparisonList
-
     goldStandardResults = np.zeros(len(comparisons))
     testGroupResults = np.zeros(len(comparisons))
 

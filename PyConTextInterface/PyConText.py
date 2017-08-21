@@ -137,7 +137,7 @@ def _removeDuplicateAnnotations(nodeSentenceAnnotationTuples):
             uniqueAnnotations.append(tuple)
             continue
 
-        if re.match(sentence.targetRegex, node.getPhrase()):
+        if re.match(sentence.targetRegex, node.getPhrase(), re.IGNORECASE):
             uniqueAnnotations.append(tuple)
 
     return uniqueAnnotations
