@@ -81,8 +81,8 @@ class Document:
                     break
             secondOutputAnnotations.append(outerAnnotation)
 
-        outputDoc1 = Document("DiscrepancyOutput1", firstOutputAnnotations)
-        outputDoc2 = Document("DiscrepancyOutput2", secondOutputAnnotations)
+        outputDoc1 = cls("DiscrepancyOutput1", firstOutputAnnotations)
+        outputDoc2 = cls("DiscrepancyOutput2", secondOutputAnnotations)
 
         return outputDoc1, outputDoc2
 
@@ -107,3 +107,30 @@ class Document:
         :return: [string] A clean document name.
         """
         return filePath.split('/')[-1].split('.')[0]
+
+class ClassifiedDocument(Document):
+    def __init__(self, documentName, annotationGroup, mentionLevelObjects, numberOfCharacters, documentClass, adjudicationStatus=None):
+        """
+        This class represents a document which has been classified, presumably in preparation for performing some kind of supervised learning or other analysis that requires data to be accompanied by class labels. Given the variety of classification methods and the likelihood that the details of each use case may vary widely it is intended that eHostess users will write custom logic to convert their Document objects to ClassifiedDocument objects. Once the user is in possession of ClassifiedDocument objects they may avail themselves of the more generalized analysis functions available in eHostess.Analysis (which consume these objects) or of course create their own analysis scripts.
+
+    :param documentName: [string] The name you want the document to have.
+    :param annotationGroup: [string] The annotation group that the document will belong to.
+    :param mentionLevelObjects: [list] A list of MentionLevelAnnotation objects. These will be the document's annotations.
+    :param numberOfCharacters: [int] The number of characters in the document.
+    :param documentClass: [string] The class with which this document has been labeled, e.g. "positive", "negative", "group_1", etc. The inclusion of this attribute facilitates many types of document analyses.
+    :param adjudicationStatus: [object] An instance of :class:`AdjudicationStatus <eHostess.Annotations.Document.AdjudicationStatus>`. Useful only if you plan to perform adjudication using eHost. Defaults all adjudication values to False.
+        """
+        Document.__init__(self, documentName, annotationGroup, mentionLevelObjects, numberOfCharacters)
+        self.documentClass = documentClass
+
+    @classmethod
+    def CreateFromDocument(cls, document, documentClass):
+        """
+        This his a convenience method for creating a ClassifiedDocument from a regular Document. This is useful in cases where the process of document classification does not involve altering the list of MentionLevelAnnotations. This method simply calls the ClassifiedDocument constructor passing the input 'document's attributes as arguments along with the supplied 'documentClass'.
+        :param document: [object] An instance of Document.
+        :param documentClass: [string] The class with which this document has been labeled.
+        :return: [object] An instance of ClassifiedDocument.
+        """
+
+        return cls(document.documentName, document.annotationGroup, document.annotations, document.numberOfCharacters, documentClass, document.adjudicationStatus)
+
