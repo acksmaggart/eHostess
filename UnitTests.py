@@ -469,13 +469,61 @@ except RuntimeError as error:
 if not gotException:
     failed = True
 
-
-
 if failed:
     failCount += 1
     print failedColor + '*****************Test Failed***************************' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
+
+    # TODO add unit test for ClassifiedDocument comparison.
+    #### Test Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification() ####
+    printTestName('Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification')
+    from eHostess.Analysis.DocumentComparison import Comparison
+    from eHostess.Annotations.Document import ClassifiedDocument
+
+    failed = False
+
+    goldClasses = ["positive", "positive", "positive", "negative"]
+    testClassesAllAgree = ["positive", "positive", "positive", "negative"]
+    testClassesAllDisagree = ["negative", "negative", "negative", "positive"]
+    testClassesMixed = ["positive", "positive", "negative", "positive"]
+
+    trueAllAgreeResults = (1.0, 1.0, 1.0, 1.0)
+    trueAllDisagreeResults = (0.0, 0.0, 0.0, 0.0)
+    trueMixedResults = (0.6666, 0.66666, 0.666666, 0.5)
+
+    goldDocs = []
+    testDocsAllAgree = []
+    testDocsAllDisagree = []
+    testDocsMixed = []
+
+    for index in range(len(goldClasses)):
+        goldDocs.append(ClassifiedDocument("%i"%index, "UnitTesting", [], 0, goldClasses[index]))
+        testDocsAllAgree.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesAllAgree[index]))
+        testDocsAllDisagree.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesAllDisagree[index]))
+        testDocsMixed.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesMixed[index]))
+
+    allAgreeResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsAllAgree, positiveClass="positive")
+    allDisagreeResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsAllDisagree, positiveClass="positive")
+    mixedResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsMixed, positiveClass="positive")
+
+    if allAgreeResults != trueAllAgreeResults or allDisagreeResults != trueAllDisagreeResults:
+        failed = True
+
+    for index in range(len(mixedResults)):
+        diff = mixedResults[index] - trueMixedResults[index]
+        if abs(diff) > .01:
+            failed = True
+            break
+
+    if failed:
+        failCount += 1
+        print failedColor + '*****************Test Failed***************************' + resetColor
+    else:
+        print passedColor + "Passed\n" + resetColor
+
+
+
 
 if failCount == 0:
     print boldPassedColor + "ALL TESTS PASSED" + resetColor

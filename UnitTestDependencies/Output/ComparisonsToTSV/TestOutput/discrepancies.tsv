@@ -1,4 +1,4 @@
-DocumentName	TestAnnotator2Text	TestAnnotator2Text	ComparisonResult	Agreement	TestAnnotator2	TestAnnotator2	SpanStart	SpanEnd	DocLength
+DocumentName	TestAnnotator2 Text	TestAnnotator1 Text	ComparisonResult	Agreement	TestAnnotator2	TestAnnotator1	SpanStart	SpanEnd	DocLength
 2530	"Allergies:"	"Allergies:"	Match	1	bleeding_absent	bleeding_absent	162	172	8442
 2530	"Sex: M"	"Sex: M"	Class and Attribute Mismatch	0	Class: bleeding_absent,  Attributes: {'certainty': 'possible'}	Class: bleeding_present,  Attributes: {'certainty': 'definite'}	127	135	8442
 2530	"Service: CARDIOTHORACIC"	"Service: CARDIOTHORACIC"	Attribute Mismatch	0	DOC CLASS: {'present_or_absent': 'present', 'certainty': 'definite'}	DOC CLASS: {'present_or_absent': 'absent', 'certainty': 'definite'}	137	160	8442
