@@ -370,10 +370,10 @@ if failed:
 else:
     print passedColor + "Passed\n" + resetColor
 
+
 #### Test PyConTextInterface.PyConText.AnnotateSentences() ability to Remove Duplicate Annotations####
 printTestName('Testing PyConTextInterface.PyConText.AnnotateSingleDocument() ability to Remove Duplicate Annotations.')
 from eHostess.PyConTextInterface.SentenceSplitters.TargetSpanSplitter import splitSentencesSingleDocument as targetSpanSingleSplit
-from eHostess.PyConTextInterface.SentenceSplitters.TargetSpanSplitter import splitSentencesMultipleDocuments as targetSpanSplitMultiple
 
 failed = False
 
@@ -421,10 +421,10 @@ else:
 
 #### Test Analysis.Metrics.calculateRecallPrecisionFScoreAndSupport() ####
 printTestName('Analysis.Metrics.calculateRecallPrecisionFScoreAndSupport()')
-from eHostess.Analysis.Metrics import CalculateRecallPrecisionFScoreAndSupport
+from eHostess.Analysis.Metrics import CalculateRecallPrecisionFScoreAndAgreement
 failed = False
 
-recall, precision, fscore, support = CalculateRecallPrecisionFScoreAndSupport(discrepancies)
+recall, precision, fscore, support = CalculateRecallPrecisionFScoreAndAgreement(discrepancies)
 
 if recall != .25 or precision != .5:
     failed = True
@@ -475,52 +475,52 @@ if failed:
 else:
     print passedColor + "Passed\n" + resetColor
 
-    # TODO add unit test for ClassifiedDocument comparison.
-    #### Test Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification() ####
-    printTestName('Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification')
-    from eHostess.Analysis.DocumentComparison import Comparison
-    from eHostess.Annotations.Document import ClassifiedDocument
 
-    failed = False
+#### Test Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification() ####
+printTestName('Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification')
+from eHostess.Analysis.DocumentComparison import Comparison
+from eHostess.Annotations.Document import ClassifiedDocument
 
-    goldClasses = ["positive", "positive", "positive", "negative"]
-    testClassesAllAgree = ["positive", "positive", "positive", "negative"]
-    testClassesAllDisagree = ["negative", "negative", "negative", "positive"]
-    testClassesMixed = ["positive", "positive", "negative", "positive"]
+failed = False
 
-    trueAllAgreeResults = (1.0, 1.0, 1.0, 1.0)
-    trueAllDisagreeResults = (0.0, 0.0, 0.0, 0.0)
-    trueMixedResults = (0.6666, 0.66666, 0.666666, 0.5)
+goldClasses = ["positive", "positive", "positive", "negative"]
+testClassesAllAgree = ["positive", "positive", "positive", "negative"]
+testClassesAllDisagree = ["negative", "negative", "negative", "positive"]
+testClassesMixed = ["positive", "positive", "negative", "positive"]
 
-    goldDocs = []
-    testDocsAllAgree = []
-    testDocsAllDisagree = []
-    testDocsMixed = []
+trueAllAgreeResults = (1.0, 1.0, 1.0, 1.0)
+trueAllDisagreeResults = (0.0, 0.0, 0.0, 0.0)
+trueMixedResults = (0.6666, 0.66666, 0.666666, 0.5)
 
-    for index in range(len(goldClasses)):
-        goldDocs.append(ClassifiedDocument("%i"%index, "UnitTesting", [], 0, goldClasses[index]))
-        testDocsAllAgree.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesAllAgree[index]))
-        testDocsAllDisagree.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesAllDisagree[index]))
-        testDocsMixed.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesMixed[index]))
+goldDocs = []
+testDocsAllAgree = []
+testDocsAllDisagree = []
+testDocsMixed = []
 
-    allAgreeResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsAllAgree, positiveClass="positive")
-    allDisagreeResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsAllDisagree, positiveClass="positive")
-    mixedResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsMixed, positiveClass="positive")
+for index in range(len(goldClasses)):
+    goldDocs.append(ClassifiedDocument("%i"%index, "UnitTesting", [], 0, goldClasses[index]))
+    testDocsAllAgree.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesAllAgree[index]))
+    testDocsAllDisagree.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesAllDisagree[index]))
+    testDocsMixed.append(ClassifiedDocument("%i" % index, "UnitTesting", [], 0, testClassesMixed[index]))
 
-    if allAgreeResults != trueAllAgreeResults or allDisagreeResults != trueAllDisagreeResults:
+allAgreeResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsAllAgree, positiveClass="positive")
+allDisagreeResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsAllDisagree, positiveClass="positive")
+mixedResults = Comparison.CalculateTestMetricsForDocumentClassifications(goldDocs, testDocsMixed, positiveClass="positive")
+
+if allAgreeResults != trueAllAgreeResults or allDisagreeResults != trueAllDisagreeResults:
+    failed = True
+
+for index in range(len(mixedResults)):
+    diff = mixedResults[index] - trueMixedResults[index]
+    if abs(diff) > .01:
         failed = True
+        break
 
-    for index in range(len(mixedResults)):
-        diff = mixedResults[index] - trueMixedResults[index]
-        if abs(diff) > .01:
-            failed = True
-            break
-
-    if failed:
-        failCount += 1
-        print failedColor + '*****************Test Failed***************************' + resetColor
-    else:
-        print passedColor + "Passed\n" + resetColor
+if failed:
+    failCount += 1
+    print failedColor + '*****************Test Failed***************************' + resetColor
+else:
+    print passedColor + "Passed\n" + resetColor
 
 
 
