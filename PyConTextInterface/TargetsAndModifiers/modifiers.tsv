@@ -1,4 +1,5 @@
 Lex	Type	Regex	Direction
+ago	NEGATED_EXISTENCE	\bago\b	backward
 cc	AFFIRMED_EXISTENCE	(cc:|chief complaint:)	forward
 ddx	NEGATED_EXISTENCE	ddx	forward
 denies	NEGATED_EXISTENCE	denies|denied	forward
@@ -10,7 +11,8 @@ here with	AFFIRMED_EXISTENCE	here (with|w\\|w/)	forward
 history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of))	forward
 history of	NEGATED_EXISTENCE	history of	forward
 if	NEGATED_EXISTENCE	\bif\b	forward
-monitor	NEGATED_EXISTENCE	monitor for	forward
+monitor	NEGATED_EXISTENCE	monitor( for)?	forward
+negative NEGATED_EXISTENCE	\bnegative\b	bidirectional	
 no	NEGATED_EXISTENCE	\bno\b	forward
 no evidence	NEGATED_EXISTENCE	no (evidence|e\\o|e/o)	forward
 no history	NEGATED_EXISTENCE	no ((h/o)|(h\\o)]|hx)	forward
@@ -20,9 +22,12 @@ now with	AFFIRMED_EXISTENCE	now (with|w\\|w/)	forward
 possible	NEGATED_EXISTENCE	possible	bidirectional
 presenting	AFFIRMED_EXISTENCE	presenting* (with|w\\|w/)	forward
 presents	AFFIRMED_EXISTENCE	present[s|e][d]* (with|w\\|w/)	forward
+previous	NEGATED_EXISTENCE	previous	forward
 risk	NEGATED_EXISTENCE	risk of	bidirectional
-rule out	NEGATED_EXISTENCE	rule out	forward
+rule out	NEGATED_EXISTENCE	(rule out|r\/o)	forward
+suspicion	NEGATED_EXISTENCE	suspicion	forward
 transfuse	NEGATED_EXISTENCE	transfuse	forward
+unlikely	NEGATED_EXISTENCE	unlikely	bidirectional
 versus	NEGATED_EXISTENCE	versus|vs	bidirectional
 watch	NEGATED_EXISTENCE	watch for	forward
 without	NEGATED_EXISTENCE	((without)|(w\\o)|(w/o))	forward

@@ -6,9 +6,11 @@ bloody	TARGET	bloody	backward
 bloody	TARGET	(bloody)	backward
 brbpr	TARGET	brbpr	backward
 coffee grounds	TARGET	coffee\-?(ground|grounds)	bidirectional
+ecchymosis	TARGET	ecchymosis	backward
 epistaxis	TARGET	epistaxis	backward
+exsanguination	TARGET	exsanguination	backward
 gib	TARGET	gib	backward
-guaiac	TARGET	gua?iac[ \-]((positive)|(pos)|\+)	backward
+guaiac	TARGET	((g|gua?iac)[ \-]((positive)|(pos)|\+)|guaiac\(\+\))	backward
 hematemesis	TARGET	hematem[a-z]+	backward
 hematochezia	TARGET	hematochezia	backward
 hematoma	TARGET	hematoma	backward
