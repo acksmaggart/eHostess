@@ -6,7 +6,7 @@ bloody	TARGET	bloody	backward
 bloody	TARGET	(bloody)	backward
 brbpr	TARGET	brbpr	backward
 coffee grounds	TARGET	coffee\-?(ground|grounds)	bidirectional
-ecchymosis	TARGET	ecchymosis	backward
+ecchymosis	TARGET	ecchymos[ie]s	backward
 epistaxis	TARGET	epistaxis	backward
 exsanguination	TARGET	exsanguination	backward
 gib	TARGET	gib	backward
@@ -19,7 +19,7 @@ hemoperitoneum	TARGET	hemoperitoneum	backward
 hemoptysis	TARGET	hemoptysis	backward
 hemorrhage	TARGET	"hem{1,2}or{1,2}h{1,2}age?"	backward
 ich	TARGET	\bich	backward
-melena	TARGET	melena	backward
+melena	TARGET	mel[ae]n(a|ic)	backward
 ng lavage post	TARGET	(ng|ngt)\s+lavage\s+((positive)|(pos)|\+)	backward
 ng lavage pre	TARGET	((positive)|(pos)|\+) (ng|ngt) lavage	backward
 sah	TARGET	sah	backward

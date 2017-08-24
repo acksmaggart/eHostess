@@ -12,7 +12,7 @@ history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of))	forward
 history of	NEGATED_EXISTENCE	history of	forward
 if	NEGATED_EXISTENCE	\bif\b	forward
 monitor	NEGATED_EXISTENCE	monitor( for)?	forward
-negative NEGATED_EXISTENCE	\bnegative\b	bidirectional	
+negative	NEGATED_EXISTENCE	\bnegative\b	forward
 no	NEGATED_EXISTENCE	\bno\b	forward
 no evidence	NEGATED_EXISTENCE	no (evidence|e\\o|e/o)	forward
 no history	NEGATED_EXISTENCE	no ((h/o)|(h\\o)]|hx)	forward
