@@ -1,14 +1,14 @@
 Lex	Type	Regex	Direction
-bleed	TARGET	(?<!non)(?<!non-)bleed	backward
+bleed	TARGET	(?<!non)(?<!non )(?<!non-)bleed[a-z]*	backward
 blood loss	TARGET	blood loss	backward
 blood per rectum	TARGET	blood per rectum	backward
 bloody	TARGET	bloody	backward
 bloody	TARGET	(bloody)	backward
 brbpr	TARGET	brbpr	backward
-coffee grounds	TARGET	coffee (ground|grounds)	bidirectional
-epistaxsis	TARGET	epistaxsis	backward
+coffee grounds	TARGET	coffee\-?(ground|grounds)	bidirectional
+epistaxis	TARGET	epistaxis	backward
 gib	TARGET	gib	backward
-guaiac	TARGET	guaiac ((positive)|(pos)|\+)	backward
+guaiac	TARGET	gua?iac[ \-]((positive)|(pos)|\+)	backward
 hematemesis	TARGET	hematem[a-z]+	backward
 hematochezia	TARGET	hematochezia	backward
 hematoma	TARGET	hematoma	backward

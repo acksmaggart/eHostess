@@ -1,5 +1,6 @@
 Lex	Type	Regex	Direction
 cc	AFFIRMED_EXISTENCE	(cc:|chief complaint:)	forward
+ddx	NEGATED_EXISTENCE	ddx	forward
 denies	NEGATED_EXISTENCE	denies|denied	forward
 did not show	NEGATED_EXISTENCE	did not (show|reveal)	forward
 episode	AFFIRMED_EXISTENCE	episode of	forward
@@ -8,9 +9,9 @@ found to have	AFFIRMED_EXISTENCE	found to have	forward
 here with	AFFIRMED_EXISTENCE	here (with|w\\|w/)	forward
 history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of))	forward
 history of	NEGATED_EXISTENCE	history of	forward
-if	NEGATED_EXISTENCE	if	forward
+if	NEGATED_EXISTENCE	\bif\b	forward
 monitor	NEGATED_EXISTENCE	monitor for	forward
-no	NEGATED_EXISTENCE	no\s	forward
+no	NEGATED_EXISTENCE	\bno\b	forward
 no evidence	NEGATED_EXISTENCE	no (evidence|e\\o|e/o)	forward
 no history	NEGATED_EXISTENCE	no ((h/o)|(h\\o)]|hx)	forward
 non	NEGATED_EXISTENCE	non(\s|-)	forward
