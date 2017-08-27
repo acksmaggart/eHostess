@@ -4,6 +4,16 @@ from time import gmtime, strftime
 class MentionLevelAnnotation:
     """This class represents a single mention-level annotation. For example, a single highlight in eHost or a single node in PyConText. It currently only has one method, a class method for determining if two mention-level annotations overlap with one another."""
     def __init__(self, text, start, end, annotator, annotationId, attributes, annotationClass = None, creationDate = None):
+        """
+        :param text: [string] The text includes the target term, e.g. the highlighted text in eHost.
+        :param start: [int] The position in the document where annotation starts.
+        :param end: [int] The position in the document where annotation ends.
+        :param annotator: [string] The name of the annotator, or annotation method used to produce the annotation.
+        :param annotationId: [string] An ID belonging to the annotation that should be unique to its document. This uniqueness is not currently enforced anywhere. This attribute was included mainly because it is present in eHost output files.
+        :param attributes: [dict] A dictionary of attributes, with attribute names as the keys and attribute values as the values. Annotations in eHost have 'attributes', 'classes', and 'relationships'. This package currently only supports annotation attributes and classes. Annotations may only have a single 'class' but may have many 'attributes'. The 'attributes' property of MentionLevelAnnotation objects in this package represents the eHost attributes. However, it is of course possible to produce annotations using other methods that possess attributes, e.g. pyConText.
+        :param annotationClass: [string] The class to which the annotation has been assigned. This attribute represents the eHost class of an annotation, however, like the 'attributes' attribute the 'annotationClass' attribute is meant to be more general, allowing the user to populate it with a value produced using an arbitrary annotation method.
+        :param creationDate: [string] A string representing the time that this annotation was created. If None (default) the annotation is labeled with the time that is was created in GMT.
+        """
         self.text = text
         self.start = int(start)
         self.end = int(end)
