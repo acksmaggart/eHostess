@@ -27,7 +27,7 @@ def CalculateRecallPrecisionFScoreAndAgreement(comparisons, goldStandardPosition
             testAnnotation = comparison.annotation1
 
         # Determine agreement
-        if comparison.comparisonResult == ComparisonResults["5"]: #Match
+        if comparison.comparisonResult == ComparisonResults["5"] or comparison.comparisonResult == ComparisonResults["6"]: #Match
             agreementVec[index] = 1
 
         # Since missing annotations are considered negative results no action needs to be taken for annotations that

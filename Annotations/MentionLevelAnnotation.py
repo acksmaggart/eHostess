@@ -3,7 +3,7 @@ from time import gmtime, strftime
 
 class MentionLevelAnnotation:
     """This class represents a single mention-level annotation. For example, a single highlight in eHost or a single node in PyConText. It currently only has one method, a class method for determining if two mention-level annotations overlap with one another."""
-    def __init__(self, text, start, end, annotator, annotationId, attributes, annotationClass = None, creationDate = None):
+    def __init__(self, text, start, end, annotator, annotationId, attributes, annotationClass = None, creationDate = None, dynamicProperties={}):
         """
         :param text: [string] The text includes the target term, e.g. the highlighted text in eHost.
         :param start: [int] The position in the document where annotation starts.
@@ -13,6 +13,7 @@ class MentionLevelAnnotation:
         :param attributes: [dict] A dictionary of attributes, with attribute names as the keys and attribute values as the values. Annotations in eHost have 'attributes', 'classes', and 'relationships'. This package currently only supports annotation attributes and classes. Annotations may only have a single 'class' but may have many 'attributes'. The 'attributes' property of MentionLevelAnnotation objects in this package represents the eHost attributes. However, it is of course possible to produce annotations using other methods that possess attributes, e.g. pyConText.
         :param annotationClass: [string] The class to which the annotation has been assigned. This attribute represents the eHost class of an annotation, however, like the 'attributes' attribute the 'annotationClass' attribute is meant to be more general, allowing the user to populate it with a value produced using an arbitrary annotation method.
         :param creationDate: [string] A string representing the time that this annotation was created. If None (default) the annotation is labeled with the time that is was created in GMT.
+        :param dynamicProperties: [dict] This property is meant to store miscellaneous information assiciated with the annotation that may be useful to preserve, but does not fit into the semantics of eHost's annotation objects or analysis. For example, the PyConText module stores the PyConText target term in this dictionary using the key 'target' to help human users review the output of the algorithm during optimization..
         """
         self.text = text
         self.start = int(start)
@@ -28,6 +29,9 @@ class MentionLevelAnnotation:
             self.creationDate = creationDate
         else:
             self.creationDate = strftime("%a %b %d %H:%M:%S GMT %Y", gmtime())
+        if not isinstance(dynamicProperties, dict):
+            raise ValueError("dynamicProperties must be a dictionary or a subclass of dict. Got <%s>." % type(dynamicProperties))
+        self.dynamicProperties = dynamicProperties
 
 
     @classmethod

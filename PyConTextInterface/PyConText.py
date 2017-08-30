@@ -74,9 +74,14 @@ def _annotateSentences(sentenceList, targets, modifiers, modifierToClassMap, ann
                 # is a target with no modifier and consider it a bleeding_present annotation.
                 else:
                     annotationClass = modifierToClassMap["AFFIRMED_EXISTENCE"]
+                predecessorList = markup.predecessors(node)
+                predecessorPhrases = []
+                for predecessor in predecessorList:
+                    predecessorPhrases.append(predecessor.getPhrase())
+                targetDict = {"modifiers": predecessorPhrases, "target": node.getPhrase()}
                 newAnnotation = MentionLevelAnnotation(sentence.text, sentence.documentSpan[0],
                                                        sentence.documentSpan[1], "pyConTextNLP",
-                                                       annotationId, attributes, annotationClass)
+                                                       annotationId, attributes, annotationClass, dynamicProperties=targetDict)
                 annotationTrioTuples.append(AnnotationTrio(node, sentence, newAnnotation))
 
     return annotationTrioTuples

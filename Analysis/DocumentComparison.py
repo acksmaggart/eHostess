@@ -8,44 +8,59 @@ import numpy as np
 from sklearn.metrics import precision_recall_fscore_support
 
 
-def allAttributesMatch(annotation1, annotation2):
-    if len(annotation1.attributes) != len(annotation2.attributes):
-        return False
-
-    for attribKey1 in annotation1.attributes:
-        if attribKey1 not in annotation2.attributes:
-            return False
-        if annotation1.attributes[attribKey1] != annotation2.attributes[attribKey1]:
-            return False
-
-    return True
-
 def classesMatch(annotation1, annotation2, equivalentClasses):
     """Checks if the classes match, considering 'equivalentClasses' and returns a boolean."""
+    if equivalentClasses == False:
+        return True
     if equivalentClasses == None:
-        if annotation1.documentClass == annotation2.documentClass:
+        if annotation1.annotationClass == annotation2.annotationClass:
             return True
         else:
             return False
     else:
         for sublist in equivalentClasses:
-            if annotation1.documentClass in sublist and annotation2.documentClass in sublist:
+            if annotation1.annotationClass in sublist and annotation2.annotationClass in sublist:
                 return True
         return False
 
-def attributesMatch(annotation1, annotation2, ignoreAttributes):
-    """Checks if the attributes match, considering 'ignoreAttributes' and returns a boolean."""
-    if ignoreAttributes:
+def attributesMatch(annotation1, annotation2, equivalentAttributes):
+    """Checks if the attributes match, considering 'equivalentAttributes' and returns a boolean."""
+    if equivalentAttributes == False:
         return True
     else:
-        return allAttributesMatch(annotation1, annotation2)
+        if len(annotation1.attributes) != len(annotation2.attributes):
+            return False
+
+        for attribKey1 in annotation1.attributes:
+            if attribKey1 not in annotation2.attributes:
+                return False
+            # If the user included lists of equivalent attributes, use the lists.
+            if equivalentAttributes != None:
+                foundMatchingAttribute = False
+                for sublist in equivalentAttributes[attribKey1]:
+                    if not isinstance(sublist, list):
+                        raise ValueError("equivalentAttributes must either be 'None', 'False' or a dictionary whose values are each a list of lists. Got %s as the type of the value. see the DocumentComparison.CompareAllAnnotations() class method doc_string for more information." % type(equivalentAttributes[attribKey1]))
+                    else:
+                        if annotation1.attributes[attribKey1] in sublist and annotation2.attributes[attribKey1] in sublist:
+                            foundMatchingAttribute = True
+                            break
+                if not foundMatchingAttribute:
+                    return False
+            # The user passed equivalentAttributes=None, compare attributes directly.
+            else:
+                if annotation1.attributes[attribKey1] != annotation2.attributes[attribKey1]:
+                    return False
+
+        return True
+
 
 ComparisonResults ={
     "1" : "No Overlap",
     "2" : "Class Mismatch",
     "3" : "Attribute Mismatch",
     "4" : "Class and Attribute Mismatch",
-    "5" : "Match"
+    "5" : "Match",
+    "6" : "Match- No Overlap"
     }
 
 class Comparison:
@@ -76,16 +91,23 @@ class Comparison:
         self.documentName = documentName
 
     @classmethod
-    def CompareAllAnnotations(cls, document1, document2, equivalentClasses=None, ignoreAttributes=False):
+    def CompareAllAnnotations(cls, document1, document2, equivalentClasses=None, equivalentAttributes=None, countNoOverlapAsMatch=None):
         """
         This function compares the annotation objects contained in two Document or ClassifiedDocument instances. It first makes a list of all the annotations in both documents that do not have matches (see the Comparison class doc_string for more information about what constitutes a match). It then reviews those lists to determine which discrepancies are due to class/attribute mismatches and which are due to non-overlapping spans. Finally, it returns a list of all the annotations along with their match or mismatch types as a list of `Comparison` objects.
 
         :param document1: [object] An instance of :class:`Document <eHostess.Annotations.Document.Document>`.
         :param document2: [object] A second instance of :class:`Document <eHostess.Annotations.Document.Document>`, whose source note is the same as document1.
-        :param equivalentClasses:[ list of lists] If None (default) this method will only consider annotation to be matching if they have the same 'annotationClass' attribute. However, the user may include a list of lists, specifying which classes are equivalent and should be considered a match anyway. For example, the user may have produced annotations using the following four classes: 'condition_present', 'condition_likely', 'condition_absent', 'condition_hypothetical'. If 'equivalentClasses' is None, 'condition_present' annotations will only match other 'condition_present' annotations, 'condition_likely' annotations will only math other 'condition_likely' annotations, etc. However, the user may wish to group class labels into meta-classes, so to speak, and consider both 'condition_present' and 'condition_likely' annotations as the same class and 'condition_absent' and 'condition_hypothetical' as the same class. In this case the user would pass the list [['condition_present', 'condition_likely'],['condition_absent', 'condition_hypothetical']] as the value of 'equivalentClasses' and all annotation pairs whose classes are in the same sublist will be considered a match.
-        :param ignoreAttributes: [bool] If False, default, this method compares all the attributes between the annotations contained in the input documents. Only counting annotations as a match if they share attributes and attribute values. See MentionLevelAnnotation for more information about the concept of attributes.
-        :return: [object] An instance of :class:`Comparison <eHostess.Analysis.DocumentComparison.Comparison>`, detailing the results of the comparison.
+        :param equivalentClasses:[None, False, or list of lists] If None (default) this method will only consider annotation to be matching if they have the same 'annotationClass' attribute. If False this method will not consider 'annotationClass' in the annotation comparison. As a third option, the user may include a list of lists, specifying which classes are equivalent and should be considered a match anyway. For example, the user may have produced annotations using the following four classes: 'condition_present', 'condition_likely', 'condition_absent', 'condition_hypothetical'. If 'equivalentClasses' is None, 'condition_present' annotations will only match other 'condition_present' annotations, 'condition_likely' annotations will only math other 'condition_likely' annotations, etc. However, the user may wish to group class labels into meta-classes, so to speak, and consider both 'condition_present' and 'condition_likely' annotations as the same class and 'condition_absent' and 'condition_hypothetical' as the same class. In this case the user would pass the list [['condition_present', 'condition_likely'],['condition_absent', 'condition_hypothetical']] as the value of 'equivalentClasses' and all annotation pairs whose classes are in the same sublist will be considered a match.
+        :param equivalentAttributes: [None, False, or dict] Similar to 'equivalentClasses', except due to the fact that annotations can have multiple attributes this attribute is a dictionary whose keys are the attribute name, and whose values are each a list of lists, specifying equivalent attribute values. If None is passed (default) this method will check all attributes for equality. If False, this method will ignore the annotation attributes in the comparison. Currently this method does not allow the user to ignore only a select set of attributes or consider attributes with different keys as equivalent.
+        :param countNoOverlapAsMatch: [None, False, or list] This argument specifies how to treat 'No Overlap' comparisons. If None, this function will count 'No Overlap' comparisons as mismatches. If False, this function will ignore all 'No Overlap' and count them all as matches. As a third option the user may specify a list of classes that should be considered a match when present in a 'No Overlap' comparison. For example, even though one annotation method may have missed an annotation, if the other annotation method marked the annotation as 'negative' or 'hypothetical' the user may wish to consider this result a match, since often it is only the detection of positive events that the user is trying to achieve. In this case the user would pass ['negative', 'hypothetical'] as an argument to 'countNoOverlapAsMatch'. For all cases in which a non-overlap is counted as a match this class will use the 'Non-Overlapping Match' ComparisonResult.
+        :return: [list] A list of :class:`Comparison <eHostess.Analysis.DocumentComparison.Comparison>` objects detailing the results of the comparison.
         """
+        # TODO add option to count no overlap as a match.
+        if not isinstance(equivalentAttributes, dict) and equivalentAttributes != None and equivalentAttributes != False:
+            raise ValueError("equivalentAttributes must either be 'None', 'False' or a dictionary. Got %s. see the DocumentComparison.CompareAllAnnotations() class method doc_string for more information." % type(equivalentAttributes))
+        if not isinstance(equivalentClasses, list) and equivalentClasses != None and equivalentClasses != False:
+            raise ValueError("equivalentClasses must either be 'None', 'False' or a list of lists. Got %s. see the DocumentComparison.CompareAllAnnotations() class method doc_string for more information." % type(equivalentAttributes))
+
         doc1Annotations = document1.annotations
         doc2Annotations = document2.annotations
         doc1Matches = [False] * len(document1.annotations)
@@ -107,7 +129,7 @@ class Comparison:
                     #Check annotation class.
                     if classesMatch(annotation1, annotation2, equivalentClasses):
                         #Check all attributes
-                        if attributesMatch(annotation1, annotation2, ignoreAttributes):
+                        if attributesMatch(annotation1, annotation2, equivalentAttributes):
                             # We have a match!
                             doc1Matches[index1] = True
                             doc2Matches[index2] = True
@@ -131,7 +153,7 @@ class Comparison:
                     processed2[index2] = True
                     if not classesMatch(annotation1, annotation2, equivalentClasses):
                         # Class mismatch
-                        if attributesMatch(annotation1, annotation2, ignoreAttributes):
+                        if attributesMatch(annotation1, annotation2, equivalentAttributes):
                             newComparison = cls(documentName, ComparisonResults["2"], annotation1, annotation2,
                                                  docLength=document1.numberOfCharacters)
                             comparisons.append(newComparison)
@@ -147,22 +169,50 @@ class Comparison:
                         comparisons.append(newComparison)
             # No-overlap mismatch
             if not foundOverlap:
-                newComparison = cls(documentName, ComparisonResults["1"], annotation1, None, docLength=document1.numberOfCharacters)
-                comparisons.append(newComparison)
+                if countNoOverlapAsMatch == None:
+                    newComparison = cls(documentName, ComparisonResults["1"], annotation1, None, docLength=document1.numberOfCharacters)
+                    comparisons.append(newComparison)
+                elif countNoOverlapAsMatch == False:
+                    newComparison = cls(documentName, ComparisonResults["6"], annotation1, None,
+                                        docLength=document1.numberOfCharacters)
+                    comparisons.append(newComparison)
+                elif isinstance(countNoOverlapAsMatch, list):
+                    if annotation1.annotationClass in countNoOverlapAsMatch:
+                        newComparison = cls(documentName, ComparisonResults["6"], annotation1, None, docLength=document1.numberOfCharacters)
+                        comparisons.append(newComparison)
+                    else:
+                        newComparison = cls(documentName, ComparisonResults["1"], annotation1, None, docLength=document1.numberOfCharacters)
+                        comparisons.append(newComparison)
+                else:
+                    raise ValueError("countNoOverlapAsMatch must either be None, False, or a list of annotation class names. Got <%s>." % type(countNoOverlapAsMatch))
 
         for index, annotation2 in enumerate(doc2Mismatches):
             if processed2[index]:
                 continue
             # No-overlap mismatch
             else:
-                newComparison = cls(documentName, ComparisonResults["1"], None, annotation2, docLength=document1.numberOfCharacters)
-                comparisons.append(newComparison)
+                if countNoOverlapAsMatch == None:
+                    newComparison = cls(documentName, ComparisonResults["1"], None, annotation2, docLength=document1.numberOfCharacters)
+                    comparisons.append(newComparison)
+                elif countNoOverlapAsMatch == False:
+                    newComparison = cls(documentName, ComparisonResults["6"], None, annotation2,
+                                        docLength=document1.numberOfCharacters)
+                    comparisons.append(newComparison)
+                elif isinstance(countNoOverlapAsMatch, list):
+                    if annotation2.annotationClass in countNoOverlapAsMatch:
+                        newComparison = cls(documentName, ComparisonResults["6"], None, annotation2, docLength=document1.numberOfCharacters)
+                        comparisons.append(newComparison)
+                    else:
+                        newComparison = cls(documentName, ComparisonResults["1"], None, annotation2, docLength=document1.numberOfCharacters)
+                        comparisons.append(newComparison)
+                else:
+                    raise ValueError("countNoOverlapAsMatch must either be None, False, or a list of annotation class names. Got <%s>." % type(countNoOverlapAsMatch))
 
         return comparisons
 
 
     @classmethod
-    def CompareDocumentBatches(cls, batch1, batch2):
+    def CompareDocumentBatches(cls, batch1, batch2, equivalentClasses=None, equivalentAttributes=None, countNoOverlapAsMatch=None):
         """This method compares the annotations contained in two sets of Documents. This method assumes that batch1 and batch2 contain the same number of documents and that the set of names in both batches is the same and that all names in a given batch are unique. It returns a list of `Comparison` objects.
 
         :param batch1: [list of objects] A list of `Document` objects.
@@ -188,7 +238,7 @@ class Comparison:
 
                 raise RuntimeError("The batches were not sorted correctly or contain different documents.")
 
-            comparisons.extend(Comparison.CompareAllAnnotations(sorted1[index], sorted2[index]))
+            comparisons.extend(Comparison.CompareAllAnnotations(sorted1[index], sorted2[index], equivalentClasses, equivalentAttributes, countNoOverlapAsMatch))
 
         return comparisons
 

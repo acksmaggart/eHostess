@@ -34,7 +34,7 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
 
     #Prepare the column headers for the output file.
     outFile = open(outputPath, 'w')
-    outFile.write("DocumentName\t%s Text\t%s Text\tComparisonResult\tAgreement\t%s\t%s\tSpanStart\tSpanEnd\tDocLength\n" % (name1, name2, name1, name2))
+    outFile.write("DocumentName\t%s Text\t%s Text\tComparisonResult\tAgreement\t%s\t%s\t%s Additional Info\t%s Additional Info\tSpanStart\tSpanEnd\tDocLength\tLocationPercentage\n" % (name1, name2, name1, name2, name1, name2))
 
     for comparison in comparisons:
         documentName = comparison.documentName
@@ -54,13 +54,15 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
         firstNameText = re.sub("\t|\n|\r", "    ", firstNameText)
         secondNameText = re.sub("\t|\n|\r", "    ", secondNameText)
 
-        if comparison.comparisonResult == ComparisonResults["1"]: # No Overlap
+        if comparison.comparisonResult == ComparisonResults["1"] or comparison.comparisonResult == ComparisonResults["6"]: # No Overlap Match or Mismatch
             firstResult = ""
             secondResult = ""
 
             spanStart = None
             spanEnd = None
             docLength = None
+            dynamicProperties1 = None
+            dynamicProperties2 = None
 
             if annotation1:
                 if annotation1.annotationClass == 'doc_classification':
@@ -71,6 +73,7 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
                 spanStart = annotation1.start
                 spanEnd = annotation1.end
                 docLength = comparison.docLength
+                dynamicProperties1 = annotation1.dynamicProperties
 
             elif annotation2:
                 if annotation2.annotationClass == 'doc_classification':
@@ -81,14 +84,19 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
                 spanStart = annotation2.start
                 spanEnd = annotation2.end
                 docLength = comparison.docLength
+                dynamicProperties2 = annotation2.dynamicProperties
 
             else:
                 raise RuntimeError("Either the first annotation or the second annotation should be non-null.")
 
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
-                                                                    "0", firstResult,
-                                                                    secondResult, spanStart,
-                                                                    spanEnd, docLength))
+            matchIndicator = "0"
+            if comparison.comparisonResult == ComparisonResults["6"]:
+                matchIndicator = "1"
+
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
+                                                                    matchIndicator, firstResult,
+                                                                    secondResult, dynamicProperties1, dynamicProperties2, spanStart,
+                                                                    spanEnd, docLength, str(float(spanStart)/float(docLength))))
             continue
 
         if comparison.comparisonResult == ComparisonResults["2"]: # Class mismatch
@@ -100,11 +108,13 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             else:
                 firstResult = annotation1.annotationClass + str(annotation1.attributes)
                 secondResult = annotation2.annotationClass + str(annotation2.attributes)
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
+                                                                    comparison.annotation1.dynamicProperties,
+                                                                    comparison.annotation2.dynamicProperties,
                                                                     comparison.annotation1.start,
                                                                     comparison.annotation1.end,
-                                                                    comparison.docLength))
+                                                                    comparison.docLength, str(float(comparison.annotation1.start)/float(comparison.docLength))))
             continue
 
         if comparison.comparisonResult == ComparisonResults["3"]: # Attribute mismatch
@@ -116,11 +126,13 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             else:
                 firstResult = annotation1.annotationClass + str(annotation1.attributes)
                 secondResult = annotation2.annotationClass + str(annotation2.attributes)
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
+                                                                    comparison.annotation1.dynamicProperties,
+                                                                    comparison.annotation2.dynamicProperties,
                                                                     comparison.annotation1.start,
                                                                     comparison.annotation1.end,
-                                                                    comparison.docLength))
+                                                                    comparison.docLength, str(float(comparison.annotation1.start)/float(comparison.docLength))))
             continue
 
         if comparison.comparisonResult == ComparisonResults["4"]: # Class and attribute mismatch
@@ -129,11 +141,13 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
             secondResult = "Class: %s,  Attributes: %s" % (annotation2.annotationClass,
                                                           annotation2.attributes)
 
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "0", firstResult, secondResult,
+                                                                    comparison.annotation1.dynamicProperties,
+                                                                    comparison.annotation2.dynamicProperties,
                                                                     comparison.annotation1.start,
                                                                     comparison.annotation1.end,
-                                                                    comparison.docLength))
+                                                                    comparison.docLength, str(float(comparison.annotation1.start)/float(comparison.docLength))))
             continue
 
         if comparison.comparisonResult == ComparisonResults["5"]: # Match
@@ -146,11 +160,13 @@ def ConvertComparisonsToTSV(comparisons, outputPath):
                 firstResult = annotation1.annotationClass
                 secondResult = annotation2.annotationClass
 
-            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
+            outFile.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (documentName, firstNameText, secondNameText, comparison.comparisonResult,
                                                                     "1", firstResult, secondResult,
+                                                                    comparison.annotation1.dynamicProperties,
+                                                                    comparison.annotation2.dynamicProperties,
                                                                     comparison.annotation1.start,
                                                                     comparison.annotation1.end,
-                                                                    comparison.docLength))
+                                                                    comparison.docLength, str(float(comparison.annotation1.start)/float(comparison.docLength))))
             continue
 
     outFile.close()

@@ -1,5 +1,6 @@
 import glob
 import os
+from collections import namedtuple
 
 passedColor = '\033[32m'
 boldPassedColor = '\033[1;32m'
@@ -30,7 +31,7 @@ if numSubsets == 3 and numDuplicates == 4 and numUnion == 6:
     print passedColor + "Passed\n" + resetColor
 else:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 # duplicateProcessor.reportDuplicates()
 
 
@@ -52,7 +53,7 @@ if length != 8442:
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -75,7 +76,7 @@ if document.numberOfCharacters != 8442 \
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -89,7 +90,7 @@ cleanDirs = cleaner(dirs)
 failed = False
 for dirName in cleanDirs:
     if dirName != '/Some/path/to/stuff/*':
-        print failedColor + '*****************Test Failed***************************' + resetColor
+        print failedColor + '*****************Test Failed***************************\n' + resetColor
         failed = True
         failCount += 1
 if not failed:
@@ -172,7 +173,7 @@ if MentionLevelAnnotation.overlap(annotation1, annotation2) != True:
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -203,7 +204,7 @@ for note in [noteBody1, noteBody2]:
         break
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -242,7 +243,7 @@ else:
 
     if failed:
         failCount += 1
-        print failedColor + '*****************Test Failed***************************' + resetColor
+        print failedColor + '*****************Test Failed***************************\n' + resetColor
     else:
         print passedColor + "Passed\n" + resetColor
 
@@ -289,7 +290,7 @@ else:
 
     if failed:
         failCount += 1
-        print failedColor + '*****************Test Failed***************************' + resetColor
+        print failedColor + '*****************Test Failed***************************\n' + resetColor
     else:
         print passedColor + "Passed\n" + resetColor
 
@@ -366,7 +367,7 @@ for docIndex, document in enumerate(documents):
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -391,7 +392,7 @@ if document.annotations[0].text != 'one two bleed four hemorrhage six'\
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -406,16 +407,16 @@ from eHostess.Analysis.DocumentComparison import Comparison
 failed = False
 
 doc1 = KnowtatorReader.parseSingleKnowtatorFile(
-    './UnitTestDependencies/Output/ComparisonsToTSV/annotator2/saved/2530.txt.knowtator.xml')
-doc2 = KnowtatorReader.parseSingleKnowtatorFile(
     './UnitTestDependencies/Output/ComparisonsToTSV/annotator1/saved/2530.txt.knowtator.xml')
+doc2 = KnowtatorReader.parseSingleKnowtatorFile(
+    './UnitTestDependencies/Output/ComparisonsToTSV/annotator2/saved/2530.txt.knowtator.xml')
 
 discrepancies = Comparison.CompareAllAnnotations(doc1, doc2)
 ConvertComparisonsToTSV(discrepancies, './UnitTestDependencies/Output/ComparisonsToTSV/TestOutput/discrepancies.tsv')
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -424,14 +425,14 @@ printTestName('Analysis.Metrics.calculateRecallPrecisionFScoreAndSupport()')
 from eHostess.Analysis.Metrics import CalculateRecallPrecisionFScoreAndAgreement
 failed = False
 
-recall, precision, fscore, support = CalculateRecallPrecisionFScoreAndAgreement(discrepancies)
+recall, precision, fscore, agreement = CalculateRecallPrecisionFScoreAndAgreement(discrepancies)
 
 if recall != .25 or precision != .5:
     failed = True
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
@@ -471,14 +472,64 @@ if not gotException:
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
 
+#### Test Analysis.DocumentComparison.CompareAllAnnotations() ####
+printTestName('Analysis.DocumentComparison.CompareAllAnnotations()')
+from eHostess.Annotations.Document import Document
+from eHostess.Analysis.DocumentComparison import Comparison
+
+annotationOriginal1 = MentionLevelAnnotation("", 0, 1, "", "", {'key1' : "positive", 'key2': 'positive'}, "classPositive")
+annotationOriginal2 = MentionLevelAnnotation("", 2, 3, "", "", {'key1' : "positive", 'key2': 'positive'}, "classPositive")
+annotationOriginal3 = MentionLevelAnnotation("", 4, 5, "", "", {'key1' : "negative", 'key2': 'negative'}, "classPositive")
+annotationOriginal4 = MentionLevelAnnotation("", 6, 7, "", "", {'key1' : "positive", 'key2': 'positive'}, "classPositive")
+annotationOriginal5 = MentionLevelAnnotation("", 8, 9, "", "", {'key1' : "positive", 'key2': 'positive'}, "classNegative")
+annotationOriginal6 = MentionLevelAnnotation("", 10, 11, "", "", {'key1' : "positive", 'key2': 'positive'}, "classPositive")
+
+annotationDifferentAttributes1 = MentionLevelAnnotation("", 2, 3, "", "", {'key1' : "alternativePositive", 'key2': 'alternativePositive'}, "classPositive")
+annotationDifferentAttributes2 = MentionLevelAnnotation("", 4, 5, "", "", {'key1' : "alternativeNegative", 'key2': 'alternativeNegative'}, "classPositive")
+annotationDifferentClass1 = MentionLevelAnnotation("", 6, 7, "", "", {'key1' : "positive", 'key2': 'positive'}, "alternativeClassPositive")
+annotationDifferentClass2 = MentionLevelAnnotation("", 8, 9, "", "", {'key1' : "positive", 'key2': 'positive'}, "alternativeClassNegative")
+annotationBothDifferent = MentionLevelAnnotation("", 10, 11, "", "", {'key1' : "negative", 'key2': 'alternativePositive'}, "classNegative")
+annotationsAllSame = [annotationOriginal1, annotationOriginal2, annotationOriginal3, annotationOriginal4, annotationOriginal5, annotationOriginal6]
+annotationsAllDifferent = [annotationOriginal1, annotationDifferentAttributes1, annotationDifferentAttributes2, annotationDifferentClass1, annotationDifferentClass2, annotationBothDifferent]
+
+documentAllSame = Document("document", "test", annotationsAllSame, 0)
+documentAllDifferent = Document("document", "test", annotationsAllDifferent, 0)
+
+comparisonsDirect = Comparison.CompareAllAnnotations(documentAllSame, documentAllDifferent)
+comparisonsIgnoreAttributes = Comparison.CompareAllAnnotations(documentAllSame, documentAllDifferent, equivalentAttributes=False)
+comparisonsEquivalentAttributes = Comparison.CompareAllAnnotations(documentAllSame, documentAllDifferent, equivalentAttributes={'key1': [['positive', 'alternativePositive'], ['negative', 'alternativeNegative']], 'key2': [['positive', 'alternativePositive'], ['negative', 'alternativeNegative']]})
+comparisonsIgnoreClass = Comparison.CompareAllAnnotations(documentAllSame, documentAllDifferent, equivalentClasses=False)
+comparisonsEquivalentClasses = Comparison.CompareAllAnnotations(documentAllSame, documentAllDifferent, equivalentClasses=[['classPositive', 'alternativeClassPositive'], ['classNegative', 'alternativeClassNegative']])
+
+ComparisonTestResult = namedtuple("ComparisonTestResult", ['matches', 'classMismatches', 'attributeMismatches', 'bothMismatches'])
+correctDirectResult = ComparisonTestResult(matches=1, classMismatches=2, attributeMismatches=2, bothMismatches=1)
+correctIgnoreAttributesResult = ComparisonTestResult(matches=3, classMismatches=3, attributeMismatches=0, bothMismatches=0)
+correctEquivalentAttributesResult = ComparisonTestResult(matches=2, classMismatches=3, attributeMismatches=0, bothMismatches=1)
+correctIgnoreClassResult = ComparisonTestResult(matches=3, classMismatches=0, attributeMismatches=3, bothMismatches=0)
+correctEquivalentClassResult = ComparisonTestResult(matches=3, classMismatches=0, attributeMismatches=2, bothMismatches=1)
+
+results = [comparisonsDirect, comparisonsIgnoreAttributes, comparisonsEquivalentAttributes, comparisonsIgnoreClass, comparisonsEquivalentClasses]
+
+for result in results:
+    matches = 0
+    classMismatches = 0
+    attributeMismatches = 0
+    bothMismatches = 0
+
+    for comparison in result:
+        if comparison.comparisonResult == "Match":
+            matches += 1
+        if comparison.comparisonResult == "Attribute Mismatch":
+            attributeMismatches += 1
+            # TODO Include a unit test for the modified DocumentComparison methods using the new options to ensure comparison is still happening correctly.
 
 #### Test Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification() ####
 printTestName('Analysis.DocumentComparison.CalculateTestMetricsForDocumentClassification')
-from eHostess.Analysis.DocumentComparison import Comparison
+
 from eHostess.Annotations.Document import ClassifiedDocument
 
 failed = False
@@ -518,11 +569,9 @@ for index in range(len(mixedResults)):
 
 if failed:
     failCount += 1
-    print failedColor + '*****************Test Failed***************************' + resetColor
+    print failedColor + '*****************Test Failed***************************\n' + resetColor
 else:
     print passedColor + "Passed\n" + resetColor
-
-
 
 
 if failCount == 0:
