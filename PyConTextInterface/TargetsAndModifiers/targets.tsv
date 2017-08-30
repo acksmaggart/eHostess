@@ -2,15 +2,14 @@ Lex	Type	Regex	Direction
 bleed	TARGET	(?<!non)(?<!non )(?<!non-)bleed[a-z]*	backward
 blood loss	TARGET	blood loss	backward
 blood per rectum	TARGET	blood per rectum	backward
-bloody	TARGET	bloody	backward
-bloody	TARGET	(bloody)	backward
+bloody	TARGET	(?<!non-)(?<!non)(?<!non )bloody	backward
 brbpr	TARGET	brbpr	backward
 coffee grounds	TARGET	coffee\-?(ground|grounds)	bidirectional
 ecchymosis	TARGET	ecchymos[ie]s	backward
 epistaxis	TARGET	epistaxis	backward
 exsanguination	TARGET	exsanguination	backward
-gib	TARGET	gib	backward
-guaiac	TARGET	((g|gua?iac)[ \-]((positive)|(pos)|\+)|guaiac\(\+\))	backward
+gib	TARGET	\bl?gib\b	backward
+guaiac	TARGET	((\bg|gua?iac)([\-]|\s+)((pos(itive)?)|\+)|guaiac\(\+\))	backward
 hematemesis	TARGET	hematem[a-z]+	backward
 hematochezia	TARGET	hematochezia	backward
 hematoma	TARGET	hematoma	backward
@@ -22,7 +21,8 @@ ich	TARGET	\bich	backward
 melena	TARGET	mel[ae]n(a|ic)	backward
 ng lavage post	TARGET	(ng|ngt)\s+lavage\s+((positive)|(pos)|\+)	backward
 ng lavage pre	TARGET	((positive)|(pos)|\+) (ng|ngt) lavage	backward
+occult blood	TARGET	(fecal\s+occult(\s+blood)?|\bob|\bfob)\s+pos(itive)?	backward
 sah	TARGET	sah	backward
 sdh	TARGET	sdh	backward
-stool	TARGET	(maroon|red) (stool|bowel movement|bm)	backward
+stool	TARGET	(maroon|red)\s+(stool|bowel\s+movement|bm)	backward
 vomitting	TARGET	vomit[a-z]* blood	backward

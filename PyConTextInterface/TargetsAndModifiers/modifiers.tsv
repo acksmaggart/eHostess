@@ -8,11 +8,13 @@ episode	AFFIRMED_EXISTENCE	episode of	forward
 episodes	AFFIRMED_EXISTENCE	episodes of	forward
 found to have	AFFIRMED_EXISTENCE	found to have	forward
 here with	AFFIRMED_EXISTENCE	here (with|w\\|w/)	forward
-history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of))	forward
-history of	NEGATED_EXISTENCE	history of	forward
+history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of)|history)	forward
+history of	NEGATED_EXISTENCE	history\s+of	forward
 if	NEGATED_EXISTENCE	\bif\b	forward
+in the past	NEGATED_EXISTENCE	\bin\s+the\s+past/b	bidirectional
 monitor	NEGATED_EXISTENCE	monitor( for)?	forward
 negative	NEGATED_EXISTENCE	\bnegative\b	forward
+never	NEGATED_EXISTENCE	\bnever\b	forward
 no	NEGATED_EXISTENCE	\bno\b	forward
 no evidence	NEGATED_EXISTENCE	no (evidence|e\\o|e/o)	forward
 no history	NEGATED_EXISTENCE	no ((h/o)|(h\\o)]|hx)	forward
@@ -23,11 +25,13 @@ possible	NEGATED_EXISTENCE	possible	bidirectional
 presenting	AFFIRMED_EXISTENCE	presenting* (with|w\\|w/)	forward
 presents	AFFIRMED_EXISTENCE	present[s|e][d]* (with|w\\|w/)	forward
 previous	NEGATED_EXISTENCE	previous	forward
+prior	NEGATED_EXISTENCE	\bprior\b	forward
 risk	NEGATED_EXISTENCE	risk of	bidirectional
 rule out	NEGATED_EXISTENCE	(rule out|r\/o)	forward
+recent admission	NEGATED_EXISTENCE	recent\s+admission	forward
 suspicion	NEGATED_EXISTENCE	suspicion	forward
 transfuse	NEGATED_EXISTENCE	transfuse	forward
 unlikely	NEGATED_EXISTENCE	unlikely	bidirectional
 versus	NEGATED_EXISTENCE	versus|vs	bidirectional
 watch	NEGATED_EXISTENCE	watch for	forward
-without	NEGATED_EXISTENCE	((without)|(w\\o)|(w/o))	forward
+without	NEGATED_EXISTENCE	((without)|(w\\o)|(w/o))(?!\scontrast)	forward
