@@ -11,7 +11,7 @@ from ..Annotations.Document import Document
 def constructMongoDocument(annotationDocument):
     annotatorName = ""
     annotations = []
-    for index, annotation in enumerate(annotationDocument.annotations.values()):
+    for index, annotation in enumerate(annotationDocument.annotations):
         if index == 0:
             annotatorName = annotation.annotator
         newAnnotation = {}
