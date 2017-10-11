@@ -1,10 +1,10 @@
 Lex	Type	Regex	Direction
-bleed	TARGET	(?<!non)(?<!non )(?<!non-)bleed[a-z]*	backward
+bleed	TARGET	(?<!non)(?<!non )(?<!non-)(bleed(?!ing)|bleeding(?!\stime))	backward
 blood loss	TARGET	blood loss	backward
 blood per rectum	TARGET	blood per rectum	backward
 bloody	TARGET	(?<!non-)(?<!non)(?<!non )bloody	backward
 brbpr	TARGET	brbpr	backward
-coffee grounds	TARGET	coffee\-?(ground|grounds)	bidirectional
+coffee grounds	TARGET	coffee[\- ](ground|grounds)	bidirectional
 ecchymosis	TARGET	ecchymos[ie]s	backward
 epistaxis	TARGET	epistaxis	backward
 exsanguination	TARGET	exsanguination	backward
@@ -16,7 +16,7 @@ hematoma	TARGET	hematoma	backward
 hematuria	TARGET	hematuria	backward
 hemoperitoneum	TARGET	hemoperitoneum	backward
 hemoptysis	TARGET	hemoptysis	backward
-hemorrhage	TARGET	"hem{1,2}or{1,2}h{1,2}age?"	backward
+hemorrhage	TARGET	(?<!splinter\s)hem{1,2}or{1,2}h{1,2}age?	backward
 ich	TARGET	\bich	backward
 melena	TARGET	mel[ae]n(a|ic)	backward
 ng lavage post	TARGET	(ng|ngt)\s+lavage\s+((positive)|(pos)|\+)	backward

@@ -61,8 +61,7 @@ def _annotateSentences(sentenceList, targets, modifiers, modifierToClassMap, ann
                     "certainty": "definite"
                 }
                 annotationClass = None
-                if markup.isModifiedByCategory(node, "NEGATED_EXISTENCE") \
-                        and markup.isModifiedByCategory(node, "AFFIRMED_EXISTENCE"):
+                if markup.isModifiedByCategory(node, "NEGATED_EXISTENCE") and markup.isModifiedByCategory(node, "AFFIRMED_EXISTENCE"):
                     # Currently any node that is marked as both affirmed and negated is considered negated.
                     print(
                     "Node is modified by both NEGATED_EXISTENCE and AFFIRMED_EXISTENCE....hmmmm.\n\nNote: %s\nSentence: %s" % (

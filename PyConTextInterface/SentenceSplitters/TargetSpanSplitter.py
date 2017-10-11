@@ -51,6 +51,7 @@ from PyConTextInput import PyConTextInput
 from eHostess.Annotations.Document import Document
 import eHostess.Utilities.utilities as utilities
 import glob
+import sys
 
 def _splitSentencesSingleDocumentInternal(documentPath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation):
     """This function takes a document path and splits it up according to the other paramaters, returning a tuple of the form (text, docSpanTuple, docName, docLength, None) to be fed to PyConTextInput. Or (None, <docName>) if no target terms were matched in the input doc."""
@@ -143,7 +144,9 @@ def splitSentencesMultipleDocuments(directoryList, targets, numLeadingWords, num
     fileList = [filename for directory in cleanList for filename in glob.glob(directory)]
 
     sentenceTuples = []
-    for filepath in fileList:
+    for index, filepath in enumerate(fileList):
+        sys.stdout.write("\rSplitting document %i of %i. (%.2f%%)"% (index + 1, len(fileList) + 1, float(index + 1)/float(len(fileList) + 1) * 100.))
+        sys.stdout.flush()
         tupleList = _splitSentencesSingleDocumentInternal(filepath, targets, numLeadingWords, numTrailingWords,spanTargetPunctuation)
         #If the splitter returns (None, <docname>) instead of a list then we should append the tuple rather than
         # extending the list with the contents of the tuple.
@@ -151,6 +154,7 @@ def splitSentencesMultipleDocuments(directoryList, targets, numLeadingWords, num
             sentenceTuples.extend(tupleList)
         else:
             sentenceTuples.append(tupleList)
+    print ""
 
     pyConTextInput = PyConTextInput(numDocs=len(fileList))
     for sentenceTuple in sentenceTuples:

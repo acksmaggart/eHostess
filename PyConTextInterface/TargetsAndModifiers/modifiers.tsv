@@ -1,19 +1,21 @@
 Lex	Type	Regex	Direction
 ago	NEGATED_EXISTENCE	\bago\b	backward
+can result in	NEGATED_EXISTENCE	\bcan\s+result\s+in\b	forward
 cc	AFFIRMED_EXISTENCE	(cc:|chief complaint:)	forward
 ddx	NEGATED_EXISTENCE	ddx	forward
-denies	NEGATED_EXISTENCE	denies|denied	forward
+deny	NEGATED_EXISTENCE	denies|denied|denying	forward
 did not show	NEGATED_EXISTENCE	did not (show|reveal)	forward
 episode	AFFIRMED_EXISTENCE	episode of	forward
 episodes	AFFIRMED_EXISTENCE	episodes of	forward
 found to have	AFFIRMED_EXISTENCE	found to have	forward
 here with	AFFIRMED_EXISTENCE	here (with|w\\|w/)	forward
-history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx of)|history)	forward
+history	NEGATED_EXISTENCE	((h/o)|(h\\o)|(hx ?of)|history|\bhx\b|pmh)	forward
 history of	NEGATED_EXISTENCE	history\s+of	forward
 if	NEGATED_EXISTENCE	\bif\b	forward
-in the past	NEGATED_EXISTENCE	\bin\s+the\s+past/b	bidirectional
+in the past	NEGATED_EXISTENCE	\bin\s+the\s+past\b	bidirectional
 monitor	NEGATED_EXISTENCE	monitor( for)?	forward
 negative	NEGATED_EXISTENCE	\bnegative\b	forward
+negative dash	NEGATED_EXISTENCE	\(-\)	bidirectional
 never	NEGATED_EXISTENCE	\bnever\b	forward
 no	NEGATED_EXISTENCE	\bno\b	forward
 no evidence	NEGATED_EXISTENCE	no (evidence|e\\o|e/o)	forward
@@ -32,6 +34,7 @@ recent admission	NEGATED_EXISTENCE	recent\s+admission	forward
 suspicion	NEGATED_EXISTENCE	suspicion	forward
 transfuse	NEGATED_EXISTENCE	transfuse	forward
 unlikely	NEGATED_EXISTENCE	unlikely	bidirectional
+unrevealing	NEGATED_EXISTENCE	unrevealing\s+for	1forward
 versus	NEGATED_EXISTENCE	versus|vs	bidirectional
 watch	NEGATED_EXISTENCE	watch for	forward
 without	NEGATED_EXISTENCE	((without)|(w\\o)|(w/o))(?!\scontrast)	forward
