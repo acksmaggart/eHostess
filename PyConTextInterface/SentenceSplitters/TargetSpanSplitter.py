@@ -52,6 +52,7 @@ from eHostess.Annotations.Document import Document
 import eHostess.Utilities.utilities as utilities
 import glob
 import sys
+import multiprocessing
 
 def _splitSentencesSingleDocumentInternal(documentPath, targets, numLeadingWords, numTrailingWords, spanTargetPunctuation):
     """This function takes a document path and splits it up according to the other paramaters, returning a tuple of the form (text, docSpanTuple, docName, docLength, None) to be fed to PyConTextInput. Or (None, <docName>) if no target terms were matched in the input doc."""

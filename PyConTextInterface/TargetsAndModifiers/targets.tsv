@@ -1,5 +1,5 @@
 Lex	Type	Regex	Direction
-bleed	TARGET	(?<!non)(?<!non )(?<!non-)(bleed(?!ing)|bleeding(?!\stime))	backward
+bleed	TARGET	(?<!non)(?<!non )(?<!non-)(?<!re)(bleed(?!ing)|bleeding(?!\stime))	backward
 blood loss	TARGET	blood loss	backward
 blood per rectum	TARGET	blood per rectum	backward
 bloody	TARGET	(?<!non-)(?<!non)(?<!non )bloody	backward

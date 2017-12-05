@@ -8,3 +8,9 @@ Documentation/_build/
 
 # IDE Files
 .idea
+
+# Files currently open in vim
+*.swp
+
+#System files
+.DS_Store
