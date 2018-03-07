@@ -18,3 +18,7 @@ Documentation/_build/
 # Virtual Environment Packages
 vEnv2.7/lib/python2.7/site-packages/
 vEnv3.6/lib/python3.6/site-packages/
+
+# Distribution stuff
+dist/
+ehostess.egg-info/
