@@ -1,4 +1,4 @@
-# This file tells git which other files to ignore. For example, when `git add -A` is run any file whose name matches a pattern that is specified in this file is not addded to the staging area.
+ # This file tells git which other files to ignore. For example, when `git add -A` is run any file whose name matches a pattern that is specified in this file is not addded to the staging area.
 
 # Compiled python files
 *.pyc
