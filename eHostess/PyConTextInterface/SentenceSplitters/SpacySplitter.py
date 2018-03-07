@@ -1,13 +1,14 @@
 
 
-from PyConTextInput import PyConTextInput
+from .PyConTextInput import PyConTextInput
 from eHostess.Annotations.Document import Document
 import spacy
+import en_core_web_sm
 import os
 import sys
 import re
 
-nlp = spacy.load('en')
+nlp = en_core_web_sm.load()
 
 def _splitSentencesInternal(documentPath):
     """Splits a single document."""
@@ -17,7 +18,21 @@ def _splitSentencesInternal(documentPath):
         body = f.read()
     docLength = len(body)
     docName = Document.ParseDocumentNameFromPath(documentPath)
-    doc = nlp(unicode(body))
+    doc = nlp(unicode(body)) # Necessary in Python2.7
+    #doc = nlp(body) # Necessary in python3.6
+    sentences = []
+    for sent in doc.sents:
+        text = sent.text
+        span = (sent.start_char, sent.end_char)
+        sentences.append((text, span, docName, docLength))
+    return sentences
+
+def _splitSentencesInternalRawString(body, name):
+    """Splits a raw string."""
+    docLength = len(body)
+    docName = name
+    doc = nlp(unicode(body)) # Necessary in Python2.7
+    #doc = nlp(body) # Necessary in python3.6
     sentences = []
     for sent in doc.sents:
         text = sent.text
@@ -41,4 +56,9 @@ def splitSentencesMultipleDocuments(documentPaths):
 
     return inputObj
 
+def splitSentencesRawString(string, documentName):
+    inputObj = PyConTextInput()
+    for sentenceInfo in _splitSentencesInternalRawString(string, documentName):
+        inputObj.addSentence(*sentenceInfo)
+    return inputObj
 

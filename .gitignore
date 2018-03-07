@@ -14,3 +14,7 @@ Documentation/_build/
 
 #System files
 .DS_Store
+
+# Virtual Environment Packages
+vEnv2.7/lib/python2.7/site-packages/
+vEnv3.6/lib/python3.6/site-packages/

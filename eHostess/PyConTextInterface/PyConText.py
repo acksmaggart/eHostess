@@ -15,7 +15,7 @@ from pyConTextNLP import pyConTextGraph as pyConText
 import pyConTextNLP.itemData as itemData
 from ..Annotations.MentionLevelAnnotation import MentionLevelAnnotation
 from ..Annotations.Document import Document
-from SentenceSplitters.PyConTextInput import DocumentPlaceholder
+from .SentenceSplitters.PyConTextInput import DocumentPlaceholder
 import re
 import os
 from collections import namedtuple

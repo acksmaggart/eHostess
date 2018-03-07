@@ -1,7 +1,7 @@
 
 from xml.etree.cElementTree import Element, SubElement
 from xml.etree import ElementTree
-from MentionLevelAnnotation import MentionLevelAnnotation
+from .MentionLevelAnnotation import MentionLevelAnnotation
 
 
 class AdjudicationStatus:
