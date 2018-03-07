@@ -22,3 +22,6 @@ vEnv3.6/lib/python3.6/site-packages/
 # Distribution stuff
 dist/
 ehostess.egg-info/
+
+# Distribution Scripts
+uploadTo*
